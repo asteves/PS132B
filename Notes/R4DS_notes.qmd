@@ -1,0 +1,534 @@
+---
+title: "R for Data Science Notes"
+format: 
+  html:
+    toc: true
+    toc-location: left 
+    toc-title: Chapters
+    html-math-method: katex
+editor: visual
+---
+
+## Libraries
+
+```{r, warning = F, message = F}
+library(tidyverse)
+```
+
+## Chapter 3
+
+Chapter 3 serves as an introduction to different types of visualizations that can be made with `ggplot2`.
+
+```{r}
+ggplot(data = mpg, aes(x = displ, y = hwy))+
+  geom_point()
+```
+
+The general graphing template in the book is
+
+ggplot(data = \<DATA\>) +
+
+\<GEOM_FUNCTION\>(mapping = aes(\<MAPPINGS\>))
+
+```{r}
+## Some of the exercises 
+nrow(mpg) # will be 234 
+
+mpg |>
+  ggplot() +
+  geom_point(aes(cyl, hwy))
+
+## The useless plot 
+mpg |>
+  ggplot() +
+  geom_point(aes(class, drv))
+```
+
+We add additional information by mapping aesthetics in our plot to variables in the dataset
+
+```{r}
+mpg |>
+  ggplot()+
+  geom_point(aes(displ, hwy, color = class))
+```
+
+```{r}
+## using aesthetics to change point transparency
+mpg |>
+  ggplot()+
+  geom_point(aes(displ, hwy, alpha = class))
+
+## using aesthetics to change point shape 
+## They'll be a warning because we have more classes 
+## than ggplot2 likes
+mpg |>
+  ggplot()+
+  geom_point(aes(displ, hwy, shape = class))
+```
+
+Some answers to the next set of exercises
+
+```{r}
+## Chart is fixed by putting color outside of aes() function
+mpg |>
+  ggplot()+
+  geom_point(aes(x = displ, y = hwy), color = "blue")
+
+### What happens with a continuous variable 
+mpg |>
+  ggplot()+
+  geom_point(aes(x=displ, y=hwy,color = cty))
+
+### Stroke affects the border for shapes with borders 
+mpg |>
+  ggplot()+
+  geom_point(aes(x=displ, y= hwy), shape = 21, color = "black", fill = "white")
+
+## what happens if you map something to something other
+## than a variable 
+mpg |>
+  ggplot()+
+  geom_point(aes(displ, hwy, color = displ <5))
+
+### What happens if you want to see all the points 
+## Overplotting reduces points. Get them "back" by jitter
+mpg |>
+  ggplot() +
+  geom_point(aes(displ, hwy), position = "jitter")
+```
+
+### Facets
+
+If we want subplots of our data, we want to split our plot into facets.
+
+```{r}
+mpg |>
+  ggplot()+
+  geom_point(aes(displ, hwy))+
+  facet_wrap(~class, nrow = 2)
+```
+
+If we want the combination of two variables, then we want `facet_grid()`
+
+```{r}
+mpg |>
+  ggplot()+
+  geom_point(aes(displ, hwy))+
+  facet_grid(drv ~ cyl)
+```
+
+```{r}
+## the . ignores the dimension when faceting
+## There isn't an obvious reason to prefer this to facet_wrap()
+mpg |>
+  ggplot()+
+  geom_point(aes(displ, hwy))+
+  facet_grid(drv ~.)
+
+mpg |>
+  ggplot()+
+  geom_point(aes(displ, hwy))+
+  facet_grid(.~cyl)
+```
+
+### Putting multiple geoms together
+
+```{r, message = FALSE}
+mpg |>
+  ggplot(aes(displ, hwy))+
+  geom_point(aes(color = class))+
+  geom_smooth(data = filter(mpg, class == "subcompact"), se =FALSE)
+```
+
+```{r}
+mpg |>
+  ggplot()+
+  geom_smooth(aes(displ, hwy, color = drv),
+              show.legend = FALSE)
+```
+
+```{r, message =F, warning =F}
+mpg |>
+  ggplot(aes(displ, hwy))+
+  geom_point()+
+  geom_smooth(se = F)
+
+### add drv aesthetics to get separate lines 
+mpg |>
+  ggplot(aes(displ, hwy))+
+  geom_point()+
+  geom_smooth(aes(group = drv),se = F)
+
+### Use color to get separate lines 
+mpg |>
+  ggplot(aes(displ,hwy,color=drv))+
+  geom_point()+
+  geom_smooth(se = FALSE)
+
+### Change line type 
+mpg |>
+  ggplot(aes(displ, hwy))+
+  geom_point(aes(color = drv))+
+  geom_smooth(aes(linetype=drv), se = FALSE)
+
+### Use color to differentiate points but one line only
+mpg |>
+  ggplot(aes(displ, hwy))+
+  geom_point(aes(color = drv))+
+  geom_smooth(se = FALSE)
+
+### Use stroke to change border 
+mpg |>
+  ggplot(aes(displ, hwy))+
+  geom_point(size = 4, color = "white")+
+  geom_point(aes(color =drv))
+```
+
+### Statistical Transformations
+
+```{r}
+diamonds |>
+  ggplot()+
+  stat_count(aes(x=cut))
+```
+
+```{r}
+diamonds |>
+  ggplot()+
+  geom_pointrange(aes(cut, depth),
+                  stat = "summary",
+                  fun.min = min,
+                  fun.max = max, 
+                  fun = median)
+```
+
+There are lots of geoms and complementary stats. Here's a table showing common pairs.
+
+![](Desktop/Screenshot%202023-01-15%20at%2010.56.06%20AM.png){fig-align="center"}
+
+```{r}
+## Example of using stats to get proportions. 
+## With fill 
+diamonds |>
+  ggplot()+
+  geom_bar(aes(cut, y = after_stat(count) / sum(after_stat(count)), fill = color), position = "dodge")
+
+## Without fill
+diamonds |>
+  ggplot()+
+  geom_bar(aes(cut, y = after_stat(prop), group = 1))
+```
+
+```{r}
+## We usually use fill to color in bars 
+diamonds |>
+  ggplot()+
+  geom_bar(aes(cut, fill = cut))
+```
+
+## Chapter 19
+
+Use functions whenever you write the same thing more than once. This is the DRY ("Don't repeat yourself") principle, which reduces mistakes and also reduces the number of places you have to make changes in code.
+
+```{r}
+### function template 
+fn_template = function(args, ...){
+  ### Thing you want to do with your function 
+}
+
+## Example rescaling a variable 
+rescale01 = function(x){
+  rng = range(x, na.rm = TRUE, finite = TRUE)
+  out = (x- rng[1]) / (rng[2] - rng[1])
+  out[out == -Inf] = 0
+  out[out == Inf] = 1
+  return(out)
+}
+rescale01(c(-Inf, 10:15,Inf, NA))
+```
+
+```{r}
+## Compute sample var 
+sample_var01 = function(x){
+  ## A one liner 
+  (1/(length(x)-1))*sum((x-mean(x,na.rm=TRUE))^2)
+}
+set.seed(100)
+x = sample(1:100, replace = T)
+sample_var01(x) == var(x)
+
+## The same function but "easier to read" to me 
+sample_var02 = function(x){
+  n = length(x)
+  sample_correction = 1/(n-1)
+  sumSquares = sum((x - mean(x, na.rm=TRUE))^2)
+  sample_correction*sumSquares
+}
+sample_var02(x) == var(x)
+
+## Skewness 
+skew = function(x){
+  ## numerator 
+  n = length(x)
+  correction = 1/(n-2)
+  sumCubes = sum((x-mean(x, na.rm=T))^3)
+  num = correction*sumCubes 
+  num / (sample_var02(x)^(3/2))
+}
+skew(x)
+```
+
+```{r}
+both_na = function(x,y){
+  ### presumes both x and y are the same length
+  sum(is.na(x) & is.na(y))
+}
+
+both_na(c(NA,NA, 1,2), c(NA,1,NA,2))
+
+```
+
+### Conditional Statements
+
+```{r}
+x = 1:3
+## This code if uncommented will break 
+# if(x == 3){
+#   print("3")
+# }
+
+## This code will run 
+ifelse(x == 3, print("3"), 
+       print(as.character(x)))
+
+## Since if() tests a single condition and not elementwise
+## the following both work
+x = 2
+if(x < 3){
+  print("low")
+}
+
+ifelse(x < 3, print("low"), print("high"))
+```
+
+```{r}
+greet = function(datetime = lubridate::now()){
+  hr = lubridate::hour(datetime)
+  if(hr < 12){
+    print("good morning")
+  } else if(hr >= 12 & hr < 18){
+    print("good afternoon")
+  } else{
+    print("good evening")
+  }
+}
+
+greet()
+```
+
+```{r}
+## The classic fizzbuzz problem 
+fizzbuzz = function(x){
+  stopifnot(length(x) == 1)
+  stopifnot(is.numeric(x))
+  if(x == 0){
+    print("0 has undefined behavior")
+  }
+  if(x %% 3 == 0){
+    if(x %% 5 == 0){
+      print("fizzbuzz")
+    }else{
+      print("fizz")
+    }
+  } else if(x %% 5 == 0){
+    print("buzz")
+  }else{
+    print(x)
+  }
+}
+
+## See it work
+for(i in 0:15){
+  fizzbuzz(i)
+}
+```
+
+## Chapter 21
+
+```{r}
+## Replicating the first example 
+set.seed(123)
+dat = tibble::tibble(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+dat
+output = vector("double", ncol(dat))
+for(i in seq_along(dat)){
+  output[[i]] = median(dat[[i]])
+}
+output
+```
+
+Every loop has three components:
+
+-   The output. R is a memory hogging language. We should always allocate memory ahead of time to speed up loops
+
+-   The sequence. This determines what to loop over and how to do it
+
+-   The body. This is the code that runs during each iteration of the loop to do work with a different value of the sequence
+
+```{r}
+output = vector("double", ncol(mtcars))
+for(i in seq_along(mtcars)){
+  output[[i]] = mean(mtcars[[i]], na.rm = T)
+}
+output
+
+## compute number of unique values in each column of 
+## Palmer Penguins 
+output = vector("double", ncol(palmerpenguins::penguins))
+for(i in seq_along(palmerpenguins::penguins)){
+  output[[i]] = length(unique(palmerpenguins::penguins[[i]]))
+}
+output
+
+## Generate 10 random normals from distributions 
+set.seed(1)
+dists = c(-10, 0, 10, 100)
+output = vector(mode = "list", length(dists))
+for(i in seq_along(dists)){
+  output[[i]] = rnorm(n = 10, mean = dists[i], sd = 1)
+}
+output
+
+## As a side note, because of recylcing this also works
+## You can verify that the lists values are the same as the rows
+set.seed(1)
+matrix(rnorm(10*length(dists), mean = dists), ncol = 10)
+```
+
+```{r}
+## For loop for cumulative sum 
+set.seed(2)
+x = runif(100)
+output = vector("numeric", length(x))
+output[1] = x[1]
+for(i in 2:length(x)){
+  output[i] = output[i-1] + x[i]
+}
+all.equal(output, cumsum(x))
+```
+
+### For Loop Variations
+
+There are four variations on the basic for loop theme:
+
+-   Modify an existing object instead of creating a new copy of an object
+
+-   Loop over names or values instead of indices
+
+-   Handle outputs of unknown length
+
+-   Handle sequences of unknown length
+
+```{r}
+
+## Rescale in place via loop 
+for(i in seq_along(dat)){
+  dat[[i]] = rescale01(dat[[i]])
+}
+dat
+```
+
+```{r}
+## Loop with unknown output length 
+set.seed(5)
+medians = c(5,10,15)
+output = vector("list", length(medians))
+for(i in seq_along(medians)){
+  n = sample(10,1)
+  output[[i]] = rnorm(n, medians[[i]])
+}
+## flatten output to vector
+unlist(output)
+```
+
+```{r}
+## Unknown sequence length 
+roll = function(){
+  sample(1:6, 1)
+}
+
+tosses = 0 
+nOnes = 0 
+
+set.seed(5)
+while(nOnes < 2){
+  if(roll() == 1){
+    nOnes = nOnes + 1
+  } else{
+    nOnes = 0
+  }
+  tosses = tosses + 1
+}
+tosses
+```
+
+```{r, eval = F}
+## The list files is so common it actually comes standard 
+
+## for loop way 
+files = dir("data/", pattern = "\\.csv$", full.names = TRUE)
+dat_list = vector("list", length(files))
+for(f in seq_along(files)){
+  dat_list[[f]] = read_csv(files[[f]])
+}
+
+bind_rows(dat_list)
+```
+
+```{r}
+show_mean = function(dat, digits = 2){
+  max_l = max(nchar(names(dat)))
+  for(n in names(dat)){
+    if(is.numeric(dat[[n]])){
+      print(paste0(n, ": ", round(mean(dat[[n]]),2)))
+    }
+  }
+}
+show_mean(iris)
+```
+
+### Functional Programming
+
+R loves functions. R is a weird beast in that it is a functional programming language that is also happily able to be an object oriented language. This leads to some challenges for people who come to it after having programmed in another language for awhile. One of the cool things R can do is take a function as an argument to another function.
+
+```{r}
+## Here's one way to do exercise 21.4.1
+col_summary <- function(df, fun) {
+  ## Drop the non numeric columns 
+  numeric_cols = unlist(lapply(df, is.numeric), use.names = F)
+  df = df[,numeric_cols]
+  out <- vector("double", length(df))
+  names(out) = names(df)
+  for (i in seq_along(df)) {
+    if(is.numeric(df[[i]])){
+      out[i] <- fun(df[[i]], na.rm = T)
+    }else{
+      out[i] = NA
+    }
+  }
+  out
+}
+df <- tibble(
+  X1 = c(1, 2, 3,NA),
+  X2 = c("A", "B", "C","D"),
+  X3 = c(0, -1, 5,5),
+  X4 = c(TRUE, FALSE, TRUE,TRUE)
+)
+col_summary(df, median)
+col_summary(df, mean)
+```

@@ -1,0 +1,270 @@
+---
+title: "R Introduction"
+format: 
+  html:
+    toc: true
+    toc-location: left 
+    toc-title: Chapters
+    html-math-method: katex
+editor: visual
+---
+
+## Chapter 2: Simple Manipulation, numbers and vectors
+
+### Assignment
+
+R works on data structures. The most common of these is a vector.[^1] A vector is a data structure where all values have to be the same type/mode.
+
+[^1]: As an aside, assignment in R is often also shown as \<-. Both work. I use "=" because most other programming languages use it and the number of use cases where it is a problem is so minor as to not be worth discussion. Should you be interested see [here](https://github.com/geocompx/geocompr/issues/319) for some discussion.
+
+```{r}
+# This is a comment. It starts with a # and R ignores everything that follows it
+## This is also a comment. Note that we can have multiple #
+## Comments are good because they tell us in the future why we did what 
+## we did 
+
+## make an example vector 
+x = c(1,2,3,4) 
+print(x)
+```
+
+There is actually a lot going on in this code block. We have:
+
+-   created a variable
+
+-   assigned the variable to a data structure
+
+-   created a vector with a function `c()`
+
+-   Used a separate function to print out the output of that vector.
+
+We will see assignments, functions, and computations over and over. Stylistically, R lets you assign values to variables in multiple ways. I strongly recommend against doing anything other than "=" or "\<-" in your work.
+
+### Vector Arithmetic
+
+```{r}
+x = c(10.4, 5.6, 3.1, 6.4, 21.7)
+y = c(x, 0, x)
+print(x)
+print(y)
+```
+
+If you have taken linear algebra you'll be unsurprised that vectors are added together element wise.
+
+```{r}
+a = c(1,2,3)
+b = c(2,3,4)
+c = a + b 
+print(c)
+```
+
+What may be a bit surprising is that if vectors are not the same length R will "recycle" values to match the longest vector to complete the computation. You'll often get a helpful warning message about this in your code.
+
+```{r}
+## This is compiled, so these chunks do not actually require the print statement. Imagine the print() is always there in the background to print results to output. 
+v = 2*x + y + 1
+v 
+```
+
+### Generating Sequences
+
+If you have a sequence that is in numerical order with no skips, the shortcut is
+
+```{r}
+n = 10
+1:n
+```
+
+```{r}
+1:n-1
+1:(n-1)
+
+## A cute way to create a double sequence 
+2*1:n
+
+## Note that this is a somewhat confusing short hand when we start 
+## doing complicated things
+3*5:n
+```
+
+The most general way to create a sequence of values in R is to use `seq()`
+
+```{r}
+## Replicating the previous sequences with seq()
+seq(from = 1, to = 10, by = 1)
+seq(from = 0, to= 9, by = 1)
+seq(2,20,2)
+3*seq(from=5, to = 10, by =1)
+```
+
+Sometimes we just want to replicate a value. We can always use brute force.
+
+```{r}
+bad_rep = c(1,1,1,1,1)
+bad_rep
+```
+
+Making a repeated vector in this way is bad for multiple reasons. Chiefly, it is very easy to make a mistake. How many ones are in that vector? Maybe I actually meant to put six of them instead of 5. The code compiles and so I would have introduced a bug.
+
+A better way to replicate a value
+
+```{r}
+good_rep = rep(1, times = 5)
+good_rep 
+```
+
+For actual data analysis, replicating numbers this way is much better.
+
+Suppose we want to repeat three different values each five times.
+
+```{r}
+rep(c(1,2,3), each = 5)
+```
+
+### Logical Vectors
+
+TRUE and FALSE are reserved words in the R programming language, which means that they always mean one thing. TRUE is 1 and False is 0 for computation purposes, so you can do math with logical vectors.
+
+```{r}
+log_vec = c(TRUE, FALSE, TRUE)
+log_vec
+z = x > 5
+z
+```
+
+### Missing Values
+
+There is a difference between something didn't happen and we don't know if something happened. Missing values are reserved in a vector but we can't do computations with them.
+
+```{r}
+ex = c(1,NA,2)
+2*ex ## any operation on a NA becomes missing 
+```
+
+Why does this happen? Conceptually speaking imagine playing the following (likely boring) game. I will give you two numbers and hide one and ask you guess the average. For example, you get the values {1,2, "No idea"}. What should you guess? There are an infinite number of options for the third number. R's answer is "This is a stupid game and I'm not playing."
+
+Since `NA` is a placeholder, we should always use `is.na()` to determine if a value is missing. There is also `NaN` which comes up if we do a computation that cannot be reasonably defined.
+
+```{r}
+## For example, here's a computation that produces NaN
+0/0
+
+## Strangely this doesn't. Why might that be? 
+1/0
+```
+
+### Character vectors
+
+If you're coming from another languages, think "string" variables. Character vectors are vectors where every value is some kind of text.
+
+```{r, eval = F}
+num_vec = c(1,2,3)
+char_vec = c("1","2","3")
+
+## we can't do math with character vectors 
+2*char_vec
+
+### Will report 
+"Error in 2 * char_vec : non-numeric argument to binary operator"
+
+```
+
+I deliberately made this error to highlight that math does not work with character vectors *and* the error that comes along with that. R's error messages are often lacking, so it is useful to take note of what error messages show up when you do something wrong on purpose.
+
+Sometimes we want to join different characters together.
+
+```{r}
+paste("Professor", "Bansak", sep = " ")
+paste(c("X", "Y"), c(rep(c(1,2,3), each = 5)), sep = "")
+
+## a slightly more efficient way to do the second 
+paste0(c("X", "Y"), c(rep(c(1,2,3), each =5)))
+```
+
+### Index Vectors
+
+We take selections of vectors (and data structures generally) often.
+
+```{r}
+index = c(1,2,NA,4,5,6,NA,8, NA, 10)
+
+## logical index 
+index[!is.na(index)]
+
+## include certain elements
+index[c(1,2,4,5,6)]
+
+## exclude certain elements 
+index[-c(1,2,4,5,6)]
+
+## vector of characters 
+people = c(1,2,3)
+names(people) = c("A", "B","C")
+people[c("A", "B")]
+```
+
+## Chapter 3: Objects
+
+Everything in R is an object. Everything. Is. An. Object.
+
+```{r}
+object = c(1,2,3)
+another_object = "object"
+so_objectified = NA
+
+```
+
+Because everything is an object in R, everything has a mode. If we want to change mode, we need to coerce the object. A common coercion is to turn something into a character variable
+
+```{r}
+object_butNowChar = as.character(object)
+class(object)
+class(object_butNowChar)
+
+## we can coerce it back 
+object == as.numeric(object_butNowChar)
+```
+
+## Chapter 6: Lists and Data Frames
+
+Lists are a data structure that allow us to put different types of data into the same data structure.
+
+```{r}
+lst = list(prof = "Bansak", gsi = "Alex", doesStanfordSuck = TRUE,vec = 1:20)
+lst
+```
+
+In a vector, we index elements like `vec[1]`. In a list we need to use double brackets
+
+```{r}
+## get the second element of the list 
+lst[[2]]
+
+## get the 4th element of the list and add 20 to each element 
+20 + lst[[4]]
+
+## Grab an element by names 
+lst[["doesStanfordSuck"]]
+
+## What happens if we don't use the [[]]
+## Here's an example. 
+lst[[4]][1]
+lst[4][1]
+```
+
+### Data Frames
+
+```{r}
+dat = data.frame(
+  id = 1:3,
+  name = c("a","b","c"),
+  logic = c(TRUE, FALSE, TRUE)
+)
+dat
+```
+
+Data Frames are a type of list but for which every component must be the same length (or same number of rows if a matrix). Unquestionably, the Data Frame is the most important data structure in R. With some occasional exceptions, every algorithm that we see in this class will operate on a data frame.
+
+#### Attach
+
+Don't use `attach().` There is never a good reason to use it, so don't get in the habit.

@@ -1,0 +1,550 @@
+---
+title: "ISLR Notes"
+format: 
+  html:
+    toc: true
+    toc-location: left 
+    toc-title: Chapters
+    html-math-method: katex
+editor: visual
+code-overflow: wrap
+---
+
+## Libraries
+
+```{r, message=F, warning=F}
+library(tidyverse)
+```
+
+## Chapter 2: Statistical Learning
+
+### Figure 2.1
+
+While reading the main textbook, it will be helpful to make a list of flashcards of basic terms and definitions that are *italicized* in the chapters. The first key set of terms are input variables and output variables. *Input variables* go by lots of names, but the main commonality is that input variables go on the right hand side of an equation.[^1] *Output variables* are the outputs of the function we seek to learn using the input variables.
+
+[^1]: Strictly speaking, input variables are arguments to the fixed but unknown function *f* that we are trying to learn.
+
+```{r, message = F}
+## Anything that follows a # inside a R code block is a comment 
+## We use them to provide notes to ourselves or others 
+## about what a line or lines of code do to help solve 
+## the problem we are working on. 
+## I personally find ## easier to read than #. 
+## Most of my comments here relate to where you find certain functions
+## in the set of tidyverse packages. 
+## Learning what you want to do is as important 
+## as learning where functions are located. 
+
+## readr::read_csv()
+ads = read_csv("https://www.statlearning.com/s/Advertising.csv",
+               show_col_types = FALSE) |>
+  ## Remove the row names 
+  ## dplyr::select()
+  select(-`...1`)
+
+ads |>
+  ## tidyr::pivot_longer()
+  pivot_longer(-sales, 
+               names_to = "type", 
+               values_to = "spend") |>
+  ## dplyr::mutate, dplyr::case_when(), stringr::str_detect, stringr::str_to_title()
+  mutate(type = case_when(
+    str_detect(type, "TV")~"TV",
+    TRUE~str_to_title(type)
+  )) |>
+  ## ggplot2 for all functions unless noted
+  ggplot(aes(spend, 
+             sales, 
+             group = type))+
+  geom_point() +
+  ## forcats::fct_rev()
+  facet_wrap(~fct_rev(type), 
+             scales = "free", 
+             strip.position = "bottom")+
+  theme_bw()+
+  geom_smooth(method = "lm", 
+              se = F)+
+  theme(strip.background = element_blank(),
+        strip.placement = "outside")
+```
+
+The base version of this figure is slightly more annoying, but that's just my opinion. You may prefer it.
+
+```{r, message = F, warning = F}
+ads = read.csv("https://www.statlearning.com/s/Advertising.csv",
+               stringsAsFactors = FALSE) 
+ads = ads[,-1]
+
+ads_long = ads |>
+  reshape(direction = "long", 
+          v.names = "spend", 
+          timevar ="type", 
+          times = names(ads[c(1:3)]),
+          varying = c(1:3))
+
+ads_long$type = ifelse(ads_long$type != "TV", 
+                       tools::toTitleCase(ads_long$type), 
+                       ads_long$type)
+
+ads_long |>
+  ## ggplot2 for all functions unless noted
+  ggplot(aes(spend, 
+             sales, 
+             group = type))+
+  geom_point() +
+  ## forcats::fct_rev()
+  facet_wrap(~fct_rev(type), 
+             scales = "free", 
+             strip.position = "bottom")+
+  theme_bw()+
+  geom_smooth(method = "lm", 
+              se = F)+
+  theme(strip.background = element_blank(),
+        strip.placement = "outside")
+```
+
+### Figure 2.2
+
+```{r, message = F}
+income = read_csv("https://www.statlearning.com/s/Income1.csv", 
+                  show_col_types = FALSE) |>
+  ## Another way to remove the first column 
+  ## tidyselect::contains()
+  select(-contains("."))
+
+income |>
+  ggplot(aes(Education, Income))+
+  geom_point()+
+  ylab("Income")+
+  xlab("Years of Education")+
+  theme_bw()
+             
+```
+
+We can think of the fundamental learning problem of interest that of learning some function that relates our output and input variables.
+
+$$
+\begin{aligned}
+Y = f(X) + \epsilon
+\end{aligned}
+$$
+
+Y corresponds to the output variable and $X$ is a vector of input variables. The $\epsilon$ (epsilon) is the random error term, for which we may or may not make an assumption about. Usually when we make assumptions it is that it is independent of $X$ and (trivially because we can always normalize a set of values) has mean zero.
+
+### Why Estimate $f$?
+
+#### Prediction
+
+To be frank (and opinionated), prediction is the reason why we most of the time people are interested in machine learning. We have a set of input variables, and we use them to estimate our function of interest. Over the course of the semester, we will learn some different ways to estimate this function but the most common estimation strategy is some form of regression.
+
+We determine if our prediction is any good by some metric. A common one might be accuracy. How often does our prediction get sufficiently close to our observed output variables. We break this up into *reducible* and *irreducible* errors. Reducible error is something we can make smaller, often by collecting more or better data. Irreducible error is something we are stuck with because it is a function of a variable we can never collect data about (that pesky $\epsilon$).
+
+We can decompose the expected error into reducible and irreducible parts.
+
+$$
+\begin{aligned}
+E(Y-\hat{Y})^2 &= E[f(X) + \epsilon - \hat{f}(X)]^2 \\
+E(Y-\hat{Y})^2 &= E[f(X) + \epsilon - \hat{f}(X)]E[f(X) + \epsilon - \hat{f}(X)] \\
+E(Y-\hat{Y})^2 &= E[f(X)^2 + 2f(X)\epsilon - 2f(X)\hat{f}(X) + \epsilon^2 - 2\epsilon\hat{f}(X) + \hat{f}(X)^2] \\
+E(Y-\hat{Y})^2 &= E[f(X)^2 - 2f(X)\hat{f}(X) + \hat{f}(X)^2] + E[\epsilon^2] \\
+E(Y-\hat{Y})^2 &= E[(f(X)^2 - \hat{f}(X))^2] + V[\epsilon] \\
+E(Y-\hat{Y})^2 &= [f(X)^2 - \hat{f}(X)]^2 + V[\epsilon]
+\end{aligned}
+$$
+
+How did we do that?
+
+-   The second line expands out the squared term.
+
+-   The third line applies the identity that $(x+y-z)^2 = x^2 + 2xy - 2xz + y^2 -2yz + z^2$.
+
+-   The fourth line does a couple of steps at once based on properties of the expectation operator: $E[c] = c, E[x + y] = E[x] + E[y]$ and then groups terms.
+
+-   The fifth line substitutes in the appropriate definition of the variance and condenses the square. The sixth line applies the expectation of a constant property again.
+
+Irreducible error matters because the irreducible error bounds the accuracy of our predictions of Y, and we never actually know what it is in practice.
+
+#### Inference
+
+The book notes that another reason we care about the relationship between input and output variables is to learn something about their association. Note here the word "association" which does mean related but does not imply that the input variables cause the output variables. That is a separate problem of causal inference. People are sloppy all the time about this, but for the purpose of learning you should always be clear about when the inference you are drawing is causal.[^2]
+
+[^2]: Whether non-causal inferences are interesting is a separate question.
+
+### How do we estimate $f$?
+
+Suppose we observe a set of *n* different data points. We call these observations *training data* because we use them to train our estimation method how to estimate *f* our function of interest. In the book's notation:
+
+$$
+\begin{aligned}
+\{(x_1, y_1),...,(x_n, y_n)\}, x_i = (x_{i1}, ...x_{ip})^T
+\end{aligned}
+$$
+
+That compact expression looks confusing if we have not seen them before, but all it is seeing is that we have a set of realizations of input variables $X$ and output variable $y$ and each $X$ is the realization of of the vector of input variables. Here's an example in code.
+
+```{r}
+## number of training data pairs
+set.seed(123)
+n = 5
+
+## tibble::tibble()
+training_data = tibble(
+  x1 = rnorm(n),
+  x2 = rnorm(n),
+  x3 = rnorm(n),
+  y = x1 + x2 + x3 + runif(n)
+) |>
+  ## dplyr::relocate()
+  relocate(y, .before = x1)
+
+training_data
+
+```
+
+```{r}
+## Base version 
+n = 5 
+set.seed(123)
+training_data = data.frame(
+  x1 = rnorm(n),
+  x2 = rnorm(n),
+  x3 = rnorm(n)
+)
+training_data[["y"]] = training_data$x1 + training_data$x2 + training_data$x3 + runif(n)
+training_data = training_data[union("y", names(training_data))]
+
+training_data 
+```
+
+The other part of that equation that might be strange to you is the $T$ at the end. This is the symbol for transpose, and is done because by convention we think of all of the operations as column operations.
+
+#### Parametric Methods
+
+Parametric means that we make some assumptions about the parameters of the function. For example, we might assume that the function is linear in parameters, or that no value can ever be above 42, or a host of other possible assumptions.
+
+In parametric modeling, we first make an assumption about the functional form of the $f$ and then follow some procedure to estimate a model of that functional form.
+
+What's the benefit? Well since we have assumed that the problem must look a certain way, estimating the function is now much easier. The downside (and there is always a downside in everything) is that if we are wrong about this assumption we will be very wrong. Some parametric assumptions (linear function) tend to be used a lot.
+
+#### Non-parametric Methods
+
+Non-parametric methods do not make explicit assumptions about the functional form of the function of interest. Instead, they simply seek to estimate it in a way that flexibly fits the data without fitting *too well*. We will see what that means as we move through the book, but the word to get familiar with is *overfitting*.
+
+Note that for both parametric and non-parametric methods the reason why we care about overfitting is that we are seeking to learn about some function $f$ based on our training data, not what the best functional fit of the data we have is. Overfitting only matters because we do not care about the training data for its own sake, but rather what it can tell us about future observations.
+
+### Supervised and Unsupervised Learning
+
+Supervised learning implies that we have some observations for which we know the outputs. It is "supervised" because we are telling our machine assistant what is the correct answer. The vast majority of prediction problems are supervised learning problems. Unsupervised learning occurs when we do not have a correct output variable to predict, but still seek to understand relationships between variables or between observations. Unsupervised topic models would be an example of the latter in text analysis.
+
+### Regression vs. Classification
+
+Because methods come from different disciplines, there is some confusing vocabulary distinctions. For the purpose of this book, when you hear a regression problem, you should think of trying to predict a continuous or quantitative output variable. Is more advertising associated with increased sales is a regression problem. In contrast a classification problem deals with ordinal or nominal data where the goal is the predict what bucket a set of observations might fall into. Will a person with a set of attributes be likely to get into Cal is a classification problem.[^3]
+
+[^3]: This distinction is annoying to someone who comes at these questions from a different discipline. Much of the machine learning literature's hodgepodge of terms tells you more about the authors' educational background as it does the problem at hand.
+
+### Assessing Model Accuracy
+
+There are an infinite number of possible models that we can use to estimate our function of interest given our input variables and output variables. Therefore we need some way to determine which model is "best" and so also need some metric to define "best." A common one in the regression setting is Mean Squared Error (MSE).
+
+$$
+\begin{aligned}
+MSE = \frac{1}{n}\sum_{i=1}^n(y_i - \hat{f}(x_i))^2
+\end{aligned}
+$$
+
+Mean Squared Error is an example of a "loss function." By its name, you might infer correctly that the goal is to pick the model that has the smallest loss function of interest. Examine the equation for MSE to convince yourself that the MSE will be as low as possible if the prediction that our estimate gives is identical to the true value of our observed output variable.
+
+As stated earlier, we do not care about the MSE of the training data per se. We care about the MSE of our learning method on unseen data, which is often referred to as *test* data. Supposing that we have a large number of training observation to estimate a model, we simply sub in new data pairs into the above equation to get the test MSE.
+
+One key point regarding flexibility of models is that as the flexibility of our model increases (the fewer assumptions we put on functional form) we will observe a decrease in the training MSE and a U shape in the test MSE. *Overfitting* occurs when we have a low training MSE but a high test MSE.
+
+### Bias-Variance Tradeoff
+
+The most important trade-off in all of machine learning is the Bias-Variance tradeoff. Bias refers to (loosely) how off our estimate of the true function would be as the number of training examples gets very large. Formally the bias of some statistic $\theta$ is \$B\[\\theta\] = E\[\\theta - \\hat{\\theta}\]\$. We can think of bias as the error introduced by approximating the problem of interest. Variance on the other hand refers to how much our estimate $\hat{f}$ would change if we had used a different training data set. High variance means that a small change in the training data leads to a large change in $\hat{f}$.
+
+The book gives the following equation for the decomposition of the MSE into the variance of our estimator, the squared bias of our estimator and the error term.[^4]
+
+[^4]: The derivation is boring. Recall the decomposition of error and add and subtract $E[\hat{f}]$ from the right hand side. Group the terms together and substitute in appropriate named quantitites.
+
+    $$
+    \begin{aligned}
+    E[Y-\hat{Y}]^2 &= E[(f- \hat{f})^2] + V[\epsilon] \\
+    E[Y-\hat{Y}]^2 &= E[f + E[\hat{f}] - E[\hat{f}] - \hat{f}] + V[\epsilon] \\
+    E[Y-\hat{Y}]^2 &= E[\hat{f} - E[\hat{f}]]^2 + [f - E[\hat{f}]]^2 + V[\epsilon] \\
+    E[Y-\hat{Y}]^2 &= V[\hat{f}] + B[\hat{f}]^2 + V[\epsilon]
+    \end{aligned}
+    $$
+
+$$
+\begin{aligned}
+E[y_0 - \hat{f}(x_0)]^2 = V[\hat{f}(x_0)] + [B(\hat{f}(x_0))]^2 + V[\epsilon]
+\end{aligned}
+$$
+
+What does this equation tell us about the expected MSE on the test set. First, notice that every quantity is non-negative. Second, notice that irreducible error is part of the equation and serves as the upper bound because even if we had an estimate that had no variance and no bias, we would still have $V[\epsilon]$ left over.
+
+The Bias-Variance tradeoff tells us that good test set performance has low bias and low variance. The tradeoff is that we can always draw some curve to the data at hand that perfectly captures every data point, but if we take that method to a different set of data points we will have increased variance. Conversely, we can always make variance 0 by fitting a horizontal line through data, but this will be unlikely to capture the true fit of the function increasing bias.[^5]
+
+[^5]: In causal inference, we tend to care a lot more about the bias of our estimator than the variance.
+
+#### Classification Loss Functions
+
+Accuracy in the classification setting is conceptually similar with appropriate changes for the fact that we are now interested in the *training error rate*, the proportion of mistakes if we apply our learned estimate to the training observations.
+
+$$
+\begin{aligned}
+Err = \frac{1}{n}\sum_{i=1}^nI(y_i \neq \hat{y}_i)
+\end{aligned}
+$$
+
+The lowest test error occurs via the *Bayes Classifier* a method that assigns each observation to the most likely class given predictor values.
+
+$$
+\begin{aligned}
+BC = Pr(Y=j|X = x_0)
+\end{aligned}
+$$
+
+and the overall error rate will be $1 - E[\max_{\j} Pr(Y=j|X))$, analogous to irreducible error in the classification case.
+
+### Lab
+
+The lab at the end of Chapter 2 just reproduces some basic R functions.
+
+```{r}
+## Make a vector 
+x = c(1,6,2)
+y = c(1,4,3)
+## Element wise addition
+x + y 
+```
+
+```{r}
+## Make a matrix 
+x = matrix(data = c(1,2,3,4), 
+           nrow = 2, 
+           ncol = 2, 
+           byrow = TRUE)
+x
+sqrt(x)
+
+```
+
+```{r}
+## Generate some random normal realizations 
+set.seed(123)
+x = rnorm(500)
+y = x + rnorm(50, mean = 50, sd = .1)
+cor(x,y)
+```
+
+### Indexing Data
+
+I'm choosing to skip the graphics section because this class uses the tidyverse and because base R graphics look ugly to me without extensive customization.
+
+Indexing is incredibly important in any programming. A key note in R is that it is a 1 based index instead of a 0 based index.
+
+```{r}
+A = matrix(1:16, 4,4, byrow = T)
+A
+A[2,3]
+
+## We can also get slices 
+A[c(1,3), c(2,4)]
+A[1:3, 2:4]
+A[1:2,] # Getting just the first two rows 
+A[,1:2] # first two columns
+A[-c(1,3),] # get only 2 and 4th row
+```
+
+### Exercises
+
+#### Problem 7
+
+Here is an example of applying a function to a data set.
+
+```{r}
+knn_data = tibble(
+  id = 1:6,
+  x1 = c(0,2,0,0,-1,1),
+  x2 = c(3,0,1,1,0,1),
+  x3 = c(0,0,3,2,1,1),
+  y = c("red", "red", "red","green","green","red")
+)
+
+getEuclideanDistance = function(point = c(0,0,0), vec){
+  dist = sqrt((vec[1]- point[1])^2 + (vec[2]-point[2])^2 + (vec[3]-point[3])^2)
+  return(dist)
+}
+
+getClosestPoints = function(k){
+  
+}
+knn_data |>
+  rowwise()|>
+  mutate(d = getEuclideanDistance(vec = c(x1, x2, x3)))
+
+```
+
+## Chapter 3: Linear Regression
+
+Linear regression is a simple approach for supervised learning. We might use it to determine if a relationship exists between variables, the strength of the (linear) relationship, associations between multiple variables, or whether there are interaction effects.[^6]
+
+[^6]: The book often refers to this as "synergy"
+
+The relationship we seek to fit is \$\$Y \\approx B_i\\textbf{X}\$\$ where we have a series of input variables in a design matrix $\textbf{X}$ and want to predict an output $Y$.
+
+There are lots of ways to do this in R.
+
+1.  We can do it by hand
+
+```{r}
+## We will use the advertising data 
+Y = as.matrix(ads[, "sales"])
+x = as.matrix(ads[, c("TV")])
+
+## We add an intercept term 
+intercept = rep(1, nrow(ads))
+X = as.matrix(cbind(intercept, x))
+
+## (X'X)^-1X'y is the OLS estimator for any number 
+## of input variables X
+## The RHS of this is the way to do matrix multiplication and 
+## the inverse and transpose operations in R
+betas = solve(t(X) %*% X)%*%t(X)%*%Y
+betas
+
+### Calculate residuals
+resids = Y - X%*%betas 
+
+### Get degrees of freedom 
+df = nrow(X) - ncol(X) - 1
+
+### Calculate residual variance 
+resids_v = sum(resids^2)/df 
+
+### Get covariance matrix 
+beta_cov = resids_v * solve(t(X)%*%X)
+
+## Takes the square root of the diagonal of the covariance matrix
+## to get standard errors 
+beta_se = sqrt(diag(beta_cov))
+
+round(data.frame(betas, beta_se),3)
+```
+
+2.  We can use the base default `lm()`
+
+```{r}
+## broom tidy is a way to get the output of lm into a data frame
+## Note that you will need to install the package before using
+broom::tidy(lm(sales ~ TV, data = ads))
+```
+
+Note that our calculation "by hand" matches the estimate and standard errors of the default function.
+
+3.  We can use (and should!) a function from a package that lets us have better standard error estimation.
+
+```{r}
+## fixest is a created package, so must be installed before using
+broom::tidy(fixest::feols(sales ~ TV, data = ads))
+```
+
+### The Math
+
+The optimization problem is to take a set of data points $\{(x_1, y_1),…(x_n,y_n)\}$ that represent $n$ observation pairs. In the model in the chapter the points are the TV advertising budget and the product sales. We want to fit a model that minimizes the least squares criterion, which is our loss function. This model amounts to minimizing the total error between our model fit and all of the data points.[^7] The errors are defined by the residuals, and the residual sum of squares RSS is \$(y_1 - \hat{\beta_0} - ...\hat{\beta_nx_n)^2 + ... (y_n - \hat{\beta_0}x_n)^2}\$. In words, we make some guesses about our beta coefficients and then subtract the prediction $\hat{\beta_i}x_i$ from the actual value observed.
+
+[^7]: Note that this sounds an awful lot like finding an average and that is intentional.
+
+It turns out in the simple linear regression case, the minimizes for this equation are:
+
+$$\begin{aligned}
+\hat{\beta_0} &= \bar{y} - \hat{\beta_1}\bar{x} \\
+\hat{\beta_1} &= \frac{\sum_{i=1}^n(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n(x_i - \bar{x})^2}
+\end{aligned}$$
+
+The numerator in the second estimate the covariance between the vectors and the denominator is the variance of the input variables. The values with bars over them represent the sample means.
+
+```{r}
+## In code 
+beta1 = cov(ads[["TV"]], ads[["sales"]]) / var(ads[["TV"]])
+
+beta0 = mean(ads[["sales"]], na.rm = T) - beta1 * mean(ads[["TV"]], na.rm = T)
+
+rbind(beta0, beta1)
+```
+
+To assess uncertainty we compute standard errors. The formulas associated with the two coefficients are:
+
+$$\begin{aligned}
+SE_{\hat{\beta_0}} &= \sigma^2[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n(x_i - \bar{x})^2}] \\
+SE_{\hat{\beta_1}} &= \frac{\sigma^2}{\sum_{i=1}^n(x_i -\bar{x})^2}
+\end{aligned}$$
+
+```{r}
+## in code 
+
+## How far off are we? 
+sigma_squared = var(ads[["sales"]]- beta0 - beta1*ads[["TV"]])
+
+## For readability purposes
+numerator = sigma_squared*mean(ads[["TV"]]^2) 
+denominator = sum((ads[["TV"]]-mean(ads[["TV"]]))^2)
+var_beta0 = numerator / denominator 
+se_beta0 = sqrt(var_beta0)
+
+
+var_beta1 = sigma_squared / denominator
+se_beta1 = sqrt(var_beta1)
+
+rbind(se_beta0, se_beta1)
+```
+
+If we want a confidence interval, we take the coefficient and multiply it plus/minus some critical value times the standard error.
+
+```{r}
+## approximately 95% confidence intervals 
+lower_bound = beta1 - 2*se_beta1 
+upper_bound = beta1 + 2*se_beta1 
+
+rbind(lower_bound, upper_bound)
+```
+
+The t-statistic is defined as the coefficient divided by the standard error
+
+```{r}
+## We'll get a slightly different answer here due to floating point operations and the calculation of the generalized variance
+beta1 / se_beta1
+```
+
+### Multiple Regression
+
+Everything that we have done so far generalizes to the multiple regression case. This is good because if it did not we likely would have made a basic category error.
+
+### A word on interactions
+
+If you have an interaction in your model, you always need to put the separate variables into the model (e.g. the main effects). To add interactions into a model, we simply multiply variables together. Here are two commons ways to do that in R.
+
+```{r}
+broom::tidy(lm(sales ~ TV + radio + TV*radio, data = ads))
+broom::tidy(lm(sales ~ TV + radio + TV:radio, data = ads))
+
+## Also works in fixest 
+broom::tidy(fixest::feols(sales ~ TV + radio + TV:radio, data = ads))
+```
+
+Similarly, if we want to include powers, we simply add in the appropriate order.
+
+```{r, message = F}
+auto = read_csv("https://www.statlearning.com/s/Auto.csv", na = c("?",NA)) |>
+  ## drop missing
+  na.omit()
+
+## poly is more flexible, raw = T makes it equivalent to the 
+## the next way to do it. poly by default only uses orthogonal
+## terms. Raw terms are likely to have collinearity 
+broom::tidy(lm(mpg ~ poly(horsepower, 2, raw=T), data = auto))
+
+## alternatively 
+broom::tidy(lm(mpg ~ horsepower + I(horsepower^2), data = auto))
+```
