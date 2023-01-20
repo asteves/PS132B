@@ -1,0 +1,148 @@
+---
+title: "PS132B Section 1"
+format: beamer
+editor: visual
+---
+
+## Section in 30ish seconds
+
+-   Fill out the Office Hour form on Ed Discussion
+
+-   Participation Activity
+
+    -   Reply to Ed Discussion there is a thread called "Section 1 Activity" with the name of a song that you think everyone should listen to. Include the artist name as well
+
+-   Learn some other peoples' names
+
+-   Go over the survey results
+
+    -   If you put "None at all" or "A little" to coding experience you're the modal respondent
+
+## Office Hours
+
+I am deciding when to hold my office hours between the following day/times:
+
+-   M: 10-12
+
+-   T: 10-12
+
+-   W: 2-4pm
+
+-   H: 10-12
+
+-   F: 2-4
+
+Please fill out the form linked on Ed Discussion
+
+## R Installation
+
+The R and RStudio installation instructions are on Ed Discussion
+
+Note: You might need to install tinytex. The instructions to do that are in a thread on Ed Discussion
+
+## Make a Friend
+
+```{r, echo = T, eval = F}
+makeFriendFunction = function(){
+  ## 1. Survey the classroom 
+  ## 2. Find at least one person you have never met 
+  ## 3. Introduce yourself to that person 
+  ## 4a. Find some common shared aspect of the 
+  ## human experience
+  ## 5. If appropriate, exchange contact information
+}
+
+## Loop the function to make three friends 
+for(i in 1:3){
+  makeFriendFunction()
+}
+```
+
+## What are the answers for the survey questions?
+
+```{r, echo = T}
+## Makes a vector with the c() function and 
+## assigns value to x
+x = c(1,2,3,4,5,6,7,8)
+
+## prints to the console the "value" of the object x
+print(x)
+
+## a way to get only the even values 
+## from the vector x
+y = x[seq(2,8,2)] 
+
+## prints the value of the vector y 
+print(y)
+```
+
+## What are the answers for the survey questions?
+
+```{r, echo = T}
+set.seed(123)
+## Make a vector of the values 1,3,5,7
+x = c(1,3,5,7) 
+
+## Make another vector that takes the values of x 
+## and adds noise from a standard normal distribution
+y = x + rnorm(4) 
+
+## runs a linear regression of y on x
+lm(y ~ x)
+
+```
+
+## What are the answers for the survey questions?
+
+```{r, echo = T}
+## This function removes the last value of a vector 
+## we might call it dropLast instead of f2
+f2 = function(x){ 
+  if(length(x)== 1){
+    return(NULL) 
+  }
+  x[-length(x)] 
+}
+
+x = c(1,2,3,4,5)
+print(x)
+f2(x)
+```
+
+## What should I take away from today?
+
+-   This class succeeds because of you. Everyone in class can learn the material.
+
+-   We want to help you learn the material.
+
+-   If you do not understand R code, you are not alone in class
+
+-   Type examples out. Avoid copy/pastes
+
+## Some Concrete Suggestions to see what happens (Problem 1)
+
+The following are all suggestions to see *what* happens without worrying necessarily about *why* it happens.
+
+Learning a language is as much about breaking things/trying something and seeing what happens as anything else early on
+
+-   Try changing the number of elements in the vector.
+    -   What happens if you make x the first 10 numbers?
+    -   What happens if you make `x = c("A", "B", "C", "D", "E")`
+    -   What happens if you change the last argument in `seq()` to 4
+-   Type ?seq into your R console and press enter. What happens?
+
+## Some Concrete Suggestions to see what happens (Problem 2)
+
+-   Swap the order of y and x. Do you get the same answer? Can you think of why you get the result? Write down some guesses.
+
+-   Add `y = c(y, 2,3)` after the the line defining y initially. Run the same `lm()` function. What happens? Can you think of why you get the result? Write down some guesses.
+
+-   Does it matter that x is composed of just whole numbers? Experiment by changing the values to fractions.
+
+## Some Concrete Suggestions to see what happens (Problem 3)
+
+-   Try passing a vector of length 1 to the function. What happens?
+    -   e.g. `x = c(5)`
+-   Try passing the function a vector of names. What happens? Remember that we need to put "" around them like this
+    -   `x = c("Bansak", "Wurster")`
+-   Amend line 7 to be `x[-(length(x)-3)]`. What happens if you run the same example as in class? What happens if you make `x=c(1,2)`? Do you have any guesses as to why this happens?
