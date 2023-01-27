@@ -1,0 +1,108 @@
+---
+title: "Section 2 R Activity"
+format: 
+  html:
+    toc: true
+    toc-title: Outline
+    toc-location: left
+editor: visual
+---
+
+## How should we think about randomness?
+
+```{r}
+
+set.seed(123)
+num_vec = 1:5
+num_vec[c(5,3,1,2,4)]
+num_vec[c(1,3,4,2,5)]
+```
+
+On your own computer, try to make a different order than the ones on the screen.
+
+### How many possible ordering are there are 5 numbers?
+
+```{r}
+factorial(5)
+```
+
+### What are we doing here?
+
+SAMPLING!
+
+```{r}
+sample(1:5, 5)
+```
+
+## Section 101
+
+```{r, echo=FALSE, message =FALSE}
+sections = read.csv("https://tinyurl.com/4uarvs4c")
+section101 = subset(sections, section == 101)
+section102 = subset(sections, section == 102)
+```
+
+```{r}
+head(section101)
+```
+
+### Let's make some random groups
+
+How many students do we have
+
+```{r}
+nrow(section101)
+```
+
+### Let's make 9 groups
+
+```{r}
+group = 1:9
+section101$group = sample(group, nrow(section101), replace = TRUE)
+section101[order(section101$group),]
+```
+
+### We have a problem when we do this. Why?
+
+### An alternative
+
+```{r}
+group2 = c(rep(1:9, each = 3))
+section101$group = sample(group2, 
+                          nrow(section101), 
+                          replace = FALSE)
+section101[order(section101$group),]
+```
+
+## Section 102
+
+```{r}
+head(section102)
+```
+
+### Let's make some random groups
+
+How many students do we have?
+
+```{r}
+nrow(section102)
+```
+
+### Let's make 9 groups
+
+```{r}
+group = 1:9
+section102$group = sample(group, nrow(section101), 
+                          replace = TRUE)
+section102[order(section102$group),]
+```
+
+### We have a problem when we do this. Why?
+
+### An alternative
+
+```{r}
+group2 = c(rep(1:9, each = 3))
+section102$group = sample(group2, nrow(section101), replace = FALSE)
+section102[order(section102$group),]
+```

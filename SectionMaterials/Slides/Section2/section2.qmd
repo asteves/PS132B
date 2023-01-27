@@ -1,0 +1,38 @@
+---
+title: "Section 2"
+author: "1/26/23"
+format: revealjs
+editor: visual
+---
+
+## Section in 30ish Seconds
+
+-   `ps132b::makeFriendFunction(num=3)`
+
+-   Space for Questions from the week
+
+-   R Practice
+
+-   Teach some other friends
+
+## Make Friends
+
+Make three friends (e.g. groups of no less than 3).
+
+I'm not here to tell you how to live your life, but you might consider making at least one new friend that you didn't make last week
+
+## Space for Questions from the week
+
+Within reason, the floor is open for any questions
+
+## R Activity 1: How might we assign groups?
+
+To R!
+
+## R Activity 2: Data Practice
+
+1.  Come up with a problem domain you find interesting. What are you interested in predicting within this domain?
+2.  Discuss what data you would want to have if you were Oski the Bear (or some other being of unimaginable power)
+3.  Build out that data frame with at least 6 data points in each variable. Use different types of variables. Every single person in your group should individually type out their own R script!
+4.  Discuss how you might use your magical data to predict your outcome of interest
+5.  Find another person(s) who you haven't met before. Exchange thoughts.
