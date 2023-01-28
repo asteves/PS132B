@@ -1,10 +1,7 @@
 ---
 title: "Section 2 R Activity"
 format: 
-  html:
-    toc: true
-    toc-title: Outline
-    toc-location: left
+  pdf
 editor: visual
 ---
 
@@ -36,8 +33,8 @@ sample(1:5, 5)
 
 ## Section 101
 
-```{r, echo=FALSE, message =FALSE}
-sections = read.csv("https://tinyurl.com/4uarvs4c")
+```{r, echo=TRUE, message =FALSE}
+sections = read.csv("sections.csv")
 section101 = subset(sections, section == 101)
 section102 = subset(sections, section == 102)
 ```
