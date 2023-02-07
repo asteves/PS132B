@@ -1,0 +1,1001 @@
+"name","city","business_postal_code","inspection_date","risk_category","isViolation","highRisk"
+"CHAIRMAN SF, LLC","San Francisco","94124","01/08/2019 12:00:00 AM",NA,FALSE,NA
+"Luigi's Pizzeria","San Francisco","94133","01/05/2017 12:00:00 AM",NA,FALSE,NA
+"SK&L Trading, LLC","San Francisco","94133","08/23/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Akikos Sushi","San Francisco","94108","03/08/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Bar Crenn","San Francisco","94123","02/28/2018 12:00:00 AM",NA,FALSE,NA
+"Ilana Cafe","San Francisco","94121","10/24/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Grandeho's Kamekyo II","San Francisco","94109","02/05/2019 12:00:00 AM",NA,FALSE,NA
+"Amphawa Thai Noodle House","San Francisco","94122","06/05/2017 12:00:00 AM",NA,FALSE,NA
+"Shanghai Dumpling King 2","San Francisco","94127","12/13/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Sam Rong Cafe","San Francisco","94133","05/25/2017 12:00:00 AM",NA,FALSE,NA
+"Champa Garden","San Francisco","94112","03/05/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"CHA-AM RESTAURANT","San Francisco","94107","07/09/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Kara's Cupcakes","San Francisco","94107","01/18/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"PASITA'S BAKERY","San Francisco","94112","03/21/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Senor Sisig #3","San Francisco",NA,"01/26/2017 12:00:00 AM",NA,FALSE,NA
+"95222 - V-4 King Street Carvery (Cart)","San Francisco","94107","03/26/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"DECCAN HOUSE","San Francisco","94110","11/03/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Xiao Loong","San Francisco",NA,"01/31/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Green Bar","San Francisco","94111","03/07/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"RICHMOND NEW MAY WAH SUPERMARKET","San Francisco","94118","07/31/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Japanese House","San Francisco","94103","03/01/2018 12:00:00 AM",NA,FALSE,NA
+"Epicurean@SHCP","San Francisco","94109","09/17/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Flying Pig Bistro","San Francisco","94103","10/15/2018 12:00:00 AM",NA,FALSE,NA
+"Beard Papa's","San Francisco","94103","08/22/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Cafe Encore","San Francisco","94109","11/07/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"NICKIES IRISH PUB","San Francisco","94117","05/29/2019 12:00:00 AM",NA,FALSE,NA
+"MONGKOK DIM SUM & RESTAURANT","San Francisco","94122","05/15/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"NEW TSING TAO RESTAURANT","San Francisco","94127","01/04/2019 12:00:00 AM",NA,FALSE,NA
+"Gambinos Deli, Inc.","San Francisco","94111","06/26/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Guzman's Produce Market, Inc.","San Francisco","94112","09/14/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Extreme Pizza","San Francisco","94103","08/29/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Niji Japanese Grille","San Francisco","94104","07/15/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Leadership High School","San Francisco","94112","09/18/2019 12:00:00 AM",NA,FALSE,NA
+"Hogwash","San Francisco",NA,"11/27/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"The Napper Tandy","San Francisco",NA,"03/07/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Boss Supermarket","San Francisco","94122","07/16/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Peet's Coffee and Tea","San Francisco","94104","05/15/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"HAMANO SUSHI","San Francisco","94114","09/19/2018 12:00:00 AM",NA,FALSE,NA
+"Beer Nerds","San Francisco","94110","07/22/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Kagawa-ya Udon Noodle Company","San Francisco","94103","06/26/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Soma Eats","San Francisco","94105","03/13/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Super Save Supermarket","San Francisco","94124","07/16/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Pizza Express","San Francisco","94110","09/25/2017 12:00:00 AM",NA,FALSE,NA
+"7-Mission Restaurant","San Francisco","94103","05/22/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Ritu Indian Soul Food","San Francisco","94110","12/22/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Ayola","San Francisco","94105","04/24/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Blaze Pizza Fast-Fire'd","San Francisco","94132","02/23/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"1428 Haight","San Francisco","94117","08/17/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"My Ivy Corp.","San Francisco","94115","03/07/2019 12:00:00 AM",NA,FALSE,NA
+"Healthy Spirits Castro","San Francisco","94114","03/27/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Brendas Meat & Three","San Francisco","94115","03/13/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Little Heaven Deli","San Francisco","94110","11/02/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Jang Soo BBQ","San Francisco","94121","04/03/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"NAPOLI PIZZA RESTAURANT","San Francisco","94109","10/04/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Castro Coffee Company","San Francisco","94114","10/17/2017 12:00:00 AM",NA,FALSE,NA
+"Jay's Cheesesteak","San Francisco","94110","09/26/2018 12:00:00 AM",NA,FALSE,NA
+"Tip Top Market","San Francisco","94102","08/20/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Seal Rock Inn Restaurant","San Francisco","94121","09/09/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Dirty Habit","San Francisco","94103","04/23/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Uno Dos Taco","San Francisco","94105","01/23/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SAI JAI THAI","San Francisco","94109","04/16/2019 12:00:00 AM",NA,FALSE,NA
+"AHA Fresh","San Francisco","94114","08/30/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Vital Tea Leaf Inc","San Francisco","94108","12/17/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"AMC Theatres Metreon 16 - Main Stand","San Francisco","94103","01/05/2017 12:00:00 AM",NA,FALSE,NA
+"Poke Origin","San Francisco","94122","01/30/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Crepe House","San Francisco","94109","10/12/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"CAFE MADELEINE","San Francisco","94105","01/10/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Roadside Rotisserie (#4)","San Francisco","94158","05/08/2019 12:00:00 AM",NA,FALSE,NA
+"95250 C&C Concessions/View Level Vending Room","San Francisco","94107","03/26/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"CROSSROADS CAFE","San Francisco","94107","01/30/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"SUNRISE MARKET","San Francisco","94117","05/08/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"DOSA","San Francisco","94110","06/05/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Jamber","San Francisco","94107","12/07/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"SK&L Trading, LLC","San Francisco","94133","12/05/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"El Buen Comer","San Francisco",NA,"08/23/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The White Horse","San Francisco","94102","01/27/2017 12:00:00 AM",NA,FALSE,NA
+"Yum Yum Hunan","San Francisco","94115","04/30/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"HAPPY LAMB HOT POT","San Francisco","94102","11/01/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Katherine Delmar Burke School","San Francisco","94121","04/11/2019 12:00:00 AM",NA,FALSE,NA
+"TAQUERIA EL BUEN SABOR","San Francisco","94112","10/25/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Sotto Mare Oysteria & Seafood","San Francisco","94133","08/27/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Fog City","San Francisco","94111","04/11/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"LA REYNA BAKERY","San Francisco","94110","11/17/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Phillies","San Francisco","94112","03/05/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"A B C MARKET","San Francisco","94110","03/28/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Fillmore Bake Shop","San Francisco","94115","06/25/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"ESTELA'S DONBURI","San Francisco","94108","09/10/2019 12:00:00 AM",NA,FALSE,NA
+"Golden Ocean Quickly","San Francisco","94112","10/27/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"El Porteno I Restaurant","San Francisco","94112","05/30/2018 12:00:00 AM",NA,FALSE,NA
+"EL BURRITO EXPRESS #2","San Francisco","94115","05/04/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Monterey Deli","San Francisco","94127","07/30/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Heritage, The","San Francisco","94123","02/23/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Stanford Hotel","San Francisco","94108","02/27/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"FRENA","San Francisco","94121","02/22/2019 12:00:00 AM",NA,FALSE,NA
+"Marlowe","San Francisco","94107","09/26/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Michael's Food Store","San Francisco","94109","06/15/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Little Sweet","San Francisco","94118","06/29/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Early to Rise","San Francisco","94133","07/26/2017 12:00:00 AM",NA,FALSE,NA
+"Soo Fong Restaurant","San Francisco","94124","02/07/2017 12:00:00 AM",NA,FALSE,NA
+"Lucky California #755","San Francisco","94132","11/17/2017 12:00:00 AM",NA,FALSE,NA
+"Maxfield's House of Caffeine","San Francisco","94110","07/05/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Imperial Palace","San Francisco","94108","12/17/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Joy Hing BBQ Noodles House","San Francisco","94108","01/02/2019 12:00:00 AM",NA,FALSE,NA
+"Gold Coin Trading Co","San Francisco","94133","11/17/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Kaiju Cooks","San Francisco","94121","08/27/2019 12:00:00 AM",NA,FALSE,NA
+"Subway #4066","San Francisco","94121","02/12/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Chef's Work in the Truck","San Francisco","94103","02/07/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Nande-Ya","San Francisco","94115","02/27/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Applebee's Fisherman's Wharf","San Francisco","94133","02/28/2018 12:00:00 AM",NA,FALSE,NA
+"Molinari Delicatessen","San Francisco","94133","06/20/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Mymy","San Francisco","94109","10/30/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"JT Market","San Francisco","94122","04/12/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"St. Ignatius","San Francisco","94116","03/11/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Mikaku Restaurant","San Francisco","94108","12/28/2018 12:00:00 AM",NA,FALSE,NA
+"Golden Horse Restaurant","San Francisco","94109","10/07/2016 12:00:00 AM",NA,FALSE,NA
+"Reveille Coffee","San Francisco","94111","06/10/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Cala Restaurant","San Francisco","94102","06/04/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Brioche Bakery & Cafe","San Francisco","94133","07/31/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"KERY MARKET","San Francisco","94110","05/21/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"GARDEN HOUSE CAFE","San Francisco","94121","01/26/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Miss Saigon LLC","San Francisco","94103","06/15/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Subway Sandwiches #34341","San Francisco","94103","02/24/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"North Beach Pizza","San Francisco","94133","08/29/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Pho Dong Huong","San Francisco","94127","11/02/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Alba Ray's","San Francisco","94110","07/01/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Happy Shabu Shabu","San Francisco","94115","03/05/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Chanvi","San Francisco","94103","03/14/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SAN FRANCISCO FOOD BANK","San Francisco","94107","01/19/2017 12:00:00 AM",NA,FALSE,NA
+"The Flying Falafel","San Francisco",NA,"09/24/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Little Bee Baking","San Francisco","94110","03/20/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"LADLE & LEAF","San Francisco","94111","04/25/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"COSTCO WHOLESALE","San Francisco","94107","01/19/2018 12:00:00 AM",NA,FALSE,NA
+"H & L Super Market","San Francisco","94102","04/15/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Red Jade Restaurant","San Francisco","94114","07/18/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"City View Restaurant","San Francisco","94111","04/03/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"BOSTON MARKET","San Francisco","94103","02/14/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"HIEP-THANH MARKET","San Francisco","94109","04/05/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"City Super","San Francisco","94133","11/27/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"ILLY CAFFE SF_PIER 39","San Francisco","94133","03/29/2019 12:00:00 AM",NA,FALSE,NA
+"Sweet Hut","San Francisco","94118","08/28/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"California Grocery","San Francisco","94102","06/27/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Centro Latino de SF at the Star Hotel","San Francisco","94110","08/27/2018 12:00:00 AM",NA,FALSE,NA
+"Akiko's Sushi Bar","San Francisco","94102","07/28/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Java House LLC","San Francisco","94107","10/25/2018 12:00:00 AM",NA,FALSE,NA
+"HAYES STREET GRILL","San Francisco","94102","07/11/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Fancy Wheatfield Bakery, Inc","San Francisco","94134","01/10/2017 12:00:00 AM",NA,FALSE,NA
+"LA TRAVIATA","San Francisco","94110","02/28/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"OOLA RESTAURANT & BAR","San Francisco","94103","08/15/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Green Bar","San Francisco","94111","03/07/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Ladle & Leaf","San Francisco","94104","11/10/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"FLOUR + WATER PIZZERIA","San Francisco","94110","06/26/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"CINDERELLA BAKERY & CAFE","San Francisco","94118","09/23/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Tu Lan Vietnamese Restaurant","San Francisco","94103","02/27/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Champa Garden","San Francisco","94112","07/24/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Facebook INC","San Francisco","94105","05/22/2018 12:00:00 AM",NA,FALSE,NA
+"Halal Wings Plus","San Francisco","94102","12/06/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Academy of Arts Univ- I House Cafe","San Francisco","94109","09/11/2019 12:00:00 AM",NA,FALSE,NA
+"Lahore Karahi","San Francisco","94109","08/13/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Shabuway, Men-Oh","San Francisco","94118","10/12/2017 12:00:00 AM",NA,FALSE,NA
+"FIRE AND BREW","San Francisco","94105","05/13/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"PRINCESS BAKERY","San Francisco","94112","02/26/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"O' by Claude Le Tohic","San Francisco","94102","04/29/2019 12:00:00 AM",NA,FALSE,NA
+"Fresco Pizza and Grill","San Francisco","94109","09/06/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Saffron Lounge","San Francisco","94103","05/09/2019 12:00:00 AM",NA,FALSE,NA
+"Latte Express #3","San Francisco","94133","03/06/2018 12:00:00 AM",NA,FALSE,NA
+"Cafe Valencia","San Francisco","94110","04/09/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Korean Bobcha","San Francisco","94103","10/24/2016 12:00:00 AM",NA,FALSE,NA
+"Golden Gate Halal Food","San Francisco","94102","08/16/2019 12:00:00 AM",NA,FALSE,NA
+"La Fonda","San Francisco","94122","03/15/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Yan Yan Seafood Restaurant","San Francisco","94122","07/10/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"RESTAURANTE FAMILIAR","San Francisco","94112","05/18/2017 12:00:00 AM",NA,FALSE,NA
+"Fresca Gardens, Inc","San Francisco","94103","09/26/2018 12:00:00 AM",NA,FALSE,NA
+"Osha Express","San Francisco","94105","02/15/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Manila Bowl","San Francisco","94103","03/06/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"San Francisco Public Montessori","San Francisco","94115","03/22/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"McAllister Grocery & Deli","San Francisco","94102","02/14/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Saison","San Francisco","94107","11/29/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Dar Bar Pakistani/Indian Cusine","San Francisco","94109","05/29/2018 12:00:00 AM",NA,FALSE,NA
+"Wild Pepper","San Francisco","94110","08/26/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SUNRISE MARKET","San Francisco","94117","10/24/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Alfred's Steakhouse","San Francisco",NA,"03/01/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Crab House","San Francisco","94133","09/13/2018 12:00:00 AM",NA,FALSE,NA
+"Alioto's","San Francisco","94133","10/24/2017 12:00:00 AM",NA,FALSE,NA
+"Castro Theatre","San Francisco","94114","02/26/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tamashi","San Francisco","94123","05/15/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"95206 King Street Carvery (Soup) Cart","San Francisco","94107","07/19/2019 12:00:00 AM",NA,FALSE,NA
+"ABSINTHE BRASSERIE & BAR","San Francisco","94102","04/03/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Westin St Francis - Employee's Cafeteria","San Francisco","94102","06/10/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Blue Bottle Coffee","San Francisco","94107","10/07/2016 12:00:00 AM",NA,FALSE,NA
+"Om Indian Cuisine","San Francisco","94117","05/01/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"EL CASTILLITO TAQUERIA INC.","San Francisco","94114","07/02/2018 12:00:00 AM",NA,FALSE,NA
+"BeiJing Restaurant","San Francisco","94112","08/13/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Mayah's Restaurant Cafe","San Francisco","94103","03/08/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Tip Top Market","San Francisco","94102","12/22/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SANRAKU","San Francisco","94103","02/14/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Firenze By Night","San Francisco","94133","04/18/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"SMILE'S  B.B.Q.","San Francisco","94110","11/15/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"CHARLIE'S DELI CAFE","San Francisco","94110","04/04/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Kio Ramen","San Francisco","94121","10/21/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Udupi Palace","San Francisco","94110","09/06/2019 12:00:00 AM",NA,FALSE,NA
+"Jamba Juice","San Francisco","94108","05/15/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Oski","San Francisco","94133","01/19/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"TEA FM","San Francisco","94132","06/14/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Mr. & Mrs. Tea House LLC","San Francisco","94118","05/01/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Bonito Poke","San Francisco",NA,"11/15/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Balboa Teriyaki","San Francisco","94121","06/27/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"COLLEGE MARKET","San Francisco","94109","02/21/2019 12:00:00 AM",NA,FALSE,NA
+"Blue Bottle Coffee","San Francisco","94107","02/23/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Eden Silk Road Cuisine","San Francisco","94102","10/28/2016 12:00:00 AM",NA,FALSE,NA
+"Mission Shell","San Francisco","94110","05/23/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"La Boulangerie De San Francisco","San Francisco","94114","06/20/2018 12:00:00 AM",NA,FALSE,NA
+"Fish N Gari","San Francisco","94109","08/20/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"HONG KONG RESTAURANT","San Francisco","94134","07/23/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Aveline / The European","San Francisco","94102","11/27/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"GreenSurge","San Francisco","94114","07/14/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Saint Frank Coffee","San Francisco","94103","09/22/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Las Brisas","San Francisco","94110","03/09/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Illy Caffe SF_Sansome","San Francisco","94111","04/29/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"SERRANO'S PIZZA II","San Francisco","94110","07/14/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Blaze Pizza Fast-Fire'd","San Francisco","94132","08/07/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Bar 587","San Francisco","94102","05/10/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"St. Anthony Foundation","San Francisco","94102","10/24/2017 12:00:00 AM",NA,FALSE,NA
+"Good Eats Cafe","San Francisco","94104","04/08/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Oski","San Francisco","94133","01/19/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Coffee Mission","San Francisco","94110","05/14/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Flying Pig Bistro","San Francisco","94103","11/28/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Charles Chocolates","San Francisco","94110","02/23/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Lee's Deli","San Francisco","94111","10/17/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"7 Eleven Store #2366-39475B","San Francisco","94110","12/15/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Andrea's Bakery","San Francisco","94112","10/25/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"PUERTO ALEGRE","San Francisco","94110","10/24/2016 12:00:00 AM","High Risk",TRUE,TRUE
+"Canyon Market","San Francisco","94131","08/06/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SF BAGEL CO. (KATZ BAGELS)","San Francisco","94103","08/30/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Nihon","San Francisco","94103","08/01/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Hilton Financial District- Restaurant Seven Fifty","San Francisco","94108","09/22/2017 12:00:00 AM",NA,FALSE,NA
+"Ikes Love & Sandwiches","San Francisco","94109","04/04/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Kama Sushi","San Francisco","94131","06/12/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"AFC Sushi @ Safeway #2646","San Francisco","94118","09/06/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"THE LINKS BAR AND GRILL","San Francisco","94121","02/06/2019 12:00:00 AM",NA,FALSE,NA
+"Cafe Bean","San Francisco","94109","04/17/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Izakaya Kou","San Francisco","94115","03/13/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"OTD","San Francisco","94115","05/17/2019 12:00:00 AM",NA,FALSE,NA
+"Elixiria","San Francisco","94105","08/21/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Pasta Moto of San Francisco Centre LLC","San Francisco","94103","02/06/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Chennai Kings","San Francisco","94133","03/18/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Sf Hilton Employee Cafe","San Francisco","94102","04/05/2019 12:00:00 AM",NA,FALSE,NA
+"Little Heaven Deli","San Francisco","94110","07/01/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Lemongrass Thai Cuisine","San Francisco","94109","03/13/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"H20 Cafe","San Francisco","94109","11/07/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Xpress Market","San Francisco","94102","02/27/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"SUBWAY","San Francisco","94109","12/08/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"TOP SF BBQ","San Francisco","94121","08/13/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"B. Patisserie LLC","San Francisco","94115","07/02/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"New Fruit Garden, LLC","San Francisco","94133","04/13/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Castro Republic","San Francisco","94114","03/23/2018 12:00:00 AM",NA,FALSE,NA
+"Silver Market Inc.","San Francisco","94134","04/21/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"MANIVANH THAI RESTAURANT","San Francisco","94110","03/21/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Cajun House","San Francisco","94118","10/26/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Cheese Plus","San Francisco","94109","07/30/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"AHA Fresh","San Francisco","94114","01/07/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Howard & 6th Street Food Market Inc.","San Francisco","94103","05/16/2018 12:00:00 AM",NA,FALSE,NA
+"Cup A Joe Coffehaus","San Francisco","94109","02/03/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Slice House by Tony Gemignani","San Francisco","94107","03/22/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Cafe Mystique","San Francisco","94114","07/24/2019 12:00:00 AM",NA,FALSE,NA
+"Nihon","San Francisco","94103","08/01/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"MENKEE WONTON","San Francisco","94122","03/06/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"HONG KONG RESTAURANT","San Francisco","94134","07/23/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Caribbean Spices","San Francisco","94103","05/01/2018 12:00:00 AM",NA,FALSE,NA
+"Poke Bar","San Francisco","94103","01/30/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"95160 Outtahere Cheese Steak","San Francisco","94107","03/26/2018 12:00:00 AM",NA,FALSE,NA
+"North East Bar 200","San Francisco","94158","08/12/2019 12:00:00 AM",NA,FALSE,NA
+"Parkside Quickly","San Francisco","94116","11/05/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tenderloin Grocery & Liquor","San Francisco","94102","06/04/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Rosa Mexicano","San Francisco","94105","09/17/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"HARRY'S BAR","San Francisco","94115","10/13/2016 12:00:00 AM",NA,FALSE,NA
+"Notes From Underground Cafe","San Francisco",NA,"05/14/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Bow Hon Restaurant","San Francisco","94108","09/10/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"VILLA D'ESTE","San Francisco","94132","05/07/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Stacks Restaurant","San Francisco","94102","05/21/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Utopia Cafe","San Francisco","94108","08/26/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Elsy's Restaurant","San Francisco","94110","08/09/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Mr. Bread","San Francisco","94116","04/26/2018 12:00:00 AM",NA,FALSE,NA
+"Washington Cafe","San Francisco","94108","09/23/2019 12:00:00 AM",NA,FALSE,NA
+"EL FARO","San Francisco","94105","09/26/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"LELENITA'S CAKES","San Francisco","94110","01/03/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Woods Outbound","San Francisco","94122","02/02/2017 12:00:00 AM",NA,FALSE,NA
+"CAFE ROCCO","San Francisco","94103","03/05/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Aria","San Francisco","94109","02/14/2018 12:00:00 AM",NA,FALSE,NA
+"Roy's #2501","San Francisco","94105","06/25/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"La Capra Coffee","San Francisco","94105","01/14/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Folsom Street Foundry","San Francisco","94103","10/26/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Chopsticks Restaurant","San Francisco","94112","09/26/2019 12:00:00 AM",NA,FALSE,NA
+"R Caffe","San Francisco","94102","04/13/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Huli Huli Hawaiian Grill","San Francisco","94124","11/15/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Broadway Studios","San Francisco","94133","02/12/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Deli Board","San Francisco","94107","11/14/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"I'A Poke","San Francisco","94114","07/29/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tofu Village","San Francisco","94122","01/11/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Union Square Sports Bar","San Francisco","94102","10/20/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Yan Yan Seafood Restaurant","San Francisco","94122","11/08/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"LUCCA DELICATESSEN","San Francisco","94123","01/09/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"New Golden Daisy","San Francisco","94108","11/08/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"VENUS CAFE","San Francisco","94118","07/11/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Cadillac Market","San Francisco","94109","05/01/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Bella 3848","San Francisco","94118","11/15/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Blue Barn Gourmet","San Francisco","94123","01/19/2017 12:00:00 AM",NA,FALSE,NA
+"Hotel Whitcomb - Employee Kitchen","San Francisco","94103","05/07/2019 12:00:00 AM",NA,FALSE,NA
+"ETERNA PRIMAVERA BAKERY","San Francisco","94110","08/02/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Garaje","San Francisco","94107","09/06/2019 12:00:00 AM",NA,FALSE,NA
+"Hing Wang Bakery","San Francisco","94122","02/08/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"VAN NESS CAFE & GYROS","San Francisco","94109","02/06/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"DREW ELEMENTARY SCHOOL","San Francisco","94124","10/15/2018 12:00:00 AM",NA,FALSE,NA
+"Chipotle Mexican Grill #2080","San Francisco","94110","03/07/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Raintree Cafe","San Francisco","94127","11/16/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Jane","San Francisco","94115","10/24/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Burger King 5830","San Francisco","94124","07/21/2017 12:00:00 AM",NA,FALSE,NA
+"Cherry Blossom Bakery","San Francisco","94118","02/26/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"6001 California Market","San Francisco","94121","09/25/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Taqueria Mexico Tipico","San Francisco","94112","05/01/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"15 Romolo","San Francisco","94133","06/04/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Royal Bakery","San Francisco","94112","04/19/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Shanghai House","San Francisco","94121","02/12/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"GRAND LODGE OF CALIFORNIA","San Francisco","94112","02/20/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"T C PASTRY","San Francisco","94122","09/20/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"McDonald's","San Francisco","94110","08/08/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Little Nepal","San Francisco","94110","08/15/2019 12:00:00 AM",NA,FALSE,NA
+"Wayfare Tavern","San Francisco","94111","03/01/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Pier 39 Ice Cream Shop","San Francisco","94133","09/27/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Trattoria Pinocchio","San Francisco","94133","04/19/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Story of Ramen","San Francisco","94110","08/12/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"A16","San Francisco","94123","01/05/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Shanghai House","San Francisco","94121","10/01/2018 12:00:00 AM",NA,FALSE,NA
+"MOSCOW & TBILSI BAKERY STORE","San Francisco","94121","07/01/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Lahore Karahi","San Francisco","94109","03/01/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Kio Ramen","San Francisco","94121","10/21/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"BAYSIDE COFFEE SHOP","San Francisco","94134","09/19/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SF Food Market","San Francisco","94124","07/02/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"TAQUERIA SAN JOSE #1","San Francisco","94110","07/11/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"New Lien Hing","San Francisco","94118","06/07/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"95194 Doggie Diner Cart","San Francisco","94107","09/11/2018 12:00:00 AM",NA,FALSE,NA
+"Sakesan","San Francisco","94118","02/01/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SUBWAY","San Francisco","94109","12/08/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"St. Regis Hotel San Francisco Main Kitchen","San Francisco","94103","05/18/2018 12:00:00 AM",NA,FALSE,NA
+"MELS DRIVE-IN","San Francisco","94109","11/01/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"RINCON PERUANO RESTAURANT","San Francisco","94110","09/01/2017 12:00:00 AM",NA,FALSE,NA
+"La Fonda","San Francisco","94122","01/22/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Halal Cart LLC (#2)","San Francisco","94105","04/26/2018 12:00:00 AM",NA,FALSE,NA
+"Javalenica Cafe","San Francisco","94110","02/28/2018 12:00:00 AM",NA,FALSE,NA
+"Wise Sons Delicatessen","San Francisco","94115","05/15/2018 12:00:00 AM",NA,FALSE,NA
+"VIKINGS GIANT SUBMARINE SANDWICHES","San Francisco","94123","10/23/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"PICCOLO PETE","San Francisco","94134","08/23/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Chef Li's Cafe","San Francisco","94134","09/05/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"LAM HOA THUAN RESTAURANT","San Francisco","94122","07/13/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"RJ's Market","San Francisco","94111","06/01/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"AMC Theatres Metreon 16 - Main Stand","San Francisco","94103","07/27/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"CHINA FIRST INC.","San Francisco","94118","07/01/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"John Muir Elementary School","San Francisco","94117","04/05/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Subway #43108","San Francisco","94112","02/02/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Leo's Luxury Oyster Bar","San Francisco","94111","03/19/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"HAN IL KWAN","San Francisco","94121","03/23/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Durty Nelly's LLC","San Francisco","94122","11/08/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Harrington's Bar & Grill","San Francisco","94111","05/09/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Joe & The Juice 2213 Fillmore","San Francisco","94115","04/23/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Roma Pizzeria","San Francisco","94112","06/17/2019 12:00:00 AM",NA,FALSE,NA
+"Origen","San Francisco","94110","07/18/2017 12:00:00 AM",NA,FALSE,NA
+"CAFE COLE","San Francisco","94117","02/27/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Cafe X","San Francisco","94104","08/06/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Elaine's Kitchen","San Francisco","94133","04/08/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Hollywood Cafe","San Francisco","94133","11/09/2016 12:00:00 AM",NA,FALSE,NA
+"Che Fico","San Francisco","94117","03/13/2018 12:00:00 AM",NA,FALSE,NA
+"Bamboo Restaurant","San Francisco","94109","05/24/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Aicha","San Francisco","94109","05/21/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"MELS DRIVE-IN","San Francisco","94109","10/19/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Folklores Coffee Traders","San Francisco","94115","06/21/2019 12:00:00 AM",NA,FALSE,NA
+"Betty Lou's Seafood & Grill","San Francisco","94133","12/27/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Lord Stanley","San Francisco","94109","10/04/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Broadway Dim Sum Cafe","San Francisco","94133","08/13/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Lifeworks @ Levi's","San Francisco","94111","02/15/2019 12:00:00 AM",NA,FALSE,NA
+"Gallardo's Mexican Restaurant","San Francisco","94110","07/21/2017 12:00:00 AM",NA,FALSE,NA
+"La Boulange de San Francisco","San Francisco","94108","05/21/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Carlin's Corner","San Francisco","94103","06/25/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Sarah B. Cooper SFUSD Satellite","San Francisco","94109","02/28/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"94672 Doggie Diner","San Francisco","94107","02/08/2018 12:00:00 AM",NA,FALSE,NA
+"Scopo Divino","San Francisco","94115","05/17/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"LA TORTILLA","San Francisco","94114","08/10/2018 12:00:00 AM",NA,FALSE,NA
+"An Chi Inc","San Francisco","94112","02/26/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The Sunset's Best Seafood Restaurant","San Francisco","94116","09/24/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"GLEN PARK ELEMENTARY SCHOOL","San Francisco","94122","03/05/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"El Chico Produce Market #2","San Francisco","94112","04/16/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Momma's Kitchen","San Francisco","94103","10/24/2016 12:00:00 AM",NA,FALSE,NA
+"ON THE BRIDGE","San Francisco","94115","01/07/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Good Luck Dim Sum","San Francisco","94118","03/14/2019 12:00:00 AM",NA,FALSE,NA
+"Dim Sum Kitchen Inc","San Francisco","94134","09/09/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Sheraton Fisherman's Wharf Hotel","San Francisco","94133","12/12/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"CAFE V","San Francisco","94103","01/09/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Jasmine Rae Bakery","San Francisco","94110","10/13/2017 12:00:00 AM",NA,FALSE,NA
+"Hula Truck (#2)","San Francisco","94123","05/31/2019 12:00:00 AM",NA,FALSE,NA
+"Jake's Steaks","San Francisco","94123","11/17/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Starbucks Coffee Company #6765","San Francisco","94108","01/12/2017 12:00:00 AM",NA,FALSE,NA
+"TS Cafe","San Francisco","94112","10/03/2018 12:00:00 AM",NA,FALSE,NA
+"HONG KONG LOUNGE","San Francisco","94121","07/29/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Big Fish Little Fish Poke","San Francisco","94105","02/27/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"CAFE MARS","San Francisco","94103","08/05/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Extreme Pizza","San Francisco","94132","02/14/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Soma Wine & Spirits 2","San Francisco","94107","07/23/2019 12:00:00 AM",NA,FALSE,NA
+"Papalote Mexican Grill","San Francisco","94117","09/25/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Hollywood Cafe","San Francisco","94133","04/22/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Auntie Anne's Pretzels","San Francisco","94103","02/28/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Union Street Coffee Roastery, Inc.","San Francisco","94123","07/07/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Press Club","San Francisco","94103","02/23/2018 12:00:00 AM",NA,FALSE,NA
+"The Grub-Bies LLC","San Francisco","94105","05/01/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Hotel Via","San Francisco","94107","06/09/2017 12:00:00 AM",NA,FALSE,NA
+"Jayhoon Fedaiy","San Francisco","94109","08/02/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Starbucks Coffee #47471","San Francisco","94124","04/18/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Torraku Ramen (#2)","San Francisco","94158","02/22/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"New Woey Loy Goey Restaurant","San Francisco","94133","11/08/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"ABC Falafel","San Francisco","94109","05/26/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Lollipot","San Francisco","94116","10/05/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"New Asia Restaurant","San Francisco","94133","11/30/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Eva's Catering","San Francisco","94122","02/15/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Hook Fish Company","San Francisco","94122","05/26/2017 12:00:00 AM",NA,FALSE,NA
+"Wild Pepper","San Francisco","94110","02/08/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Subway #4066","San Francisco","94121","08/22/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Udon Underground","San Francisco","94104","08/21/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The Crab Station of Fisherman's Wharf","San Francisco","94133","01/23/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Central Kitchen & Salumeria","San Francisco","94110","06/24/2019 12:00:00 AM",NA,FALSE,NA
+"Hilton Financial District- Banquet & Catering","San Francisco","94108","09/22/2017 12:00:00 AM",NA,FALSE,NA
+"Restaurante Montecristo","San Francisco","94110","10/19/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Surisan","San Francisco","94133","02/28/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Golden King Vietnamese Restaurant","San Francisco","94108","12/03/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"COOKLINES INC.","San Francisco","94103","08/16/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"EggWhite Cafe","San Francisco","94110","10/03/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Cotogna","San Francisco","94133","08/30/2019 12:00:00 AM",NA,FALSE,NA
+"PING & YANG","San Francisco","94109","07/18/2019 12:00:00 AM",NA,FALSE,NA
+"Proper Food","San Francisco","94104","11/17/2017 12:00:00 AM",NA,FALSE,NA
+"FOUR SEASONS HOTEL- EMPLOYEE  CAFETERIA","San Francisco","94103","06/16/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Fumi Curry","San Francisco","94110","10/31/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Godiva Chocolatier Inc.","San Francisco","94132","06/09/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Marina Pizza & Pasta","San Francisco","94123","01/30/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Halal Guys","San Francisco","94102","08/20/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Boba Guys, Inc.","San Francisco","94108","06/01/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Kasa Indian Eatery","San Francisco","94109","02/14/2018 12:00:00 AM",NA,FALSE,NA
+"Holiday Inn - Golden Gateway","San Francisco","94109","10/14/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SRI THAI CUISINE","San Francisco","94122","08/14/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tu Kim's Cafe","San Francisco","94109","04/25/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tato","San Francisco","94124","10/03/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"NEW ERITREA RESTAURANT","San Francisco","94122","05/02/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"ARIZMENDI BAKERY","San Francisco","94122","09/26/2017 12:00:00 AM",NA,FALSE,NA
+"Loving Hut Vegan Cuisine","San Francisco","94122","12/19/2017 12:00:00 AM",NA,FALSE,NA
+"Town School For Boys","San Francisco","94115","03/01/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Fly Trap","San Francisco","94107","04/19/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"5A5 Steak Lounge","San Francisco","94111","02/22/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Melt","San Francisco","94103","07/26/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Foundation Cafe","San Francisco","94108","05/07/2018 12:00:00 AM",NA,FALSE,NA
+"Arashi Sushi House","San Francisco","94118","10/25/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"ANCHOR OYSTER BAR INC.","San Francisco","94114","12/05/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Jamba Juice","San Francisco","94103","10/27/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"New Jumbo Seafood Restaurant","San Francisco","94122","01/23/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Walgreens #1126","San Francisco","94103","10/24/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Darren's Cafe","San Francisco","94133","03/05/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"New Mings Restaurant","San Francisco","94105","02/16/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"J & E Restaurant","San Francisco","94110","01/25/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"SF NEWA","San Francisco","94102","02/06/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"BUCHANAN FOOD MART","San Francisco","94115","10/14/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Gaufre It!","San Francisco","94124","10/04/2017 12:00:00 AM",NA,FALSE,NA
+"Mission Street Sports Bar SF","San Francisco","94110","10/01/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Jamba Juice","San Francisco","94132","05/10/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Rico Pan Bakery","San Francisco","94110","01/31/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Chef Li's Cafe","San Francisco","94134","09/18/2019 12:00:00 AM",NA,FALSE,NA
+"The Plant Cafe Organic","San Francisco","94104","11/10/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Udon Underground","San Francisco","94104","08/21/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Taqueria Los Amigos","San Francisco","94112","07/10/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Mid City Market","San Francisco","94109","04/26/2019 12:00:00 AM",NA,FALSE,NA
+"Makaseru SF","San Francisco","94110","04/06/2017 12:00:00 AM",NA,FALSE,NA
+"Coffeeshop - 3139 Mission","San Francisco","94110","04/30/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Roka Akor","San Francisco","94133","11/22/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Noori","San Francisco","94122","01/23/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Soma Restaurant And Bar","San Francisco","94103","02/01/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Caffe Centro","San Francisco","94107","02/08/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Git Hub","San Francisco","94107","08/31/2018 12:00:00 AM",NA,FALSE,NA
+"Freshroll","San Francisco","94104","12/12/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Padrecito","San Francisco","94117","06/06/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Taqueria ""Los Coyotes"" #2","San Francisco","94103","11/16/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"FACEBOOK, INC.","San Francisco","94105","07/30/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Bell","San Francisco","94109","02/28/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Mr. Holmes Bakehouse","San Francisco","94109","02/09/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Patxi's Chicago Pizza","San Francisco","94102","10/11/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Louie's","San Francisco","94105","07/08/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Toy Boat Dessert Cafe","San Francisco","94118","06/22/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"USA Power Market","San Francisco","94112","03/26/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Henry's Hunan Restaurant","San Francisco","94131","01/09/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"ONO HAWAIIAN BBQ","San Francisco","94132","04/11/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"City Taqueria","San Francisco","94115","06/24/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Subway Sandwiches","San Francisco","94102","09/19/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Kitchen Story Cafe","San Francisco","94114","08/21/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Cafe Mystique","San Francisco","94114","12/06/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Manna","San Francisco","94122","09/03/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Sun Rise Restaurant","San Francisco","94110","03/15/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Golden Wok","San Francisco","94132","07/20/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Indochine 508","San Francisco","94112","03/27/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Oscar Burger & Deli","San Francisco","94124","01/10/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"OBISPO","San Francisco","94110","07/23/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Burger King #4668","San Francisco","94110","05/18/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Diamond Cafe LLC","San Francisco","94114","07/16/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Pauline's Pizza","San Francisco","94103","03/21/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Alexander's Steakhouse","San Francisco","94107","03/12/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The Bell","San Francisco","94109","02/28/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The Mission Oyster Bar Seafood Rest. & Mkt.t","San Francisco","94110","05/16/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Cafe Bunn Mi","San Francisco","94118","05/22/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Palmyra","San Francisco","94117","05/14/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Mel's Drive-In","San Francisco","94103","03/08/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Coin-Op Game Room","San Francisco","94107","04/10/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Top Round Roast Beef","San Francisco","94110","03/20/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Ristorante Ti Piacera","San Francisco","94109","02/27/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"VILLAGE PIZZERIA","San Francisco","94109","08/26/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Foods Co #357","San Francisco","94103","04/25/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Halal Green Apple Market, Inc.","San Francisco","94109","03/20/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"PHILIPPINE DELICACIES","San Francisco","94112","01/09/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"CULINARY ARTS & HOSPITALITY","San Francisco","94112","05/01/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"House of Thai","San Francisco","94109","06/23/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Blue Bottle Cafe","San Francisco","94103","02/05/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"MONG THU COFFEE SHOP","San Francisco","94102","08/30/2017 12:00:00 AM",NA,FALSE,NA
+"Angel's Market","San Francisco","94114","10/10/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Denny's Restaurant","San Francisco","94133","08/24/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Mensho Tokyo","San Francisco","94102","07/11/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"HAAGEN-DAZS #561","San Francisco","94103","08/22/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tokyo Express Battery","San Francisco","94111","06/03/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Volcano Kitchen","San Francisco","94121","05/31/2018 12:00:00 AM",NA,FALSE,NA
+"Spinnerie","San Francisco","94109","02/05/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Radio Africa & Kitchen","San Francisco","94124","06/27/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"LELENITA'S CAKES","San Francisco","94110","04/02/2019 12:00:00 AM",NA,FALSE,NA
+"Darioush Inc.","San Francisco","94133","04/10/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Courtney's Produce II","San Francisco","94114","04/12/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Sodexo America, LLC # 42422001","San Francisco","94105","12/31/2018 12:00:00 AM",NA,FALSE,NA
+"Joe & The Juice Howard","San Francisco","94105","05/06/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"NKG Cafe","San Francisco","94134","09/26/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Lafayette Coffee Shop","San Francisco","94109","01/08/2019 12:00:00 AM",NA,FALSE,NA
+"Palio D'Asti","San Francisco","94111","04/23/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"PEET'S COFFEE & TEA","San Francisco","94103","04/02/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"La Luna Cupcakes","San Francisco","94104","05/17/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Chantal Guillon","San Francisco","94103","02/07/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"HIEP-THANH MARKET","San Francisco","94109","08/22/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"LAGUNA","San Francisco","94102","02/28/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Hole in the Wall Coffee","San Francisco","94133","05/26/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"BULLSHEAD RESTAURANT","San Francisco","94127","11/15/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"BENDERS BAR & GRILL","San Francisco","94110","04/03/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Verve Coffee Roasters","San Francisco","94114","01/19/2018 12:00:00 AM",NA,FALSE,NA
+"RITA'S CATERING TRUCK","San Francisco","94112","12/20/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Elsy's Restaurant","San Francisco","94110","08/23/2017 12:00:00 AM",NA,FALSE,NA
+"Senor Sisig #1","San Francisco",NA,"10/22/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"LADLE AND LEAF","San Francisco","94104","04/19/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"HAPPY DONUTS","San Francisco","94114","12/12/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Players","San Francisco","94133","06/11/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Kam Lok Restaurant","San Francisco","94108","01/07/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Mazzat","San Francisco","94102","03/28/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"An Chi Inc","San Francisco","94112","12/09/2016 12:00:00 AM",NA,FALSE,NA
+"Canyon Market","San Francisco","94131","03/08/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Ziggy's Burger & Grill","San Francisco","94111","09/19/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Little Heaven Deli","San Francisco","94110","12/27/2017 12:00:00 AM",NA,FALSE,NA
+"Hawaiian Drive Inn","San Francisco","94134","09/12/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Dolores Park Cafe","San Francisco","94110","06/21/2019 12:00:00 AM",NA,FALSE,NA
+"FISTFUL OF TACOS","San Francisco","94105","08/20/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Oma Sushi","San Francisco","94102","10/03/2017 12:00:00 AM",NA,FALSE,NA
+"Rubin's Market","San Francisco","94110","11/17/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Hana Zen Sushi & Yakitori Bar","San Francisco","94133","08/14/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tsubasa Sushi","San Francisco","94102","06/01/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"The Cavalier Restaurant Kitchen","San Francisco","94102","06/13/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Marla Bakery","San Francisco","94121","08/13/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Gordon J Lau Elementary School","San Francisco","94108","02/28/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Heritage","San Francisco","94118","06/05/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Gourmet Carousel","San Francisco","94109","11/07/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"PHO AT BRYANT","San Francisco","94110","07/22/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Pompei's Grotto","San Francisco","94133","07/24/2017 12:00:00 AM",NA,FALSE,NA
+"Burger King #4474","San Francisco","94102","06/20/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"KENMORE RESIDENCE CLUB","San Francisco","94109","06/29/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Supercue Cafe","San Francisco","94112","02/15/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Park Gyros Castro","San Francisco","94114","09/19/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Daily Grill","San Francisco","94102","07/25/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Zanze's Cheesecake","San Francisco","94127","06/29/2018 12:00:00 AM",NA,FALSE,NA
+"Amawele's South African Kitchen","San Francisco","94105","05/14/2018 12:00:00 AM",NA,FALSE,NA
+"Royal Star","San Francisco","94133","02/23/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Elaine's Kitchen","San Francisco","94133","11/07/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"BUTTER","San Francisco","94103","07/24/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Crazy Gringo Taco Wagon Salsa","San Francisco",NA,"10/09/2016 12:00:00 AM",NA,FALSE,NA
+"Luen Fat Market","San Francisco","94133","08/28/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tony's Cable Car Restaurant","San Francisco","94115","08/14/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"PARIGO","San Francisco","94123","11/15/2018 12:00:00 AM",NA,FALSE,NA
+"Hornblower Cruises & Events/SF Belle","San Francisco","94111","03/19/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Mollie Stone's Grand Central Market (Mezzanine Level)","San Francisco","94115","06/27/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Thnasis Deli","San Francisco","94122","06/05/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Oma Sushi","San Francisco","94102","02/07/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Dumpling Time","San Francisco","94103","05/17/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"EDEN PLAZA CAFE","San Francisco","94107","03/26/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"The Napper Tandy","San Francisco",NA,"08/21/2017 12:00:00 AM",NA,FALSE,NA
+"Leland Market","San Francisco","94134","04/08/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"All Good Pizza","San Francisco",NA,"01/04/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"WING HING RESTAURANT","San Francisco","94134","01/25/2019 12:00:00 AM",NA,FALSE,NA
+"Torraku Ramen (#2)","San Francisco","94158","02/22/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Fairmont San Francisco","San Francisco","94108","10/02/2017 12:00:00 AM",NA,FALSE,NA
+"Chinatown Restaurant","San Francisco","94108","07/06/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"L & G Vietnamese Sandwich","San Francisco","94109","03/20/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Lers Ros 16th Street","San Francisco","94103","02/25/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Matador","San Francisco","94102","07/03/2017 12:00:00 AM",NA,FALSE,NA
+"Le Marais Bakery","San Francisco","94123","12/28/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Poke Bowl","San Francisco","94112","12/29/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"TJ Cups Inc","San Francisco","94122","09/26/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"HARVEY MILK ELEMENTARY SCHOOL","San Francisco","94114","03/23/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Long Bridge Pizza Company","San Francisco","94107","01/04/2017 12:00:00 AM",NA,FALSE,NA
+"La Mediterranee","San Francisco","94133","04/20/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Publico","San Francisco",NA,"12/20/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"CLOONEY'S","San Francisco","94110","08/09/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"94660 Portable 2 Popcorn","San Francisco","94107","04/12/2019 12:00:00 AM",NA,FALSE,NA
+"Arang Restaurant","San Francisco","94115","01/22/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Le Marais Bakery Castro","San Francisco","94114","09/22/2017 12:00:00 AM",NA,FALSE,NA
+"UVA Enoteca","San Francisco","94117","12/14/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"IRMA'S PAMPANGA RESTAURANT","San Francisco","94103","01/31/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Music Hall, LLC dba Great American Music Hall","San Francisco","94109","04/23/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Tap (415)","San Francisco","94103","12/21/2016 12:00:00 AM",NA,FALSE,NA
+"Pacific Eatery","San Francisco","94109","11/28/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Premier Catering & Events, Inc.","San Francisco","94107","02/06/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Yamo Restaurant","San Francisco","94110","06/25/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Mission Chinese Food SF","San Francisco","94110","10/02/2018 12:00:00 AM",NA,FALSE,NA
+"Izakaya Roku","San Francisco","94103","04/05/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Nook","San Francisco","94109","12/13/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Fresca Restaurant","San Francisco","94122","03/15/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Jasmine Garden LLC","San Francisco","94114","10/26/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Centro Latino de SF at the Star Hotel","San Francisco","94110","12/15/2017 12:00:00 AM",NA,FALSE,NA
+"TACO LOS ALTOS","San Francisco","94110","05/14/2019 12:00:00 AM",NA,FALSE,NA
+"Crazy Pepper","San Francisco","94112","08/14/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Alley House","San Francisco","94118","08/01/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Azalina's Kitchen","San Francisco","94124","01/24/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Szechuan Taste Restaurant Inc","San Francisco","94116","08/01/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Mr. & Mrs. Tea House LLC","San Francisco","94118","05/01/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SF PITA HUB","San Francisco","94103","04/17/2019 12:00:00 AM",NA,FALSE,NA
+"Lori's Diner","San Francisco","94102","09/10/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"PANDA EXPRESS","San Francisco","94103","11/08/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"City Super","San Francisco","94133","04/16/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Zingari","San Francisco","94102","12/28/2016 12:00:00 AM",NA,FALSE,NA
+"Dong Baek Korean Restaurant","San Francisco","94109","04/03/2019 12:00:00 AM",NA,FALSE,NA
+"Sam Wo Restaurant and Bakery","San Francisco","94108","08/03/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Jiffy Dog","San Francisco","94114","11/09/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Maple Restaurant","San Francisco","94112","06/04/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Wing Lum Cafe","San Francisco","94109","07/30/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"BOUDIN BAKERY","San Francisco","94118","10/20/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Kingdom of Dumpling","San Francisco","94116","01/22/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Tasty Coffee","San Francisco","94112","11/16/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"El Nuevo Frutilandia","San Francisco","94110","04/26/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Kabob Trolley, LLC","San Francisco",NA,"02/07/2018 12:00:00 AM",NA,FALSE,NA
+"St. Anthony Foundation","San Francisco","94102","09/22/2017 12:00:00 AM",NA,FALSE,NA
+"GreenSurge","San Francisco","94114","02/23/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tadich Grill","San Francisco","94111","01/09/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Liberty Cheesesteak","San Francisco","94103","01/24/2017 12:00:00 AM",NA,FALSE,NA
+"Golden Gate Bakery","San Francisco","94133","01/12/2018 12:00:00 AM",NA,FALSE,NA
+"Ana's Market","San Francisco","94112","05/11/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Bacon Bacon LLC","San Francisco","94117","02/06/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Caffe Central","San Francisco","94103","09/23/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The Estate Kitchen, LLC","San Francisco","94107","07/17/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Jasmine Rae Bakery","San Francisco","94110","05/04/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Ha Nam Ninh Restaurant","San Francisco","94109","09/19/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Stonemill Matcha","San Francisco","94110","08/22/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"OTHER AVENUES FOOD STORE","San Francisco","94122","06/30/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Yama Sushi Restaurant","San Francisco","94112","05/28/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Red's Java House, Inc","San Francisco","94105","02/15/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Tonga Room & Hurricane Bar","San Francisco","94108","12/06/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"New Princess Market","San Francisco","94109","05/01/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"AAA Vegi, Inc","San Francisco","94118","06/18/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Henry's Hunan Restaurant","San Francisco","94103","05/08/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Curry Up Now","San Francisco","94110","05/02/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Market On Market","San Francisco","94103","03/28/2017 12:00:00 AM",NA,FALSE,NA
+"Mixt Greens/Mixt","San Francisco","94105","04/17/2017 12:00:00 AM",NA,FALSE,NA
+"S & P Concessions - MV Napa","San Francisco","94111","08/08/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"TOMMYS MEXICAN RESTAURANT","San Francisco","94121","02/07/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"COVE CAFE","San Francisco","94114","07/31/2018 12:00:00 AM",NA,FALSE,NA
+"M & M SHORTSTOP","San Francisco","94134","04/12/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Bun Mee","San Francisco","94104","01/03/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Rusty's Southern LLC","San Francisco","94109","02/01/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Upper Crust Baking Co. Inc","San Francisco","94102","03/13/2019 12:00:00 AM",NA,FALSE,NA
+"New Princess Market","San Francisco","94109","02/28/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Patxi's Chicago Pizza","San Francisco","94123","04/23/2019 12:00:00 AM",NA,FALSE,NA
+"Chart House","San Francisco","94133","09/19/2018 12:00:00 AM",NA,FALSE,NA
+"Upper Cut","San Francisco","94107","09/21/2017 12:00:00 AM",NA,FALSE,NA
+"Gold Dust Lounge","San Francisco","94133","02/21/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Red House Bakery","San Francisco","94134","12/04/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Fox and Lion Bread Co","San Francisco","94124","05/20/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"E Tutto Qua","San Francisco","94133","06/04/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"OMNI S.F. Hotel - Main Kitchen","San Francisco","94104","05/16/2019 12:00:00 AM",NA,FALSE,NA
+"BELLO COFFEE LLC","San Francisco","94131","07/30/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Bay Area Little John's Candies","San Francisco","94102","09/01/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"FINAL FINAL","San Francisco","94123","09/09/2019 12:00:00 AM",NA,FALSE,NA
+"Shabu Bar","San Francisco","94107","01/23/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Pedrito's","San Francisco","94110","07/20/2018 12:00:00 AM",NA,FALSE,NA
+"Baysubway 04","San Francisco",NA,"06/27/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Spicy Garden Restaurant","San Francisco","94103","04/18/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"BEIT RIMA","San Francisco","94114","08/21/2019 12:00:00 AM",NA,FALSE,NA
+"USA Power Market","San Francisco","94112","09/12/2019 12:00:00 AM",NA,FALSE,NA
+"Latte Express #5","San Francisco","94108","05/31/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Auntie April's","San Francisco","94124","05/24/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Farmers Market & Produce","San Francisco","94109","03/05/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Pizza Zone & Grill","San Francisco","94102","02/09/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Peet's Coffee & Tea","San Francisco","94102","11/27/2017 12:00:00 AM",NA,FALSE,NA
+"Bluestone Lane","San Francisco","94111","09/10/2019 12:00:00 AM",NA,FALSE,NA
+"TAQUERIA SAN FRANCISCO","San Francisco","94110","07/24/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Park Gyros Castro","San Francisco","94114","02/19/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Taqueria Dos Charros","San Francisco","94132","04/06/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"95232 Say Hey Sausage Cart","San Francisco","94107","03/16/2018 12:00:00 AM",NA,FALSE,NA
+"EL FARO","San Francisco","94110","06/30/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Super Save Supermarket","San Francisco","94124","07/16/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"TENDERLOIN ELEMENTARY SCHOOL","San Francisco","94102","10/18/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"IMPERIAL GARDEN SEAFOOD RESTAURANT","San Francisco","94134","09/05/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Pier Market","San Francisco","94133","05/03/2017 12:00:00 AM",NA,FALSE,NA
+"SHENG KEE BAKERY","San Francisco","94122","07/14/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"MCDONALD'S #7413","San Francisco","94124","10/30/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Grumpy Cafe","San Francisco","94124","07/25/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"LA FLOR DE IZOTE","San Francisco","94110","03/12/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"SAFEWAY STORES, INC. #995","San Francisco","94115","08/08/2017 12:00:00 AM",NA,FALSE,NA
+"Mi Yucatan","San Francisco","94110","09/25/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Phonobar","San Francisco","94102","10/24/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"GLEN PARK ELEMENTARY SCHOOL","San Francisco","94122","03/05/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Stop-N-Wrap","San Francisco","94112","12/07/2016 12:00:00 AM",NA,FALSE,NA
+"The Blue Light","San Francisco","94123","07/18/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Epic Roasthouse","San Francisco","94105","07/03/2018 12:00:00 AM",NA,FALSE,NA
+"STARBUCKS","San Francisco","94122","12/26/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"CHINA FIRST INC.","San Francisco","94118","07/01/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"HOME SERVICE MARKET","San Francisco","94117","08/14/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Tai Chi Restaurant","San Francisco","94109","02/21/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"LEE'S FOOD MARKET","San Francisco","94124","10/17/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Patxi's Pizza","San Francisco","94122","09/10/2019 12:00:00 AM",NA,FALSE,NA
+"Koja Kitchen","San Francisco","94158","04/15/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Plouf","San Francisco","94104","09/13/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Holy Ghost Service Center","San Francisco","94134","01/26/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"CAL MART SUPERMARKET","San Francisco","94118","10/31/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Fisherman's Grotto","San Francisco","94133","02/25/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Lung Fung Bakery","San Francisco","94121","09/24/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Patxi's Chicago Pizza","San Francisco","94123","02/14/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Pepper Palace","San Francisco","94109","07/19/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Fillmore Bake Shop","San Francisco","94115","02/16/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Crave","San Francisco","94109","12/19/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"DAY DARMET CATERING","San Francisco","94124","01/23/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Smoky Man","San Francisco","94122","08/27/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"CAFE MUMS","San Francisco","94115","07/15/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The Organic Coup","San Francisco","94111","05/07/2019 12:00:00 AM",NA,FALSE,NA
+"City Cafe","San Francisco","94112","04/18/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Garfield Elementary School","San Francisco","94133","03/21/2017 12:00:00 AM",NA,FALSE,NA
+"Miette Cakes, LLC","San Francisco","94102","01/11/2019 12:00:00 AM",NA,FALSE,NA
+"Geneva Bubble Tea","San Francisco","94112","06/06/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SusieCakes Cake Kitchen","San Francisco","94107","08/07/2017 12:00:00 AM",NA,FALSE,NA
+"Flying Ninja, Inc.","San Francisco","94133","05/21/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"OTHER AVENUES FOOD STORE","San Francisco","94122","09/18/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Express Liquor and Pupuseria","San Francisco","94118","05/10/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Thai Cafe","San Francisco","94118","08/29/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"ANANDA FUARA","San Francisco","94102","01/25/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Lord Stanley","San Francisco","94109","03/06/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Slurp Noodle Bar","San Francisco","94114","04/09/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Tony's/ City Bistro South 200","San Francisco","94158","08/12/2019 12:00:00 AM",NA,FALSE,NA
+"A-1 BAKERY","San Francisco","94112","07/17/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Bill's Place","San Francisco","94121","09/09/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Kazan","San Francisco","94110","03/19/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Caffe Trieste","San Francisco","94133","05/13/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Cavalier Restaurant Kitchen","San Francisco","94102","05/07/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Blue Fin Sushi & Lounge","San Francisco","94121","11/02/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Cafe Guatemalteco","San Francisco","94112","04/17/2018 12:00:00 AM",NA,FALSE,NA
+"Regalito Rosticeria","San Francisco","94110","08/27/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Holiday Inn - Golden Gateway","San Francisco","94109","02/05/2019 12:00:00 AM",NA,FALSE,NA
+"SAFEWAY #1507","San Francisco","94114","09/01/2017 12:00:00 AM",NA,FALSE,NA
+"K-Elements BBQ","San Francisco","94121","04/03/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"7 Eleven #2366-35722A","San Francisco","94118","05/03/2019 12:00:00 AM",NA,FALSE,NA
+"NOOSH","San Francisco","94115","04/11/2019 12:00:00 AM",NA,FALSE,NA
+"PANCHO VILLA","San Francisco","94103","06/25/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Supercue Cafe","San Francisco","94112","10/28/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"RIVERSIDE SEAFOOD RESTAURANT","San Francisco","94116","01/10/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"El Azteca Taqueria","San Francisco","94124","05/09/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Sweet Passion Bakery","San Francisco","94116","09/24/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Stinking Rose","San Francisco","94133","11/07/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Mikaku Restaurant","San Francisco","94108","05/31/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Spices Restaurant","San Francisco","94118","07/11/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"North India Restaurant","San Francisco","94105","01/08/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Folklores Coffee Traders","San Francisco","94115","06/14/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Connection, The","San Francisco","94112","10/05/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Beach Street Grill","San Francisco","94133","09/04/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Super Burrito","San Francisco","94109","05/30/2019 12:00:00 AM",NA,FALSE,NA
+"Yamo Restaurant","San Francisco","94110","06/25/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Good Frikin Chicken","San Francisco",NA,"11/29/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Napoleon Super Bakery Corp","San Francisco","94108","08/01/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Golden City Inn","San Francisco","94124","11/29/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Los Yaquis","San Francisco","94103","10/24/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Holiday Inn - Golden Gateway","San Francisco","94109","06/07/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"VALENCIA PIZZA & PASTA","San Francisco","94110","04/09/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"San Francisco Marriott Fisherman's Wharf","San Francisco","94133","04/03/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Hamburger Haven","San Francisco","94118","06/30/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Ginza Japanese Restaurant","San Francisco","94117","06/13/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"The Crepe House","San Francisco","94109","10/12/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"TOP SF BBQ","San Francisco","94121","07/05/2019 12:00:00 AM",NA,FALSE,NA
+"Volcano Kitchen","San Francisco","94121","01/30/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"IRMA'S PAMPANGA RESTAURANT","San Francisco","94103","02/25/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Silverstone Cafe","San Francisco","94110","10/11/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Toast Eatery SF","San Francisco","94109","08/27/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"NORM'S MARKET","San Francisco","94110","03/17/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Belly Burger","San Francisco","94121","06/13/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"LEAPING LEMUR CAFE","San Francisco","94132","04/11/2017 12:00:00 AM",NA,FALSE,NA
+"Nucha","San Francisco","94103","03/01/2017 12:00:00 AM",NA,FALSE,NA
+"El Rincon Yucateco","San Francisco","94102","01/25/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Loi's Vietnamese Restaurant","San Francisco","94122","01/19/2017 12:00:00 AM",NA,FALSE,NA
+"Tacos Santo Toribio","San Francisco",NA,"11/03/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"First Korean Market","San Francisco","94118","09/25/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"New Woey Loy Goey Restaurant","San Francisco","94133","11/16/2017 12:00:00 AM",NA,FALSE,NA
+"Sun Sun Trading co.","San Francisco","94133","01/15/2019 12:00:00 AM",NA,FALSE,NA
+"Carbon Grill","San Francisco","94118","01/10/2019 12:00:00 AM",NA,FALSE,NA
+"Sweetheart Cafe","San Francisco","94108","12/28/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"NEW COLLEGE HILL MARKET","San Francisco","94110","04/04/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Luce Restaurant &  Bar","San Francisco","94103","09/09/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The Elite Cafe","San Francisco","94115","10/07/2016 12:00:00 AM",NA,FALSE,NA
+"HONG KONG LOUNGE","San Francisco","94121","07/29/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Manila Oriental Market","San Francisco","94112","01/03/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Nizario's Pizza","San Francisco","94118","11/08/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Keeva Indian Kitchen","San Francisco","94118","10/27/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"ST. ANTHONY'S ELEMENTARY","San Francisco","94110","11/01/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Luke's Local","San Francisco","94124","05/22/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Bruno's Pizza & Restaurant","San Francisco","94115","07/18/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Uncle Benny's Donut & Bagel","San Francisco","94122","08/07/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Papalote","San Francisco","94110","08/14/2017 12:00:00 AM",NA,FALSE,NA
+"AFC Sushi @ Safeway 4601","San Francisco","94111","05/01/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Brenda's French Soul Food","San Francisco","94102","02/07/2019 12:00:00 AM",NA,FALSE,NA
+"Sotto Mare Oysteria & Seafood","San Francisco","94133","01/23/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Valenciano","San Francisco","94110","03/09/2018 12:00:00 AM",NA,FALSE,NA
+"Gashead Tavern","San Francisco","94110","08/31/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Old Jerusalem Restaurant Inc","San Francisco","94110","06/26/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Peet's Coffee & Tea","San Francisco","94109","10/18/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"TAIWAN RESTAURANT","San Francisco","94118","04/02/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Las Isletas","San Francisco","94124","03/14/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Taqueria Zorro","San Francisco","94133","11/20/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Imperial Palace","San Francisco","94108","12/17/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Foods Co #357","San Francisco","94103","03/29/2017 12:00:00 AM",NA,FALSE,NA
+"RAP/HILLTOP School","San Francisco","94110","10/15/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Peet's Coffee & Tea","San Francisco","94132","10/07/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Roadhouse Cafe","San Francisco","94124","07/31/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Pineapples","San Francisco","94112","04/17/2018 12:00:00 AM",NA,FALSE,NA
+"The Posh Bagel","San Francisco","94122","01/31/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SAN FRANCISCO SCHOOL, THE","San Francisco","94134","10/22/2018 12:00:00 AM",NA,FALSE,NA
+"SUBWAY 16604","San Francisco","94109","06/05/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Saru","San Francisco","94114","07/12/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Native Co.","San Francisco","94105","10/02/2019 12:00:00 AM",NA,FALSE,NA
+"Fifth St. Cafe Corporation","San Francisco","94103","04/18/2017 12:00:00 AM",NA,FALSE,NA
+"Biscoff Coffee Corner","San Francisco","94133","09/13/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Cafe La Taza","San Francisco","94102","07/30/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Azucar Lounge","San Francisco","94103","03/14/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Williams-Sonoma, Inc.","San Francisco","94111","09/09/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Las Palmeras","San Francisco","94110","01/26/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Andersen Bread","San Francisco","94111","09/29/2017 12:00:00 AM",NA,FALSE,NA
+"Panda Boba, Inc","San Francisco","94134","10/04/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Yan Yan Seafood Restaurant","San Francisco","94122","10/15/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Street Meet","San Francisco","94134","02/07/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"THE BRIXTON SOUTH","San Francisco","94102","05/02/2019 12:00:00 AM",NA,FALSE,NA
+"Orchard Garden Hotel","San Francisco","94108","09/03/2019 12:00:00 AM",NA,FALSE,NA
+"Inga Donuts","San Francisco","94109","10/10/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Covo","San Francisco","94103","12/04/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Papa John's Pizza","San Francisco","94132","04/12/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Hawaii West","San Francisco","94133","12/18/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"NOAH'S BAGELS","San Francisco","94133","01/30/2018 12:00:00 AM",NA,FALSE,NA
+"Bella Lucca","San Francisco","94102","01/31/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Marina Theatre","San Francisco","94123","05/02/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Wok Station Inc","San Francisco","94122","10/23/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Museum of Ice Cream","San Francisco","94108","04/03/2019 12:00:00 AM",NA,FALSE,NA
+"SRI THAI CUISINE","San Francisco","94122","08/14/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The Sarap Shop LLC","San Francisco","94103","10/08/2016 12:00:00 AM",NA,FALSE,NA
+"Golden Gate Market","San Francisco","94123","01/12/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"EL BURRITO EXPRESS #2","San Francisco","94115","01/09/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Orenchi","San Francisco","94103","08/15/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Thanh Thanh Cafe","San Francisco","94124","02/13/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Tang Collection","San Francisco","94116","01/04/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Cherry Blossom Bakery 2","San Francisco",NA,"04/25/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Hornblower Cruises & Events/SF Belle","San Francisco","94111","03/19/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Motel Capri","San Francisco","94123","06/14/2018 12:00:00 AM",NA,FALSE,NA
+"GO GO 7","San Francisco","94112","07/16/2018 12:00:00 AM",NA,FALSE,NA
+"Taqueria El Farolito #10","San Francisco","94133","01/09/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Premier Catering & Events, Inc.","San Francisco","94107","02/06/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Kui Shin Bo #2","San Francisco","94109","05/07/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Orale Orale Inc","San Francisco","94111","11/17/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"EXECUTIVE CAFE","San Francisco","94134","02/11/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"New Chef Hung's Restaurant","San Francisco","94108","11/30/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Fog Harbor Fish House","San Francisco","94133","11/20/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Sauce Belden","San Francisco","94104","10/12/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Gracias Madre","San Francisco","94103","07/10/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Yan's Kitchen","San Francisco","94111","04/24/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Star India Restaurant","San Francisco","94118","04/11/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"SAFEWAY #739","San Francisco","94110","08/26/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Taylor St. Coffee Shop","San Francisco","94102","02/13/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Old Mandarin Islamic Restaurant","San Francisco","94116","08/07/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Padrecito","San Francisco","94117","06/06/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Elaine's Kitchen","San Francisco","94133","04/09/2019 12:00:00 AM",NA,FALSE,NA
+"Taylor St. Coffee Shop","San Francisco","94102","03/22/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Green Island Restaurant","San Francisco","94118","11/29/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Taqueria Girasol Inc","San Francisco","94132","05/04/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Belcampo Meat Company LLC","San Francisco","94158","05/11/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"UNDERDOGS TO","San Francisco","94116","12/21/2018 12:00:00 AM",NA,FALSE,NA
+"Sutter Cafe","San Francisco","94108","03/30/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"HAN IL KWAN","San Francisco","94121","06/11/2019 12:00:00 AM",NA,FALSE,NA
+"Limon Restaurant","San Francisco","94103","06/30/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"OSTERIA","San Francisco","94115","02/06/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"MONGKOK DIM SUM & RESTAURANT","San Francisco","94122","10/17/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"TableTop Tap House","San Francisco","94103","08/10/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Sheba Restaurant & Lounge","San Francisco","94115","02/14/2017 12:00:00 AM",NA,FALSE,NA
+"707 Sutter","San Francisco","94109","11/28/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Violet's","San Francisco","94121","08/29/2019 12:00:00 AM",NA,FALSE,NA
+"Mrs. Fields Cookies","San Francisco","94103","05/16/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"El Porteno","San Francisco","94132","04/06/2017 12:00:00 AM",NA,FALSE,NA
+"Karma Cafe","San Francisco","94117","07/24/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Lollipot","San Francisco","94116","05/22/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Eurest Dining at First Republic Bank","San Francisco","94111","01/26/2017 12:00:00 AM",NA,FALSE,NA
+"7-Eleven #2366-34977","San Francisco","94102","12/14/2016 12:00:00 AM",NA,FALSE,NA
+"Mission Beach Cafe","San Francisco","94103","08/15/2017 12:00:00 AM",NA,FALSE,NA
+"Ginger Elizabeth Chocolates","San Francisco","94123","01/11/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Tacolicious","San Francisco","94133","01/17/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Pho Tan Hoa, Inc","San Francisco","94102","08/05/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Pakwan Restaurant","San Francisco","94112","10/03/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"ABC Super Market Inc","San Francisco","94133","12/06/2017 12:00:00 AM",NA,FALSE,NA
+"MANORA'S THAI CUISINE","San Francisco","94103","02/25/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Escape From New York Pizza","San Francisco","94103","04/03/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Chinese Hospital","San Francisco","94133","01/09/2017 12:00:00 AM",NA,FALSE,NA
+"Judahlicious Juice","San Francisco","94122","04/25/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The House","San Francisco","94133","06/11/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Pause","San Francisco","94102","11/27/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Yamo Restaurant","San Francisco","94110","09/17/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Live Sushi Bar","San Francisco","94103","02/22/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Basil Canteen","San Francisco","94103","06/29/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"American Conservatory Theater","San Francisco","94102","03/07/2018 12:00:00 AM",NA,FALSE,NA
+"Pasta Moto of San Francisco Centre LLC","San Francisco","94103","09/30/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Ted's Sports Bar & Grill","San Francisco","94103","05/08/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Franciscan Crab Restaurant","San Francisco","94133","11/06/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"The Sunset's Best Seafood Restaurant","San Francisco","94116","07/09/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"MITCHELLS ICE CREAM","San Francisco","94110","06/27/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"STARBUCKS","San Francisco","94105","09/04/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"JOSEPH LEE RECREATION CENTER","San Francisco","94124","08/14/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Hamburger Haven","San Francisco","94118","06/12/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Golden Gate Indian Cuisine & Pizza","San Francisco","94122","10/24/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Mythic Pizza","San Francisco","94117","10/04/2018 12:00:00 AM",NA,FALSE,NA
+"Pastel Brazzuca","San Francisco","94103","03/26/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"YOSOYCEVICHE","San Francisco","94124","11/15/2018 12:00:00 AM",NA,FALSE,NA
+"Flying Pig Bistro","San Francisco","94103","01/09/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Roxie Market & Deli","San Francisco","94122","03/08/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"1601 Bar & Kitchen","San Francisco","94103","08/08/2017 12:00:00 AM",NA,FALSE,NA
+"Fillmore Street Cafe","San Francisco","94115","11/28/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Hockey Haven","San Francisco","94121","08/22/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Epicurean@SHCP","San Francisco","94109","09/17/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Double Play Bar & Grill","San Francisco","94103","10/03/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"Taqueria El Castillito","San Francisco",NA,"04/16/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"OBISPO","San Francisco","94110","07/23/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Mixt Greens/Mixt","San Francisco","94104","04/08/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"HOWARD'S CAFE","San Francisco","94122","09/27/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Pizza Joint","San Francisco","94121","02/08/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Old Ship","San Francisco","94111","02/25/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Center Cafe","San Francisco","94103","06/21/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Piqueos LLC","San Francisco","94110","03/13/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Kokio Republic","San Francisco","94109","01/11/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"U :DESSERT STORY","San Francisco","94123","06/25/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Bei Fang Style","San Francisco","94122","12/09/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"LATINO CUISINE CULINARY ACADEMY","San Francisco","941102019","07/25/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"SFDH - Scala's Bistro Restaurant","San Francisco","94102","02/12/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"ETERNA PRIMAVERA BAKERY","San Francisco","94110","08/02/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Estrella Taqueria","San Francisco","94117","03/26/2019 12:00:00 AM",NA,FALSE,NA
+"I-Tea Kearny SF","San Francisco","94108","12/15/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Fog City","San Francisco","94111","09/09/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"IMPERIAL GARDEN SEAFOOD RESTAURANT","San Francisco","94134","03/11/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Jelly Donut","San Francisco","94110","02/26/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Yama Sushi Restaurant","San Francisco","94112","05/22/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Diamond Cafe LLC","San Francisco","94114","07/06/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Nina's Cafe","San Francisco","94102","11/07/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Pacific Street Fish Market","San Francisco","94133","09/24/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Jitlada Thai Cuisine","San Francisco","94115","05/04/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Sarku Japan","San Francisco","94103","09/25/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Dong Hing, LLC","San Francisco","94133","05/09/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Jijime","San Francisco","94121","06/11/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"Back Room","San Francisco","94118","09/17/2019 12:00:00 AM","High Risk",TRUE,TRUE
+"Red Dog","San Francisco","94107","02/23/2018 12:00:00 AM",NA,FALSE,NA
+"Edible Arrangements","San Francisco","94133","07/03/2019 12:00:00 AM",NA,FALSE,NA
+"Cesario","San Francisco","94102","02/13/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Epicurean at Mercy High School","San Francisco","94132","03/20/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Miette Cakes, LLC","San Francisco","94102","08/15/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Guzman's Produce Market, Inc.","San Francisco","94112","09/25/2017 12:00:00 AM",NA,FALSE,NA
+"Tommy's Joynt","San Francisco","94109","06/26/2018 12:00:00 AM",NA,FALSE,NA
+"Washington Bakery & Restaurant","San Francisco","94108","11/28/2017 12:00:00 AM","High Risk",TRUE,TRUE
+"94672 Doggie Diner","San Francisco","94107","07/19/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Julie's Kitchen","San Francisco","94104","05/29/2019 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Chili Lemon Garlic","San Francisco","94107","02/16/2017 12:00:00 AM",NA,FALSE,NA
+"GCAFE","San Francisco","94105","09/21/2017 12:00:00 AM",NA,FALSE,NA
+"Sqwers Restaurant","San Francisco","94118","10/17/2016 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"OMNI S.F. Hotel - 3rd Floor Pantry","San Francisco","94104","10/05/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"Glide Memorial Church","San Francisco","94102","05/10/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"BEN WAH RESTAURANT","San Francisco","94115","05/22/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"DONA TERE'S MARKET","San Francisco","94110","07/19/2017 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"Farallon Restaurant","San Francisco","94102","12/18/2018 12:00:00 AM",NA,FALSE,NA
+"CLARENDON ELEMENTARY SCHOOL","San Francisco","94131","02/28/2018 12:00:00 AM","Moderate Risk",TRUE,FALSE
+"STARBUCKS COFFEE","San Francisco","94132","12/14/2016 12:00:00 AM","Low Risk",TRUE,FALSE
+"All Nite Pizza & Foods","San Francisco","94124","01/19/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Westin St Francis - Caruso","San Francisco","94102","03/08/2017 12:00:00 AM","Low Risk",TRUE,FALSE
+"Internos Wine Cafe and Bar","San Francisco","94118","07/12/2018 12:00:00 AM","High Risk",TRUE,TRUE
+"Restaurante Montecristo","San Francisco","94110","02/11/2019 12:00:00 AM",NA,FALSE,NA
+"Domino's #7764","San Francisco","94109","02/05/2018 12:00:00 AM","Low Risk",TRUE,FALSE
+"Ha Nam Ninh Restaurant","San Francisco","94109","08/24/2018 12:00:00 AM",NA,FALSE,NA
+"All stars Donuts","San Francisco","94118","04/17/2019 12:00:00 AM","Low Risk",TRUE,FALSE
+"McDonald's","San Francisco","94105","02/17/2017 12:00:00 AM","Low Risk",TRUE,FALSE

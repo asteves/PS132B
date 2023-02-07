@@ -1,0 +1,195 @@
+---
+title: "Section 3 Activity (w/ suggested answers)"
+format: pdf
+editor: visual
+---
+```{r setup, include = F, echo = F}
+require("knitr")
+opts_knit$set(root.dir = "~/Desktop/work/github/PS132B/")
+```
+## Purpose
+
+Today is a practice day. Your mission, should you choose to accept it[^1], is to work in groups to examine a dataset, extract some interesting information about it, and then communicate that to others. For administrative purposes, at the end of section reply to the **Section 3 Activity** thread with your name, your group members and what initial dataset you chose to use.
+
+[^1]: Frankly, it'd be a bit weird if you didn't, but to each their own.
+
+## Datasets
+
+There are six different example datasets on bCourses as well as a a brief data explainer. Pick one of them for today and download it to your machine. You can switch at some point later if you so choose.
+
+I tried to pick datasets based on what the class discussed last section. Each dataset is purposely limited to a small number of columns.
+
+## A Brief Digression on File Paths
+
+For the better of the last thirty years, computer operating systems manufacturers have been trying to hide how the computer works from you. That creates problems when we try to read in data.
+
+### 1. Find out where you are
+
+Use the `getwd()` function to find your current directory.
+
+### 2. Go somewhere else
+
+Use the `setwd()` function to change to a different directory. Ideally, we'd like to change to the directory (think folder) where we have saved all of our data.
+
+### 3. See what's in where you are
+
+Use the `list.files()` function to see what is in your working directory.
+
+### 4. Test if the name of your dataset is in files
+
+For example, suppose I downloaded the `squirrels.csv` dataset to my desktop.
+
+```{r}
+## for example, I saved this file to my desktop.
+"squirrels.csv" %in% list.files("~/Desktop")
+
+## running the code without the argument produces FALSE
+## if my working directory isn't my Desktop
+"squirrels.csv" %in% list.files()
+```
+
+Note that I have typed the file name in double quotes. You could also use single quotes, but the following will produce an error. What error do you get?
+
+```{r, eval = F}
+squirrels.csv %in% list.files()
+```
+
+#### Conceptual Question 1
+
+Suppose you had a large number of datasets that you wanted to read in at once. Talk with your group about the steps that you would like the computer to run.
+
+*Bonus*: If you feel comfortable with the R programming language or control flow, write out some `pseudocode` for this procedure.
+
+## Basic R Operations
+
+### 1. Read in your data frame to R and save it as an object in your environment with an appropriate variable name.
+
+```{r}
+squirrels = read.csv("./exampleData/squirrels.csv")
+head(squirrels)
+```
+
+### 2. Find the dimensions of the dataset and assign each dimension to an appropriate variable name.
+
+```{r}
+rows = nrow(squirrels)
+cols = ncol(squirrels)
+
+## or 
+dims = dim(squirrels)
+rows2 = dims[1]
+cols2 = dims[2]
+```
+
+### 3. Perform the basic mathematical operations on these two variables.
+
+For example, What is their sum? Their division? What if you take the number of rows to the power of the number of dimensions? Do the number of columns divide evenly into the rows?
+
+```{r}
+rows + cols 
+rows / cols 
+rows ^ cols
+rows %% cols == 0 
+```
+
+### 4. Take a numeric column from your data frame and assign it to a separate variable.
+
+Add the number of rows to each value in this new vector. What is its length? How about its average? Are there any missing values?
+
+```{r}
+## get information about the data frame 
+str(squirrels)
+
+numericCol = squirrels$Affected
+numericCol = numericCol + rows 
+length(numericCol)
+mean(numericCol, na.rm = T)
+sum(is.na(numericCol))
+```
+## Data Frames
+
+Return to your original data frame for the next section.
+
+### 1. Using bracket notation, make three new R objects (not in your data frame) with different slices of any variable from your data set.
+
+```{r}
+a = sample(squirrels$Affected, 200)
+b = squirrels$Affected[seq(400, nrow(squirrels), 4)]
+c = squirrels$Affected[c(1:5)]
+```
+
+### 2. Using bracket notation, make a new variable (not in your data frame) that is a logical vector indexing a numeric variable by a condition in a different variable
+
+```{r}
+logicalVec = ifelse(squirrels$animal != "Squirrel", TRUE, FALSE)
+
+```
+
+Compute the sum of two different variables indexed in this way. What is their difference? Imagine you were explaining why this difference was meaningful. What would you say?
+
+```{r}
+logicalVec2 = ifelse(squirrels$year == 2019, TRUE, FALSE)
+
+sum(logicalVec, logicalVec2)
+```
+
+
+### 3. Subset your data set by something that you find meaningful in the data. Justify your choice.
+
+```{r}
+## Get all squirrel attacks in 2019 only
+squirrels2019 = which(squirrels$animal == "Squirrel" & squirrels$year == 2019)
+
+squirrels[squirrels2019,]
+
+```
+Make sure to have at least one condition (though you can have more if you'd like) in your call.
+
+### 4. Use two of the three different methods of subsetting() shown in lecture to get the same result as part 4. Do not repeate your first method.
+
+```{r, message = F, warning = F}
+method1 = subset(squirrels, animal == "Squirrel" & year == 2019)
+head(method1)
+
+method2 = squirrels[squirrels$animal == "Squirrel" & squirrels$year == 2019,]
+
+library(dplyr)
+method3 = squirrels |> 
+  filter(animal == "Squirrel", year == 2019)
+
+## Note |> is the base R pipe. If we've loaded dplyr we can also
+## do 
+method3b = squirrels %>%
+  filter(animal == "Squirrel", year == 2019)
+```
+
+### 5. Come up with a way to sample rows of your data set to make a data frame that has just 1/4 of the rows. Repeat steps 4 and 5 on this new data frame with a different condition.
+
+Nothing changes with the methods, but the new part to include is sampling rows. 
+
+```{r}
+set.seed(123) # for reproducibility 
+idx = sample(nrow(squirrels), nrow(squirrels)/4)
+squirrel_subset = squirrels[idx,]
+summary(squirrel_subset)
+```
+You may also want to consider summarizing this smaller data frame.
+
+### 6. Run a linear regression on your original data set. The regression should predict some value.
+
+```{r}
+summary(lm(Affected ~ Duration, data = squirrels))
+
+```
+### 7. Consider visualizing the dataset. You can use whatever visualization package you prefer.
+
+```{r}
+hist(squirrels$Affected)
+
+```
+
+## Find New Friends
+
+When you have completed the activity, find someone that you have not spoken to and discuss what you came up with. Did you make the same choices? Is there something about their code that you like that you can use going forward? Is there something about your code that would be helpful for them going forward?
+
+If you find that you have lots of extra time, pick another data set and try out some different operations than the ones you did previously. We are going for reps here.
