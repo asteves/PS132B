@@ -1,0 +1,71 @@
+---
+title: "Minimal Poker Pair Classifier"
+author: "Alex Stephenson"
+date: "2023-02-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Is it a pair? 
+
+The following is a program that will classify whether a 5 card hand in poker is a pair or not. For this program, we ignore anything about suits.
+
+
+## Make a deck 
+
+```{r}
+deck = rep(1:13, each = 4)
+deck
+```
+
+
+## Pair Classifier 
+We can combine table with which() and length() to determine if we have just one pair. 
+This could be one line in our function, but I'll break it up for teaching clarity
+
+```{r}
+isPair = function(hand){
+  values = table(hand)
+  pairs = which(values == 2)
+  numpairs = length(pairs)
+  
+  if(numpairs == 1){
+    return("Pair")
+  } else{
+    return("Not Pair")
+  }
+}
+```
+
+## Let's apply our test cases 
+
+```{r}
+pair = c(1,1,2,3,4)
+twopair = c(1,1,2,2,3)
+nopair = c(1,2,3,4,5)
+nopair2 = c(1,2,11,11,11)
+testcases = list(pair, twopair, nopair, nopair2)
+for(i in 1:length(testcases)){
+  print(isPair(testcases[[i]]))
+}
+```
+
+Of course we want to do this repeatedly so a loop seems reasonable.
+
+```{r}
+## Set the number of runs
+set.seed(1234)
+N = 1000
+
+## preallocate a vector
+pairs = vector(mode = "logical", length = N)
+for(i in 1:N){
+  pairs[i] = isPair(sample(deck, 5, replace = F))
+}
+prop.table(table(pairs))
+```
+
+It turns out that our estimate after 1000 runs is pretty close to the theoretical result of 42.26%. 

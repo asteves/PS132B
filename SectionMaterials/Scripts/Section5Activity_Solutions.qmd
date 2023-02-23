@@ -1,0 +1,138 @@
+---
+title: "Section 5 Activity"
+format: pdf
+editor: visual
+---
+
+## Main
+
+The goal of this question is to practice simulating data and running regressions in R. It is taken from your textbook.
+
+1.  Set the RNG seed to be 1
+
+```{r}
+library(ggplot2)
+set.seed(1) 
+```
+
+2.  Create a vector `x` that has 30 observations randomly drawn from a standard normal distribution. (Hint: use the `rnorm()` function).
+
+```{r}
+N = 30 
+x = rnorm(N) 
+```
+
+3.  Create a second vector `eps` that has 30 observations randomly drawn from a normal distribution with a mean of 0 and a standard deviation of 0.25.
+
+```{r}
+eps = rnorm(N, 0, 0.25) 
+```
+
+4.  Using `x` and `eps` create a vector `y` according to the following data generating process $$Y = -1 + 0.5X + \epsilon$$
+
+```{r}
+y = -1 + 0.5*x + eps
+
+```
+
+5.  What is the length of y? What are the values of $\beta$ in the DGP?
+
+```{r}
+length(y)
+```
+
+$\beta_0 = -1, \beta_1 = 0.5$
+
+6.  Create a data frame called `dgp` with the variables created in 2-4.
+
+```{r}
+dgp = data.frame(y, x, eps) 
+```
+
+7.  Using `ggplot2` create a scatterplot of the relationship between `x` and `y`.
+
+```{r}
+plot = dgp |> 
+  ggplot(aes(x,y))+ 
+  geom_point()+ 
+  theme_minimal()+ 
+  labs(title = "Scatterplot of X and Y", x = "X", y = "Y")
+
+plot 
+```
+
+8.  Run the regression of `y` on `x` and report the summary of the model. Call this `m1`. Comment on why you expect the result. (Hint: consider the discussion of the Conditional Expectation Function from lecture)
+
+```{r}
+m1 = lm(y~x, data = dgp)
+```
+
+```{r, echo = F}
+knitr::kable(broom::tidy(m1)) 
+```
+
+9.  Using `ggplot2` add the least squares line to your previous plot. Give it a color other than black. Draw the population regression line on the plot in a different color.
+
+```{r}
+plot + 
+  geom_abline(intercept = coef(m1)[1], 
+              slope = coef(m1)[2], 
+              color = "green")+ 
+  geom_abline(intercept = -1, 
+              slope = 0.5, 
+              color = "blue") 
+```
+
+10. Create a second model `m2` that adds a squared term $x^2$ to the model. Is there evidence that the term improves the model fit? Which model is "correct"?
+
+```{r}
+m2 = lm(y~x + I(x^2), data = dgp)
+```
+
+```{r, echo = F}
+knitr::kable(broom::tidy(m2)) 
+```
+
+*We'd generally think that the model that best estimates the true data generating process is correct. Adding in the interaction term would give us a higher $R^2$ in our model, but the fit is misspecified. We will see that in action in the next question.*
+
+11. For both models, manually predict the result of `y` when `x = 4`. Would you trust either prediction?
+
+```{r}
+m1_new_data = c(1,4)
+m2_new_data = c(1,4,4^2)
+```
+
+*The prediction from the first model is (rounded) `r round(m1$coefficients %*% m1_new_data,2)` and the prediction from the second model is (rounded) `r round(m2$coefficients %*%m2_new_data,2)`.*
+
+*I would probably trust the first one more than the second because it estimates the true data generating process. I might be "worried" about the first prediction as well because the value is far outside of my training data set.*
+
+## Bonus
+
+1.  Add a new variable `z` to the  `dgp` data frame that has 30 observations randomly drawn from a Poisson distribution. Set `lambda=3`.
+
+*In R, the way to get random observations from a Poisson distribution is `rpois`*
+
+```{r}
+dgp$z = rpois(N, lambda = 3) 
+```
+
+
+2.  Update the `y` variable in the `dgp` data frame so that Y is now drawn from the following data generating process. $$-1 + 0.5X + .25Z + .75(XZ) + \epsilon$$
+
+```{r}
+dgp$y = -1 + 0.5*dgp$x + .25*dgp$z + .75*(dgp$x*dgp$z) + dgp$eps 
+```
+
+*Note that we can and should just operate directly with the data frame rather than using objects outside of it here.*
+
+3.  Run a new model called `m3` that would perfectly estimate the CEF in expectation. Report the summary of this model.
+
+```{r}
+m3 = lm(y~x*z, data = dgp)
+```
+
+```{r, echo = F}
+knitr::kable(broom::tidy(m3)) 
+```
+
+*Since the data generating process is linear, the CEF is also linear. The best fit is thus a linear model with the appropriate interactions.*

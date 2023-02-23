@@ -452,7 +452,7 @@ broom::tidy(fixest::feols(sales ~ TV, data = ads))
 
 ### The Math
 
-The optimization problem is to take a set of data points $\{(x_1, y_1),…(x_n,y_n)\}$ that represent $n$ observation pairs. In the model in the chapter the points are the TV advertising budget and the product sales. We want to fit a model that minimizes the least squares criterion, which is our loss function. This model amounts to minimizing the total error between our model fit and all of the data points.[^7] The errors are defined by the residuals, and the residual sum of squares RSS is \$(y_1 - \hat{\beta_0} - ...\hat{\beta_nx_n)^2 + ... (y_n - \hat{\beta_0}x_n)^2}\$. In words, we make some guesses about our beta coefficients and then subtract the prediction $\hat{\beta_i}x_i$ from the actual value observed.
+The optimization problem is to take a set of data points $\{(x_1, y_1),…(x_n,y_n)\}$ that represent $n$ observation pairs. In the model in the chapter the points are the TV advertising budget and the product sales. We want to fit a model that minimizes the least squares criterion, which is our loss function. This model amounts to minimizing the total error between our model fit and all of the data points.[^7] The errors are defined by the residuals, and the residual sum of squares RSS is $(y_1 - \hat{\beta_0} - ...\hat{\beta_nx_n)^2 + ... (y_n - \hat{\beta_0}x_n)^2}$. In words, we make some guesses about our beta coefficients and then subtract the prediction $\hat{\beta_i}x_i$ from the actual value observed.
 
 [^7]: Note that this sounds an awful lot like finding an average and that is intentional.
 
@@ -548,3 +548,128 @@ broom::tidy(lm(mpg ~ poly(horsepower, 2, raw=T), data = auto))
 ## alternatively 
 broom::tidy(lm(mpg ~ horsepower + I(horsepower^2), data = auto))
 ```
+
+## Chapter 4: Classification
+
+We keep the same setting as before. We have a set of training observations that we can use as a classifier. We want the classifier to perform well not only on the training data, but also on data it has not seen before.
+
+```{r}
+### replicating Figure 4 
+default = ISLR2::Default
+
+default |>
+  ggplot(aes(balance, income, color = default, shape = default))+
+  geom_point()+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  labs(title = "Overall Default Rates",
+       x = "Balance", y = "Income")
+
+## Box plots 
+default |>
+  ggplot(aes(default, balance))+
+  geom_boxplot()+
+  theme_minimal()
+
+default |>
+  ggplot(aes(default, income))+
+  geom_boxplot()+
+  theme_minimal()
+```
+
+### Why Not Linear Regression?
+
+In cases of qualitative response with multiple non-ordinal quantities, the coding of cases will affect the output in ways that we do not want it do. Since there is no natural way to convert a qualitative response with more than two levels, we shouldn't use linear regression in this case.
+
+In the binary case there's really no problem, though the book mentions that you can get predictions greater than 1 or less than 0. Whether this is actually a problem is an open question since you can always just truncate and the linear regression approach will be the same as for linear discriminant analysis approaches.
+
+### Logistic Regression
+
+A logistic regression models the probability that Y belongs to a particular category. A logistic regression is so called because we model the probability with the logistic function.
+
+$$
+p(X) = \frac{e^{\textbf{X}\beta }}{1 + e^{\textbf{X}B}}
+$$ We fit this model via maximum likelihood. We tend to use the odds for interpretation.
+
+$$
+\frac{p(X)}{1 - p(X)} = e^{\textbf{X}\beta}
+$$ The odds can take on any value between 0 and infinity. Taking the logs of both sides reduces that equation to
+
+$$
+log \left(\frac{p(X)}{1 - p(X)}\right)= \textbf{X}\beta
+$$ The interpretation of a $\beta$ coefficient is as follows. Increasing X_i by one unit changes the log odds by $\beta_i$. Because the relationship between $p(X)$ and $X$ is not a straight line, it is not correct to interpret $\beta_i$ as a marginal change in $p(X)$ associated with a one-unit increase in $X_i$.
+
+### Estimating a logistic regression
+
+We use maximum likelihood. We'll consider the simple binary case where we have coefficients $\beta_0$ and $\beta_1$ to estimate.
+
+$$
+l(\beta_0, \beta_1) = \prod_{i:y_i = 1}p(x_i)\prod_{i':y_{i'}= 0} (1- p(x_i))
+$$
+
+In R:
+
+```{r}
+logit = glm(default~balance, data = default, family = "binomial")
+```
+
+```{r, echo = F, message = F}
+knitr::kable(broom::tidy(logit))
+```
+
+To get the log-odds
+
+```{r}
+## We're passing in the default value of the intercept
+## and a balance of $1000 to match the predictions example
+betas = logit$coefficients %*% c(1,1000)
+odds = 1/(1+exp(-betas))
+odds
+```
+
+Let's try another example
+
+```{r}
+l2 = glm(default ~ student, data = default, family = "binomial")
+
+## default for student 
+betas = l2$coefficients %*% c(1,1)
+yes = exp(betas)/ (1 + exp(betas))
+yes
+```
+
+### Multiple Logistic Regression
+
+The generalization works the same way as in the linear regression case.
+
+## Chapter 5: Resampling Methods
+
+### Cross Validation
+
+Recall that there is a distinction between training error rate and test error rate. The *training error rate* is the average error that results from using a method on the training data. The *test error rate* the average error from using a learning method to predict the response on the new observation not from the training data.
+
+#### Validation Set Approach
+
+Suppose we want to estimate the test error associated with fitting a particular learning method on a set of observations. In the *Validation Set* approach, we randomly divide the available observations into a training set and a validation set. We fit the model on the training data, and the fitted model is used to predict the responses for the validation set.
+
+```{r}
+set.seed(1)
+auto = ISLR2::Auto
+
+## Randomly split the 392 observations into two 
+## sets of 196 observations 
+idx = sample(392, 196, replace = F)
+train = auto[idx,]
+test = auto[-idx,]
+
+model = lm(mpg ~ horsepower, data = train)
+preds = predict(model, test)
+mse_pred = mean((auto$mpg[-idx] - preds)^2)
+```
+
+There are some drawbacks with just using a single validation set.
+
+1.  Validation estimates of the test error rate can be highly variable, depending on what observations are included.
+2.  Since only a subset of observations are used to fit the model, validation set error rate may tend to overestimate the test error rate for the model fit on the entire dataset.
+
+Cross validation addresses these two issues.

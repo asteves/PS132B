@@ -1,0 +1,176 @@
+---
+title: "Poker Probabilities (Full Version)"
+author: "Alex Stephenson"
+date: "2023-02-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The full version 
+The following is a program that simulates an arbitrary number of hands, and returns the frequencies of different hand values. It is not designed to be the most efficient way to calculate the answer to the question. Instead, I am using just the information we have available from class readings. 
+
+## Helper functions 
+
+Here's a function that randomly sample 5 cards to represent a poker hand. Note that the arguments for the function presume the deck is a data frame, and I have given "default" values for the number of observations to draw and whether to do so with replacement. 
+
+```{r}
+deal_cards = function(deck, N=5, R = FALSE){
+  return(deck[sample.int(nrow(deck),N,R),])
+}
+```
+
+### Testing for a straight 
+Note that this is "slow" relative to other methods. I'm writing it this way to demonstrate a for loop.
+
+```{r}
+test_straight = function(hand, card){
+  ## Sort our hand in ascending order 
+  h = sort(hand[[card]])
+  ## we test whether the cards are in sequential order
+  for(i in 1:4){
+     ## If false then we can't have a straight
+    if(h[i+1] - h[i] != 1){
+      return(FALSE)
+    }
+  }
+  return(TRUE)
+}
+```
+
+
+For reference, if we're smart about how we do the order of evaluations, this also works to test for a straight.
+
+```{r}
+test_straight2 = function(hand, card){
+  h = sort(hand[[card]])
+  return(h[5] - h[1] == 4)
+}
+```
+
+### Testing for a flush 
+
+A flush means that every card is the same suit. Consequently there should only be one unique element in the hand. 
+
+```{r}
+test_flush = function(hand, suit){
+  return(length(unique(hand[[suit]]))== 1)
+}
+```
+
+### Testing for a Royal flush 
+
+Here is one way to test for a Royal Flush. There are likely other smarter ways to accomplish this task.
+
+```{r}
+test_royal = function(hand, card, suit){
+  ## The specific cards needed for a Royal Flush 
+  ## A = 1, J=11,Q=12,K=13
+  s = c(1,10,11,12,13)
+  ## Order the hand in ascending order by card value 
+  h = hand[order(hand[[card]]),]
+  
+  ## If all the cards are the same, then the sum will be sum(T,T,T,T,T)
+  ## which is sum(c(1,1,1,1,1)) == 5 
+  ## In order for it to be a Royal Flush, the cards all have to be same suit
+  return(sum(h == s) == 5 && test_flush(hand, suit))
+}
+```
+
+### Evaluation Function 
+
+```{r}
+evaluate_hand = function(hand, card, suit){
+  ## Get the distribution of values in the hand 
+  d = table(hand[[card]])
+  
+  ## Use numbers to represent hands 1="High Card" to 10 = "Royal Flush"
+  if(test_royal(hand, card, suit)){
+    return(10)
+  }
+  else if(test_straight(hand, card)){
+    ## if it's a straight, check if it's also a flush 
+    if(test_flush(hand, suit)){
+      return(9)
+    }else{
+      ## Just a regular straight 
+      return(5)
+    }
+  }
+  ## 4 of a kind
+  else if(any(d == 4)){
+    return(8)
+  }
+  ## Full House 
+  ## First test if we have three of a kind
+  else if(any(d == 3)){
+    ## Now test if the other two cards are a pair
+    if(any(d == 2)){
+      return(7)
+    }else{
+      return(4)
+    }
+  }
+  ## In order to test for 2 pairs
+  ## We can use the fact that we should have exactly 
+  ## two buckets that have 2 in them
+  else if(length(d[d==2]) == 2){
+    return(3)
+  }
+  else if(any(d == 2)){
+    return(2)
+  }
+  ## Finally we test to see if we have a flush 
+  else if(test_flush(hand, suit)){
+    return(6)
+  } else{
+    return(1)
+  }
+}
+```
+
+
+## Build a function to simulate deals
+
+There are other representations available for making a deck, but a data frame works for this problem.
+
+```{r}
+simulateDeals = function(N){
+  ## Make a deck 
+  suits = rep(c("C", "D", "S", "H"), 13)
+  cards = rep(1:13, each = 4)
+  deck = data.frame(suits, cards)
+  
+  ## Preallocate a vector to store results
+  deals = vector(mode = "logical", length = N)
+  for(i in 1:N){
+    deals[i] = evaluate_hand(deal_cards(deck),
+                             card = "cards", 
+                             suit="suits")
+  }
+  return(deals)
+}
+```
+
+           
+## Test different numbers of hands  
+
+```{r, cache=TRUE}
+set.seed(355)
+N = c(1000,10000,100000)
+results = list()
+for(i in 1:length(N)){
+  a = simulateDeals(N[i])
+  results[[i]] = a
+}
+
+for(i in 1:length(N)){
+  print(paste0("Simulating ",N[i], " runs."))
+  print(prop.table(table(results[[i]]))*100)
+  cat("\n")
+}
+```
+
+Our results as N gets large converge to the theoretical distribution. One takeaway from the simulation is the more hands we simulate, the more likely we are to observe a rare event. Since many prediction problems of interest are predictions of rare events, one implication is that absent lots of data we are often going to be under-powered in such scenarios. 
