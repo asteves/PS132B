@@ -15,6 +15,27 @@ library(ggplot2)
 
 ## Q1
 
+First a regression table helper function to clean up the summary tables. 
+
+```{r}
+regTable = function(model){
+  m = summary(model)
+  tidydf = data.frame(terms = names(m[["coefficients"]][,1]),
+                      estimates = round(m[["coefficients"]][,1],4),
+                      std.error = m[["coefficients"]][,2],
+                      statistic = m[["coefficients"]][,3],
+                      p.value = m[["coefficients"]][,4],
+                      row.names = NULL)
+  
+  ## Round the numeric columns to 4 digits
+  tidydf[, 2:ncol(tidydf)] = apply(tidydf[, 2:ncol(tidydf)], 
+                                      2, 
+                                      function(x) round(x, 4)
+                                      )
+  return(tidydf)
+}
+```
+
 ```{r}
 set.seed(123)
 x = rexp(1500, rate = 2)
@@ -38,6 +59,8 @@ boot_univariate = function(datvec, statint, B, alpha){
 ```{r, cache = T}
 boot_univariate(x, median, 10000, 0.05)
 ```
+
+The produces a 95% bootstrap confidence interval for the median of the variable represented by x.
 
 ### Bonus 
 
@@ -75,7 +98,7 @@ plot
 
 ```{r, message = F, warning = F}
 reg = lm(prop_d ~ dem_pres_2004, data = ca)
-summary(reg)
+regTable(reg)
 ```
 
 ```{r, message = F, warning = F}
@@ -182,7 +205,7 @@ mean(clinton$clintonvote)
 ```{r}
 logit = glm(clintonvote ~ dem + female + clintondist, data = clinton,
             family = "binomial")
-summary(logit)
+regTable(logit)
 ```
 
 ### 4 and 5 

@@ -6,6 +6,7 @@ format:
     toc-location: left 
     toc-title: Chapters
     html-math-method: katex
+    number-sections: true
 editor: visual
 code-overflow: wrap
 ---
@@ -644,7 +645,7 @@ The generalization works the same way as in the linear regression case.
 
 ## Chapter 5: Resampling Methods
 
-### Cross Validation
+### Cross Validation {#sec-cv}
 
 Recall that there is a distinction between training error rate and test error rate. The *training error rate* is the average error that results from using a method on the training data. The *test error rate* the average error from using a learning method to predict the response on the new observation not from the training data.
 
@@ -673,3 +674,89 @@ There are some drawbacks with just using a single validation set.
 2.  Since only a subset of observations are used to fit the model, validation set error rate may tend to overestimate the test error rate for the model fit on the entire dataset.
 
 Cross validation addresses these two issues.
+
+#### K-Fold Cross Validation
+
+## Chapter 6: Ridge Regression and Lasso
+
+### Ridge Regression
+
+Recall that the least squares fitting procedure finds appropriate weights $\beta_0,…,\beta_n$ by minimizing the residual sum of squares (RSS)
+
+$$
+RSS = \sum_{i=1}^n\left(y_i -\beta_0 - \sum_{j=1}^p\beta_jx_{ij}\right)^2
+$$
+
+Ridge regression uses a different loss function. Ridge regression finds coefficients $\hat{\beta}^R$ that minimizes:
+
+$$
+\sum_{i=1}^n\left(y_i -\beta_0 - \sum_{j=1}^p\beta_jx_{ij}\right)^2 + \lambda \sum_{j=1}^p\beta_j^2
+$$ Here $\lambda$ is a tuning parameter. Staring at the equation we see that ridge regression trades off two different criteria. We want coefficient estimates that will fit the data well, but the second term is a shrinkage penalty. It is small whenever the $\beta_i$ are close to 0 and so has the effect of shrinking the estimates towards 0. When $\lambda=0$ there is no effect and it is the same estimator as linear regression. As $\lambda \rightarrow \infty$, the impact of the penalty grows so the ridge regression coefficient estimates will approach 0. The shrinkage penalty is not applied to the intercept.
+
+We often center the predictors to have mean zero before ridge regression is performed. In this case, the estimated intercept is:
+
+$$
+\hat{\beta_0} = \bar{y}
+$$ We do this because ridge regression coefficients are not scale equivalent. Ridge regression coefficients depend not only on the value of $\lambda$ but also on the scaling of the $jth$ predictor. It may also depend on the values of other predictors. We scale via the formula:
+
+$$
+\tilde{x}_{ij} = \frac{x_{ij}}{\sqrt{\frac{1}{n}\sum_{i=1}^n(x_{ij} - \bar{x}_j)^2}}
+$$ The denominator is the estimated standard deviation of the $jth$ predictor so all standardized predictors will have a standard deviation of 1. An implication is that the final fit will not depend on the scale of the predictors.
+
+##### Application
+
+TODO: ADD THIS IN
+
+```{r}
+credit = ISLR2::Credit
+
+##. standardize all predictors 
+center = function(x){
+  ## Function to center a vector around
+  ## a mean of 0 
+  return(x - mean(x))
+}
+
+standardize = function(x){
+  centered = center(x)
+  ## To match R scale() implementation
+  ## divide by n-1 
+  var = sum(center(x)^2)/(length(x)-1)
+  sd = sqrt(var)
+  return(center(x)/sd)
+}
+```
+
+#### Why does Ridge Regression improve over OLS
+
+Ridge regression's advantage is in the bias-variance tradeoff. As $\lambda$ increases the flexibility of the ridge regression fit decreases.
+
+-   The variance decreases and the bias of the estimate increases.
+
+Because the test MSE is composed of both bias and variance, a substantial decrease in the variance will improve predictions on this measure of success.
+
+In general, when the relationship between the response and the predictors is close to linear, the least squares estimates will have low bias but may have high variance. A small change in the training data can cause a large change in the coefficient estimates. Ridge regression works best in situations where the OLS estimate is high variance.
+
+The primary disadvantage for ridge regression is that it includes all $p$ predictors in the final model, which can create a challenge for model interpretation when $p$ is large.
+
+### The Lasso
+
+Unlike ridge regression the lasso minimizes the following quantity:
+
+$$
+\sum_{i=1}^n(y_i - \beta_0 - \sum_{j=1}^p\beta_jx_{ij})^2 + \lambda \sum_{j=1}^p|\beta_j|
+$$ The difference between ridge and lasso is the penalty term. In the lasso, we use the L1 norm instead of the L2 norm. In the lasso, the penalty has the effect of forcing some coefficient estimates to be exactly equal to zero when the tuning parameter is sufficiently large. A consequence is that the lasso is a variable selection model that yields sparse models. Depending on the value of $\lambda$ the lasso can produce a model involving any number of variables, while ridge regression will always include all predictors in the model even though the magnitude of the coefficient estimates will depend on $\lambda$.
+
+### Comparing lasso and ridge regression
+
+Both the lasso and ridge regression will often lead to qualitatively similar behavior in that as $\lambda \rightarrow \infty$ the variance decreases and the bias increases. In general neither ridge or lasso will universally dominate the other.
+
+-   The lasso will often perform better when there are relatively small number of predictors that have substantial coefficients and the remaining predictors have coefficients close to 0. Lasso like ridge yields a decrease in variance at the expense of a increase in bias when least squares has high variance.
+
+-   Ridge will perform better when the response is a function of many predictors with similar coefficient sizes.
+
+Cross validation can be used to determine which approach is better. Generally speaking, ridge regression more or less shrinks every dimension by the same proportion whereas the lasso more or less shrinks all coefficients towards zero by a similar amount and sufficiently small coefficients go to 0.
+
+### Selecting the tuning parameter
+
+Use cross validation on the penalty term. Create a grid of $\lambda$ values and compute the cross validation error for each as described in the @sec-cv section.
