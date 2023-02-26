@@ -123,22 +123,22 @@ Reason: By using LASSO, we put some contraints on the total size of coefficients
 
 #### a
 
-iii is correct. A standard OLS model is fit according to the objective criterion of minimizing the RSS of the data used in the fit (i.e. the training data). As a result, any deviation from OLS’s standard fit will lead to a larger RSS. A positive λ puts a penalty on OLS estimated coefficients being non-zero, so assuming the standard OLS estimates are indeed non-zero, increasing the size of λ will increase that penalty and increasingly induce the coefficients to get further away from their standard OLS estimated values. By inducing the solutions to be increasingly further away from the standard OLS solutions, the training RSS will steadily increase.
+*iii* is correct. A standard OLS model is fit according to the objective criterion of minimizing the RSS of the data used in the fit (i.e. the training data). As a result, any deviation from OLS’s standard fit will lead to a larger RSS. A positive λ puts a penalty on OLS estimated coefficients being non-zero, so assuming the standard OLS estimates are indeed non-zero, increasing the size of λ will increase that penalty and increasingly induce the coefficients to get further away from their standard OLS estimated values. By inducing the solutions to be increasingly further away from the standard OLS solutions, the training RSS will steadily increase.
 
 #### b
 
-ii is correct (or at least, most likely). The magic of ridge regression is that, even though it makes the training RSS increase steadily, it can make the test RSS decrease, at least initially. The reason is that putting a penalty on large coefficients ends up reducing the variance of the model’s predictions. It does, also, increase the squared bias, but typically, the variance will decrease at first at a faster rate than will the squared bias increase. However, as we have seen with the introduction/reduction of flexibility in all of our methods/models, the gradual reduction of flexibility (which is what the increasing of λ does) will eventually make it such that the squared bias increases at a faster rate than the variance decreases. The result of all of this is that that test RSS will at first decrease, but then increase, as λ increases (i.e. as the model is made less flexible). However, it is also possible for (iii) to be correct. The OLS model may indeed be the best for the test error for certain datasets, which mean test error will simply increase.
+*ii* is correct (or at least, most likely). The magic of ridge regression is that, even though it makes the training RSS increase steadily, it can make the test RSS decrease, at least initially. The reason is that putting a penalty on large coefficients ends up reducing the variance of the model’s predictions. It does, also, increase the squared bias, but typically, the variance will decrease at first at a faster rate than will the squared bias increase. However, as we have seen with the introduction/reduction of flexibility in all of our methods/models, the gradual reduction of flexibility (which is what the increasing of λ does) will eventually make it such that the squared bias increases at a faster rate than the variance decreases. The result of all of this is that that test RSS will at first decrease, but then increase, as λ increases (i.e. as the model is made less flexible). However, it is also possible for (iii) to be correct. The OLS model may indeed be the best for the test error for certain datasets, which mean test error will simply increase.
 
 #### c
 
-iv is correct. As explained above, putting a penalty (λ) on the regression coefficients shrinks them toward zero, which consequently decreases the flexibility of the model and decreases the variance.
+*iv* is correct. As explained above, putting a penalty (λ) on the regression coefficients shrinks them toward zero, which consequently decreases the flexibility of the model and decreases the variance.
 
 #### d
 
-iii is correct. As explained above, putting a penalty (λ) on the regression coefficients shrinks them toward zero, which consequently decreases the flexibility of the model and increases the (squared) bias.
+*iii* is correct. As explained above, putting a penalty (λ) on the regression coefficients shrinks them toward zero, which consequently decreases the flexibility of the model and increases the (squared) bias.
 
 #### e
 
-v is correct. The irreducible error is irreducible and does not depend upon the model. It cannot be modeled and it does not change.
+*v* is correct. The irreducible error is irreducible and does not depend upon the model. It cannot be modeled and it does not change.
 
 
