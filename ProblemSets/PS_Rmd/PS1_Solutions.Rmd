@@ -1,0 +1,86 @@
+---
+title: "PS1 Solutions"
+author: "Teaching Staff"
+date: "February 2023"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1 
+
+### 1 
+```{r}
+set.seed(8675309)
+
+### Create a vector 
+vec1 = 1:1000
+avec1 = seq(1,1000,1)
+```
+
+### 2 
+
+```{r}
+### Sampling 
+vec2 = sample(vec1, replace = F)
+avec2 = sample(avec1)
+```
+
+### 3 
+```{r}
+### Creating a data frame 
+dat = data.frame(vec1, vec2)
+```
+
+### 4 
+
+```{r}
+### compute correlation 
+cor(dat$vec1, dat$vec2)
+```
+
+### 5 
+
+The correlation will be close to 0 because randomization has mechanically broken the relationship between the two variables. The actual correlation might not be 0 due to small sample size. 
+
+
+## Question 2
+
+### 1
+
+```{r}
+hdat = read.csv("../data/data_health_synth_small.csv")
+
+```
+
+### 2
+
+```{r}
+dim(hdat)
+
+## alternatively 
+nrow(hdat)
+ncol(hdat)
+```
+
+### 3
+
+```{r}
+summary(hdat)
+```
+
+### 4
+
+```{r}
+### Mean difference 
+cost_b = mean(hdat$cost[hdat$race == "black"])
+cost_w = mean(hdat$cost[hdat$race == "white"])
+
+ate = cost_b - cost_w
+ate
+
+```

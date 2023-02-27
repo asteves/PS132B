@@ -1,0 +1,118 @@
+---
+title: "PS2 Solutions"
+author: "Teaching Staff"
+date: "February 2023"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+```
+
+## Part 1 
+
+```{r}
+vec1 = 1:1000
+set.seed(12345)
+vec2 = sample(vec1)
+dat = data.frame(vec1, vec2)
+head(dat)
+```
+
+```{r}
+idx = which(dat$vec2 %in% c(2, 47, 290, 812))
+dat$vec2[idx] = NA
+names(dat) = c("caseid", "wage")
+
+funcs = function(x){
+  c(mean = mean(x, na.rm = T),
+    med = median(x, na.rm = T),
+    std = sd(x, na.rm = T))
+}
+
+sapply(dat, funcs)[,2]
+```
+
+```{r}
+dat2 = na.omit(dat)
+head(dat2)
+```
+
+## Part 2 
+
+```{r}
+cities = read.csv("../data/CAcities.csv")
+
+for(i in 1:nrow(cities)){
+  print(cities$city[i])
+}
+
+cities2 = cities[order(cities$pop2020,decreasing = T),]
+for(i in 1:nrow(cities2)){
+  print(cities2$city[i])
+}
+
+cities |>
+  ggplot(aes(x=city, y = pop2020))+
+  geom_point()
+```
+
+## Part 3 
+
+```{r, warning = F, message = F}
+hdat = read.csv("../data/data_health_synth_small.csv") |>
+  na.omit()
+
+hdat |>
+  ggplot(aes(x = cost))+
+  geom_histogram()
+```
+
+```{r}
+hdat |>
+  ggplot(aes(x = bps_mean, y = cost))+
+  geom_point()
+
+```
+
+```{r}
+set.seed(12345)
+cost_samp = sample(hdat$cost, replace = T)
+
+mean(cost_samp)
+mean(hdat$cost)
+```
+
+```{r}
+N = 1000
+costs = vector(mode = "logical", length = N)
+set.seed(12345)
+for(i in 1:N){
+  costs[i] = mean(sample(hdat$cost, replace = T))
+}
+sd(costs)
+
+```
+
+```{r}
+my_samps_function = function(x){
+  ## x is a vector 
+  out = vector(mode = "logical", length = 1000)
+  for(i in 1:1000){
+    out[i] = mean(sample(x, replace = T))
+  }
+  return(sd(out))
+}
+
+set.seed(12345)
+my_samps_function(hdat$cost)
+```
+
+```{r}
+set.seed(12345)
+my_samps_function(hdat$bps_mean)
+```
