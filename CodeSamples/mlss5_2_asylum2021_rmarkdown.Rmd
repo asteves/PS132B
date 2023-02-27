@@ -1,0 +1,54 @@
+---
+title: "Example of Presenting Results"
+author: "Kirk Bansak"
+date: "January 31, 2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Summary
+
+Below are some simple results on asylum applications in the European Union.
+
+
+## The Data
+
+```{r}
+dat <- read.csv("europe_asylum_2021.csv")
+head(dat)
+```
+
+The countries included in the data set include the following (country codes):
+
+```{r}
+unique(dat$geo)
+```
+
+
+## Results
+
+In the European Union in 2021, the mean number of asylum applications per country was the following:
+
+```{r}
+mean(dat$napps)
+```
+
+In the European Union in 2021, the total number of asylum applications per country was the following:
+
+```{r}
+sum(dat$napps)
+```
+
+In sum, a total of `r sum(dat$napps)` asylum applications were submitted in Europe in 2021.
+
+Here is a histogram of the distribution of applications across the countries:
+
+```{r}
+hist(dat$napps, breaks = 15)
+```
+
+The end!

@@ -1,0 +1,123 @@
+---
+title: "R Markdown Example"
+author: "Kirk Bansak"
+date: "January 31, 2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Preliminary Notes
+
+First note that the code file is an Rmd file (i.e. has a .Rmd extension rather than simply a .R extension like a simple R script). Also note that the output in the header of the Rmd code file is set to 'html_document'. While this can be changed to produce different types of outputs, you should always set the output to 'html_document' or 'pdf_document' for assignments in this class.
+
+In addition, note the line of the Rmd file that reads "knitr::opts_chunk$set(echo = TRUE)". You should also always include this in assignments for this class. It is a command that will ensure that all code chunks are printed by default in the html output, and hence make it possible for the teaching staff to evaluate your code when reviewing the html output.
+
+Finally, the two hashtags in line 13 are used to denote a section, and hence "Preliminary Notes" will neatly appear as a section header in the html output.
+
+
+## Writing Text
+
+We can include text in our final document by simply writing it down. There are also formating options, such as including *italicized text* or **bold text**. See the cheat sheets posted on bCourses for more options.
+
+Sometimes, we may want to include text in our code file that serves as a comment to ourselves but that we do not want included in the html output file. For instance, I may want to remind myself that I need redo an analysis or document in greater detail for myself how or why I exactly did something. It is possible to do this using specialized synatax.
+
+<!-- Here is my text comment that will not be viewable in the output file. -->
+
+We can also create nicely formatted mathematical expressions and equations, though the conventions are not fully intuitive and can take some time to learn. For instance:
+
+$$E = m c^2$$
+
+$$f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{- \frac{1}{2} (\frac{x - \mu}{\sigma})^2}$$
+
+
+## Code Chunks
+
+The main reason we should be really excited about using R Markdown for data science, however, is our ability to embed code chunks in our documents! These chunks will print, execute, and display the results of the code.
+
+Let's load some data and run some code to perform basic exploration.
+
+```{r}
+data(Loblolly)
+summary(Loblolly)
+```
+
+I can alternate between text and code chunks to describe what I am doing and comment on results. Now, I would like to compute the standard deviation of the height of the trees in the sample.
+
+```{r}
+sd(Loblolly$height)
+```
+
+As you can see, the tree height varies quite a bit in our sample. If I want to, I can even embed the specific calculation within my text. That is, I can report that the standard deviation of the height is `r sd(Loblolly$height)`. In the html output, the standard deviation value will actually show up in the previous sentence.
+
+*Important Note: Avoid including the View() function in your embedded code! There's a possibility it will cause an error or a crash!*
+
+I can also label my code chunks as well for better organization and tracking in RStudio, as well as if I want to re-evaluate the same chunk again later on. For instance, perhaps I embed the following code, which will give the label `my-test` to the following chunk:
+
+```{r my-test}
+mean_height <- mean(Loblolly$height)
+mean_height > 30
+```
+
+Then I write some other stuff ... maybe embed more code ... and then I want to re-run the `my-test` chunk again, without having to re-write/copy the whole thing. I can use the following instructions, and the rendered document will re-run the `my-test` chunk:
+
+```{r my-test}
+```
+
+If you use code chunk labels, be sure to use unique labels!!!
+
+There may also be a situation in which I want to execute and display the results of a code chunk without printing the code itself. I can do that by specifying `echo = FALSE` as a chunk option.
+
+```{r echo = FALSE}
+head(Loblolly)
+```
+
+Alternatively, I may want to execute and print some code but not display the results (for instance, to avoid too much clutter or reduce the length of the output document). We can do this by specifying `results = 'hide'` as a chunk option.
+
+For instance, perhaps I want to indicate that I used the following code for informal data exploration, but I don't think it will be particularly useful for the readers of my output to see the results.
+
+```{r results = 'hide'}
+Loblolly[1:25,]
+Loblolly$age
+Loblolly$height / Loblolly$age
+```
+
+Please note, however, that we will typically want to see **both** your code and results in your assignments in this class!!!
+
+There are many other code chunk options that can be included that could also be useful as you continue to use R and R Markdown into the future. See the cheat sheets posted on bCourses for more information.
+
+
+## Including Plots
+
+You can also embed plots by simply including the plotting code in a code chunk.
+
+```{r}
+plot(x = Loblolly$age, y = Loblolly$height)
+```
+
+We can also manually specify the size of the plot. 
+
+```{r fig.height = 4, fig.width = 6}
+plot(x = Loblolly$age, y = Loblolly$height)
+```
+
+I personally like to use the package `ggplot2` for producing my graphics in R.
+
+```{r fig.height = 4, fig.width = 6}
+library(ggplot2)
+ggplot(Loblolly, aes(x = age, y = height)) + geom_point() +
+  theme_bw()
+```
+
+```{r fig.height = 4, fig.width = 6}
+ggplot(Loblolly, aes(x = height)) + geom_histogram(bins = 20) +
+  theme_bw()
+```
+
+
+## Rendering Output
+
+Hopefully you are using RStudio. If so, you simply need to click the Knit button at the top of the script editor window (i.e. above if you are currently looking at the Rmd script). RStudio will provide you with a preview as well as create an html (or pdf) document in the same folder as the Rmd file.
