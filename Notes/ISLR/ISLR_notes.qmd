@@ -14,6 +14,7 @@ code-overflow: wrap
 ## Libraries
 
 ```{r, message=F, warning=F}
+library(glmnet)
 library(tidyverse)
 ```
 
@@ -759,10 +760,10 @@ $$ The denominator is the estimated standard deviation of the $jth$ predictor so
 
 ##### Application
 
-TODO: ADD THIS IN
+TODO: Insert these in 
 
-```{r}
-credit = ISLR2::Credit
+```{r, cache = T}
+Hitters = na.omit(ISLR2::Hitters)
 
 ##. standardize all predictors 
 center = function(x){
@@ -779,7 +780,49 @@ standardize = function(x){
   sd = sqrt(var)
   return(center(x)/sd)
 }
+
+x = model.matrix(Salary ~ ., Hitters)[,-1]
+y = Hitters[["Salary"]]
+grid = 10^seq(10, -2, length = 100)
+## Set alpha to 0 to get ridge. Set alpha to 1 to get lasso
+ridge.mod = glmnet(x,y, alpha = 0, lambda = grid)
+plot(ridge.mod)
+lasso.mod = glmnet(x,y, alpha = 1, lambda = grid)
+plot(lasso.mod)
 ```
+
+Using cross-validation to find $\lambda$
+
+```{r}
+set.seed(1)
+train = sample(1:nrow(x), nrow(x)/2)
+test = (-train)
+y.test = y[test]
+set.seed(1)
+
+### Ridge 
+cv.out = cv.glmnet(x[train,], y[train], alpha = 0)
+plot(cv.out)
+bestlam = cv.out$lambda.min
+bestlam
+```
+Now do the same with the Lasso
+
+```{r}
+### Lasso 
+lasso.mod = glmnet(x[train,], y[train], alpha = 1, lambda = grid)
+plot(lasso.mod)
+```
+
+```{r}
+set.seed(1)
+cv.out = cv.glmnet(x[train,],y[train], alpha = 1)
+plot(cv.out)
+bestlam = cv.out$lambda.min
+lasso.pred = predict(lasso.mod, s = bestlam, newx = x[test,])
+mean((lasso.pred-y.test)^2)
+```
+
 
 #### Why does Ridge Regression improve over OLS
 
