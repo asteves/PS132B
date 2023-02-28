@@ -155,6 +155,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#chapter-5-resampling-methods" id="toc-chapter-5-resampling-methods" class="nav-link" data-scroll-target="#chapter-5-resampling-methods"><span class="toc-section-number">5</span>  Chapter 5: Resampling Methods</a>
   <ul class="collapse">
   <li><a href="#sec-cv" id="toc-sec-cv" class="nav-link" data-scroll-target="#sec-cv"><span class="toc-section-number">5.1</span>  Cross Validation</a></li>
+  <li><a href="#k-fold-cross-validation" id="toc-k-fold-cross-validation" class="nav-link" data-scroll-target="#k-fold-cross-validation"><span class="toc-section-number">5.2</span>  k-Fold Cross Validation</a></li>
+  <li><a href="#cross-validation-for-classification" id="toc-cross-validation-for-classification" class="nav-link" data-scroll-target="#cross-validation-for-classification"><span class="toc-section-number">5.3</span>  Cross Validation for Classification</a></li>
   </ul></li>
   <li><a href="#chapter-6-ridge-regression-and-lasso" id="toc-chapter-6-ridge-regression-and-lasso" class="nav-link" data-scroll-target="#chapter-6-ridge-regression-and-lasso"><span class="toc-section-number">6</span>  Chapter 6: Ridge Regression and Lasso</a>
   <ul class="collapse">
@@ -972,9 +974,56 @@ l(\beta_0, \beta_1) = \prod_{i:y_i = 1}p(x_i)\prod_{i':y_{i'}= 0} (1- p(x_i))
 </ol>
 <p>Cross validation addresses these two issues.</p>
 </section>
-<section id="k-fold-cross-validation" class="level4" data-number="5.1.2">
-<h4 data-number="5.1.2" class="anchored" data-anchor-id="k-fold-cross-validation"><span class="header-section-number">5.1.2</span> K-Fold Cross Validation</h4>
+<section id="leave-one-out-cross-validation-loocv" class="level4" data-number="5.1.2">
+<h4 data-number="5.1.2" class="anchored" data-anchor-id="leave-one-out-cross-validation-loocv"><span class="header-section-number">5.1.2</span> Leave one out Cross Validation (LOOCV)</h4>
+<p>We split the data into two parts. Instead of creating just two subsets of comparable size, we use a single observation <span class="math inline">(x_1, y_1)</span> for the validation set, and the remaining observations <span class="math inline">\{(x_2,y_2),…(x_n, y_n)\}</span> to make up the training set. We fit our learning method to the <span class="math inline">n-1</span> training observations and we make a prediction <span class="math inline">\hat{y}_1</span> to the excluded observation using its value of <span class="math inline">x_1</span>.</p>
+<p>Because we did not use the observation in the fitting process, the MSE is approximately unbiased for the test error. However, this method by itself is highly variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="do">## A very simple example</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> .<span class="dv">5</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">y =</span> y, <span class="at">x =</span> x)</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>train_mse <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"logical"</span>, <span class="at">length =</span> <span class="fu">nrow</span>(dat))</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>test_mse <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"logical"</span>, <span class="at">length =</span> <span class="fu">nrow</span>(dat))</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dat)){</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">=</span> dat[<span class="dv">1</span>,]</span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>  loo <span class="ot">=</span> dat[<span class="sc">-</span>i,]</span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> loo)</span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>  train_mse[i] <span class="ot">=</span> <span class="fu">mean</span>((fit<span class="sc">$</span>model<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">predict</span>(fit)))</span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>  test_mse[i] <span class="ot">=</span> <span class="fu">mean</span>((out[[<span class="st">"y"</span>]]<span class="sc">-</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> out))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(train_mse),<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(test_mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4059798</code></pre>
+</div>
+</div>
+<p>LOOCV has the potential to be expensive to implement because we have to fit our model <span class="math inline">n</span> times. With least squares linear or polynomial regression, it turns out that a shortcut makes the cost of LOOCV the same as a single model fit.</p>
+<p><span class="math display">
+CV_{(n)} = \frac{1}{n}\sum_{i=1}^n\left(\frac{y_i - \hat{y}_i}{1-h_i} \right)^2
+</span> Here <span class="math inline">\hat{y}_i</span> is the <span class="math inline">ith</span> fitted value from the original least squares fit, and <span class="math inline">h_i</span> is the leverage defined by</p>
+<p><span class="math display">
+h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{i' = 1}^n (x_{i'} - \bar{x})^2}
+</span> The shortcut equation is almost the same as the usual MSE except that the <span class="math inline">ith</span> residual is divided by <span class="math inline">1-h_i</span>. Leverage (<span class="math inline">h_i</span>) is between <span class="math inline">\frac{1}{n}</span> and 1. It reflects the amount that an observation influences its own fit. High leverage points’ residuals are inflated in the formula for the equality to hold.</p>
 </section>
+</section>
+<section id="k-fold-cross-validation" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="k-fold-cross-validation"><span class="header-section-number">5.2</span> k-Fold Cross Validation</h3>
+<p>Since LOOCV is expensive, an alternative is k-fold CV. The approach involves randomly dividing our set of observations into <span class="math inline">k</span> folds of approximately equal size. The first fold is the validation set and the learning method is fit on to the remaining <span class="math inline">k-1</span> folds. MSE is then computed on the observations in the hold out fold. We repeat this procedure k times for each different group and then calculate our estimate by taking the average of the values</p>
+<p><span class="math display">
+CV_{(k)} = \frac{1}{k}\sum_{i=1}^kMSE_i
+</span> Perhaps unsurprisingly, LOOCV is a k-fold cross validation where k is the same as n.&nbsp; #### Bias-Variance Trade-off for k-fold Cross Validation</p>
+<p>k-fold CV often does better than LOOCV on test error because of the bias variance trade-off. While LOOCV gives approximately unbiased estimates of the test error, because we are fitting on a single unit each time the procedure will likely have high variance. Conversely, while k-fold cross validation contains an intermediate amount of bias (each training set contains $ $ observations) whenever <span class="math inline">k &lt; n</span> the LOOCV procedure will have higher variance than k-fold CV.</p>
+<p>Typically we set k-fold to 5 or 10 which as rules of thumbs tend to yield test error estimates that suffer from neither excessively high bias nor from high variance.</p>
+</section>
+<section id="cross-validation-for-classification" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="cross-validation-for-classification"><span class="header-section-number">5.3</span> Cross Validation for Classification</h3>
+<p>Same general ideas hold, except we use accuracy error.</p>
 </section>
 </section>
 <section id="chapter-6-ridge-regression-and-lasso" class="level2" data-number="6">
@@ -1000,23 +1049,23 @@ RSS = \sum_{i=1}^n\left(y_i -\beta_0 - \sum_{j=1}^p\beta_jx_{ij}\right)^2
 <h5 data-number="6.1.0.1" class="anchored" data-anchor-id="application"><span class="header-section-number">6.1.0.1</span> Application</h5>
 <p>TODO: ADD THIS IN</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>credit <span class="ot">=</span> ISLR2<span class="sc">::</span>Credit</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="do">##. standardize all predictors </span></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>center <span class="ot">=</span> <span class="cf">function</span>(x){</span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Function to center a vector around</span></span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## a mean of 0 </span></span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="fu">mean</span>(x))</span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>standardize <span class="ot">=</span> <span class="cf">function</span>(x){</span>
-<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>  centered <span class="ot">=</span> <span class="fu">center</span>(x)</span>
-<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  <span class="do">## To match R scale() implementation</span></span>
-<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>  <span class="do">## divide by n-1 </span></span>
-<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>  var <span class="ot">=</span> <span class="fu">sum</span>(<span class="fu">center</span>(x)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="fu">length</span>(x)<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a>  sd <span class="ot">=</span> <span class="fu">sqrt</span>(var)</span>
-<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">center</span>(x)<span class="sc">/</span>sd)</span>
-<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>credit <span class="ot">=</span> ISLR2<span class="sc">::</span>Credit</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="do">##. standardize all predictors </span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>center <span class="ot">=</span> <span class="cf">function</span>(x){</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Function to center a vector around</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## a mean of 0 </span></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="fu">mean</span>(x))</span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>standardize <span class="ot">=</span> <span class="cf">function</span>(x){</span>
+<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a>  centered <span class="ot">=</span> <span class="fu">center</span>(x)</span>
+<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a>  <span class="do">## To match R scale() implementation</span></span>
+<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a>  <span class="do">## divide by n-1 </span></span>
+<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a>  var <span class="ot">=</span> <span class="fu">sum</span>(<span class="fu">center</span>(x)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="fu">length</span>(x)<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb72-15"><a href="#cb72-15" aria-hidden="true" tabindex="-1"></a>  sd <span class="ot">=</span> <span class="fu">sqrt</span>(var)</span>
+<span id="cb72-16"><a href="#cb72-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">center</span>(x)<span class="sc">/</span>sd)</span>
+<span id="cb72-17"><a href="#cb72-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="why-does-ridge-regression-improve-over-ols" class="level4" data-number="6.1.1">
