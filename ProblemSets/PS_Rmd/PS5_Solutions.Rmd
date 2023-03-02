@@ -1,0 +1,243 @@
+---
+title: "PS5 Solutions"
+author: "Teaching Staff"
+date: "2023-03-01"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+suppressPackageStartupMessages(library(glmnet))
+library(ggplot2)
+```
+
+A helper function for regression output because `broom::tidy()` is not allowed 
+
+```{r}
+regTable = function(model){
+  m = summary(model)
+  tidydf = data.frame(terms = names(m[["coefficients"]][,1]),
+                      estimates = round(m[["coefficients"]][,1],4),
+                      std.error = m[["coefficients"]][,2],
+                      statistic = m[["coefficients"]][,3],
+                      p.value = m[["coefficients"]][,4],
+                      row.names = NULL)
+  
+  ## Round the numeric columns to 4 digits
+  tidydf[, 2:ncol(tidydf)] = apply(tidydf[, 2:ncol(tidydf)], 
+                                      2, 
+                                      function(x) round(x, 4)
+                                      )
+  return(tidydf)
+}
+```
+
+## Question 1 
+
+```{r}
+load("../data/CreditClaim.RData")
+x = credit_claim$x
+y = credit_claim$y
+```
+
+*What proportion of the documents are claiming credit?*
+
+```{r}
+mean(y)
+```
+
+### 2
+
+```{r}
+dim(x)
+```
+
+There are roughly 10 times the number of predictors than the number of observations. The model matrix will thus be rank deficient and the resulting equation has an infinite number of solutions. 
+
+Practically speaking, in an OLS regression, R will arbitrarily drop a lot of character string predictors in order to deal with this problem. In the logistic regression, R will hang for ages.
+
+### 3 
+```{r}
+common_words = colMeans(x)
+cols = names(common_words[order(common_words, decreasing = T)][1:20])
+cols
+```
+
+### 4 
+
+```{r, warning=FALSE}
+top20 = x[,cols]
+m = glm(y ~ top20, family = "binomial")
+```
+
+```{r,echo=FALSE}
+knitr::kable(regTable(m))
+```
+
+### 4 Bonus 
+
+We have at least two columns that are linear combinations of each other. R consequently drops one at "random" to fit the model.
+
+In R, the dropped arguments tend to follow each other. In this case byline and dateline have the same value for every observation. This is unsurprising because dateline likely indicates when the release came out and byline indicates who wrote it, which is likely to be in every one of these documents. 
+
+```{r}
+mean(top20[,c("byline")] == top20[,c("dateline")])
+```
+
+## 5-6
+```{r}
+insamp_error = mean(m$model$y != as.numeric(m$fitted.values > .5))
+insamp_error
+```
+
+### 7 
+
+```{r, warning = F, cache = T}
+## It will be helpful to set the warning=F argument
+
+predictions = vector(mode = "logical", 
+                     length = length(y))
+loo.dat = as.data.frame(cbind(y, top20))
+for(i in 1:length(y)){
+  tmp = loo.dat[-i,]
+  m = glm(y ~ ., data = tmp, 
+          family = "binomial")
+  predictions[i] = predict(m, 
+                           newdata = loo.dat[i,],
+                           type = "response")
+}
+yhat.cv = as.numeric(predictions > 0.5)
+
+```
+
+### 8 
+
+```{r}
+mean(y != yhat.cv)
+```
+
+### 9
+The classification error is better compared to the out of sample fit, which is unsurprising because the in sample fit uses all observations. It also suggests that the in-sample fit is in some sense overfitting the data. 
+
+## Question 2 
+
+### 1 
+
+```{r}
+load("../data/CreditClaim.RData")
+x = credit_claim$x
+y = credit_claim$y 
+n.total = length(y)
+prop.train = 0.7 
+set.seed(54321)
+r = sample(1:n.total, 
+           round(prop.train*n.total), 
+           replace = FALSE)
+x.train = x[r,]
+x.test = x[-r,]
+y.train = y[r]
+y.test = y[-r]
+```
+
+### 2 
+```{r}
+set.seed(123)
+cv.results = cv.glmnet(x=x.train, 
+                       y = y.train, 
+                       family = "binomial", 
+                       nfolds = 5, 
+                       alpha = 1)
+```
+
+`cv.glmnet()` performs k-fold cross validation on a logistic regression learning model (family = "binomial"). The response variable y is identical to Question 1's outcome variable. There are 7587 predictors. `nfolds=5` indicates performing 5 cross validation folds. `alpha=1` indicates we're running a lasso regression. 
+
+### 3 
+
+`r length(cv.results$lambda)` were fit. The model fit `{r length(cv.results$lambda *5}` models. By default, the type measure is binomial deviance. 
+
+### 4
+
+```{r}
+data.frame(x = log(cv.results$lambda), y = cv.results$cvm) |>
+  ggplot(aes(x,y))+
+  geom_point()+
+  labs(title="Cross Validation Errors against log lambda values",
+       x = "Lambda",
+       y = "Mean Cross Validated Error")+
+  theme_bw()
+```
+
+### 5 
+
+```{r}
+# if you wanted to do it by hand for some reason
+# cv.results$lambda[which.min(cv.results$cvm)]
+cv.results$lambda.min
+```
+
+### 6
+```{r}
+bestlambda = cv.results$lambda.min
+m2 = glmnet(x = x.train, y = y.train, 
+            family = "binomial", 
+            lambda = bestlambda, 
+            alpha = 1)
+summary(m2)
+```
+
+Now we find the non zero coefficients
+
+```{r}
+lasso.coefs = predict(m2, 
+                      type = "coefficients",
+                      s = bestlambda)
+
+### it'll be 89 with the intercept 
+length(lasso.coefs[lasso.coefs != 0]) - 1
+
+### alternatively 
+sum(m2$beta != 0)
+```
+
+### Bonus 
+
+```{r}
+coef(m2)@Dimnames[[1]][which(coef(m2) !=0)]
+```
+
+### 7 
+
+```{r}
+mean(y.test != (as.numeric(predict(m2, 
+                                   s = bestlambda,
+                                   type = "response",
+                                   newx = x.test)) > 0.5))
+
+```
+
+#### 8 
+
+```{r, cache = T, warning = F}
+replicates = 200
+results = vector(mode ="logical", length = replicates)
+N = nrow(x.train)
+l = cv.results$lambda.1se
+
+set.seed(567)
+
+for(i in 1:replicates){
+  k = sample(N, N,replace = TRUE)
+  x.tmp = x.train[k,]
+  y.tmp = y.train[k]
+  m = glmnet(x=x.train[k,], y = y.train[k],
+               family = "binomial", lambda = l,
+               alpha = 1)
+  results[i] = predict(m, s = l, type = "response",
+                       newx = x.test[1,,drop =FALSE])
+}
+  
+quantile(results, probs = c(0.025, 0.975))
+
+```

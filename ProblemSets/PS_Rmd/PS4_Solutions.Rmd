@@ -3,8 +3,8 @@ title: "PS4 Solutions"
 author: "Teaching Staff"
 date: "February 2023"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -98,7 +98,7 @@ The pattern that we see is that the training MSE goes down mechanically as we ad
 ### 9 
 
 ```{r}
-set.seed(5001)
+set.seed(202)
 k2 = sample(1:nrow(dat), round(nrow(dat)*2/3), replace = FALSE)
 train.dat2 = dat[k2,]
 test.dat2 = dat[-k2,]
