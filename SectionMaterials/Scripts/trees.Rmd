@@ -1,0 +1,262 @@
+---
+title: "gbm and RandomForest"
+author: "Teaching Staff"
+date: "2023-03-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(gbm)
+library(randomForest)
+library(ranger)
+```
+
+## Basic Implementations
+
+### Data
+
+We'll use a common dataset that contains information on 2,930 properties in Ames, Iowa.
+
+```{r}
+# install.packages("modeldata")
+data(ames, package = "modeldata")
+
+
+set.seed(123)
+## Get a random split of 70% for training data
+split = sample(nrow(ames), nrow(ames)*.7, replace = F)
+train = ames[split,]
+test = ames[-split,]
+```
+
+## gbm
+
+### Basic Implementation
+
+We have two functions in gbm. `gbm::gbm` takes a formula interface. `gbm::gbm.fit` takes a matrix interface similar to glmnet.
+
+```{r}
+set.seed(123)
+
+m1 = gbm(
+  formula = Sale_Price ~ ., # use all predictors
+  distribution = "gaussian",
+  data = train, 
+  n.trees = 1000, 
+  interaction.depth = 1,
+  shrinkage = 0.001,
+  cv.folds = 5,
+  n.cores = NULL,
+  verbose = FALSE # setting this to true will give a lot of model info
+)
+```
+
+We can see our model fit
+
+```{r}
+print(m1)
+```
+
+### Computing MSE and RMSE
+
+```{r}
+sqrt(min(m1$cv.error))
+min_mse = which.min(m1$cv.error)
+min_mse
+## plot loss function as a result of n trees 
+gbm.perf(m1, method = "cv")
+```
+
+### Tuning
+
+The defaults generally suck. We can tune parameters one at a time, but we can also perform a grid search which will iterate over multiple combinations of hyperparameters.
+
+```{r}
+## Make a grid 
+grid = expand.grid(
+  shrinkage = c(0.05, 0.1),
+  interaction.depth = c(5,7),
+  n.minobsinnode = c(5,7),
+  bag.fraction = c(.65, .8),
+  optimal_trees = 0, # variable to store results
+  min_RMSE = 0 # variable to store results
+)
+
+nrow(grid)
+head(grid)
+```
+
+```{r, cache = TRUE}
+## Randomize our data to avoid an algorithmic problem
+idx = sample(1:nrow(train), nrow(train))
+r_ames = train[idx,]
+
+## Do a grid search 
+for(i in 1:nrow(grid)){
+  ## set a seed for reproducibility (not required)
+  set.seed(123)
+  ## train a model 
+  m = gbm(
+    formula = Sale_Price ~.,
+    distribution = "gaussian", 
+    data = r_ames, 
+    n.trees = 200,
+    interaction.depth = grid$interaction.depth[i],
+    shrinkage = grid$shrinkage[i],
+    n.minobsinnode = grid$n.minobsinnode[i],
+    bag.fraction = grid$bag.fraction[i],
+    cv.folds = 5,
+    n.cores = NULL,
+    verbose = FALSE
+  )
+  
+  ## Update minimum training error and trees to grid 
+  grid$optimal_trees[i] = which.min(m$cv.error)
+  grid$min_RMSE[i] = sqrt(min(m$cv.error))
+}
+
+```
+
+This will take a long time to run but suffice it to say we will get a bunch of models and then pick our best one.
+
+```{r}
+## Get best hyperparameters 
+bestRow = which.min(grid$min_RMSE)
+bestRow
+```
+
+```{r}
+set.seed(123)
+
+final = gbm(
+  formula = Sale_Price ~., 
+  distribution = "gaussian",
+  data = train, 
+  n.trees = 1000,
+  interaction.depth = grid$interaction.depth[bestRow],
+  shrinkage = grid$shrinkage[bestRow], 
+  n.minobsinnode = grid$shrinkage[bestRow],
+  bag.fraction = grid$shrinkage[bestRow],
+  cv.folds =  5, 
+  n.cores = NULL,
+  verbose = FALSE
+)
+
+```
+
+```{r}
+summary(final)
+```
+
+### Predict Values on Test Data
+
+```{r}
+predictions = predict(final, n.trees = final$n.trees,
+                      test)
+
+### Test RMSE 
+sqrt(mean((test$Sale_Price - predictions)^2))
+```
+
+## Random Forests
+
+```{r}
+## A default Random Forest Implementation 
+
+set.seed(123)
+
+rfm1 = randomForest(
+  formula = Sale_Price ~.,
+  data = train
+)
+
+```
+
+We can get metrics directly from this model
+
+```{r}
+## number of trees in the best model 
+which.min(rfm1$mse)
+
+### Get MSE 
+rfm1$mse[which.min(rfm1$mse)]
+
+## If we want RMSE 
+sqrt(rfm1$mse[which.min(rfm1$mse)])
+```
+
+### Tuning
+
+Random Forests only have a handful of parameters. We can tune the number of trees (`ntree`), the number of variables to randomly sample at each split (`mtry`). When `mtry = p`, we are perform bagging. When `mtry = 1` we are performing completely random split. Don't do this. Start with \~5 values evenly split from 2 to p.
+
+```{r}
+## suppose 
+p = 12 
+seq(2, 12, 6)
+```
+
+We can also mess around with the node size, the minimum number of samples within terminal nodes, and the maxnodes.
+
+Annoyingly, randomForest makes grid search a pain because it does not scale well due to its implementation. As a result, we might try using the `ranger` package instead.
+
+```{r}
+## Since this is an example, I purposely use a samll number
+## in the grid
+grid2 = expand.grid(
+  mtry       = seq(20, 30, by = 2),
+  node_size  = seq(3, 9, by = 2),
+  samp_size = c(.55, .632, .70, .80),
+  OOB_RMSE   = 0
+)
+
+nrow(grid2)
+
+```
+
+Now we can perform a similar type of loop as before
+
+```{r, cache=T}
+for(i in 1:nrow(grid2)){
+  
+  rangModel = ranger(
+    formula = Sale_Price ~ ., 
+    data = train, 
+    num.trees = 500, 
+    mtry = grid2$mtry[i],
+    min.node.size = grid2$node_size[i],
+    sample.fraction = grid2$samp_size[i],
+    seed = 123 
+  )
+  
+  ## Update OOB error 
+  grid2$OOB_RMSE[i] = sqrt(rangModel$prediction.error)
+}
+```
+
+We identify our model in similar fashion to gbm in that we find the best hyperparameters, fit that as our final model and then test against our predictions.
+
+```{r}
+bestRow2 = which.min(grid2$OOB_RMSE)
+bestRow2
+```
+
+```{r finalModel}
+
+final = ranger(
+    formula = Sale_Price ~ ., 
+    data = train, 
+    num.trees = 500, 
+    mtry = grid2$mtry[bestRow2],
+    min.node.size = grid2$node_size[bestRow2],
+    sample.fraction = grid2$samp_size[bestRow2],
+    seed = 123 
+  )
+
+pred_rf <- predict(final, test)
+sqrt(mean((test$Sale_Price - pred_rf$predictions)^2))
+```
+
+## Where could you go next?
+
+If you're going to use R in production or doing this for real I strongly recommend checking out the `mlr3`, `xGBoost`, `h20`, and `tidymodels` packages.

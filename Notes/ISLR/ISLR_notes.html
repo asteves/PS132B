@@ -989,19 +989,20 @@ l(\beta_0, \beta_1) = \prod_{i:y_i = 1}p(x_i)\prod_{i':y_{i'}= 0} (1- p(x_i))
 <span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>train_mse <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"logical"</span>, <span class="at">length =</span> <span class="fu">nrow</span>(dat))</span>
 <span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>test_mse <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"logical"</span>, <span class="at">length =</span> <span class="fu">nrow</span>(dat))</span>
 <span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dat)){</span>
-<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">=</span> dat[<span class="dv">1</span>,]</span>
-<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>  loo <span class="ot">=</span> dat[<span class="sc">-</span>i,]</span>
-<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> loo)</span>
-<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>  train_mse[i] <span class="ot">=</span> <span class="fu">mean</span>((fit<span class="sc">$</span>model<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">predict</span>(fit)))</span>
-<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>  test_mse[i] <span class="ot">=</span> <span class="fu">mean</span>((out[[<span class="st">"y"</span>]]<span class="sc">-</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> out))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(train_mse),<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">=</span> dat[i,]</span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(out)</span></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  loo <span class="ot">=</span> dat[<span class="sc">-</span>i,]</span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">lm</span>(y<span class="sc">~</span>x, <span class="at">data =</span> loo)</span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>  train_mse[i] <span class="ot">=</span> <span class="fu">mean</span>((fit<span class="sc">$</span>model<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">predict</span>(fit)))</span>
+<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a>  test_mse[i] <span class="ot">=</span> <span class="fu">mean</span>((out[[<span class="st">"y"</span>]]<span class="sc">-</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> out))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(train_mse),<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(test_mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4059798</code></pre>
+<pre><code>[1] 0.9609283</code></pre>
 </div>
 </div>
 <p>LOOCV has the potential to be expensive to implement because we have to fit our model <span class="math inline">n</span> times. With least squares linear or polynomial regression, it turns out that a shortcut makes the cost of LOOCV the same as a single model fit.</p>
@@ -1018,9 +1019,12 @@ h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{i' = 1}^n (x_{i'} - \bar{x})^
 <p>Since LOOCV is expensive, an alternative is k-fold CV. The approach involves randomly dividing our set of observations into <span class="math inline">k</span> folds of approximately equal size. The first fold is the validation set and the learning method is fit on to the remaining <span class="math inline">k-1</span> folds. MSE is then computed on the observations in the hold out fold. We repeat this procedure k times for each different group and then calculate our estimate by taking the average of the values</p>
 <p><span class="math display">
 CV_{(k)} = \frac{1}{k}\sum_{i=1}^kMSE_i
-</span> Perhaps unsurprisingly, LOOCV is a k-fold cross validation where k is the same as n.&nbsp; #### Bias-Variance Trade-off for k-fold Cross Validation</p>
+</span> Perhaps unsurprisingly, LOOCV is a k-fold cross validation where k is the same as n.</p>
+<section id="bias-variance-trade-off-for-k-fold-cross-validation" class="level4" data-number="5.2.1">
+<h4 data-number="5.2.1" class="anchored" data-anchor-id="bias-variance-trade-off-for-k-fold-cross-validation"><span class="header-section-number">5.2.1</span> Bias-Variance Trade-off for k-fold Cross Validation</h4>
 <p>k-fold CV often does better than LOOCV on test error because of the bias variance trade-off. While LOOCV gives approximately unbiased estimates of the test error, because we are fitting on a single unit each time the procedure will likely have high variance. Conversely, while k-fold cross validation contains an intermediate amount of bias (each training set contains $ $ observations) whenever <span class="math inline">k &lt; n</span> the LOOCV procedure will have higher variance than k-fold CV.</p>
 <p>Typically we set k-fold to 5 or 10 which as rules of thumbs tend to yield test error estimates that suffer from neither excessively high bias nor from high variance.</p>
+</section>
 </section>
 <section id="cross-validation-for-classification" class="level3" data-number="5.3">
 <h3 data-number="5.3" class="anchored" data-anchor-id="cross-validation-for-classification"><span class="header-section-number">5.3</span> Cross Validation for Classification</h3>

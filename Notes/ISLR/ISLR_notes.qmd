@@ -678,9 +678,9 @@ Cross validation addresses these two issues.
 
 #### Leave one out Cross Validation (LOOCV)
 
-We split the data into two parts. Instead of creating just two subsets of comparable size, we use a single observation $(x_1, y_1)$ for the validation set, and the remaining observations $\{(x_2,y_2),…(x_n, y_n)\}$ to make up the training set. We fit our learning method to the $n-1$ training observations and we make a prediction $\hat{y}_1$ to the excluded observation using its value of $x_1$. 
+We split the data into two parts. Instead of creating just two subsets of comparable size, we use a single observation $(x_1, y_1)$ for the validation set, and the remaining observations $\{(x_2,y_2),…(x_n, y_n)\}$ to make up the training set. We fit our learning method to the $n-1$ training observations and we make a prediction $\hat{y}_1$ to the excluded observation using its value of $x_1$.
 
-Because we did not use the observation in the fitting process, the MSE is approximately unbiased for the test error. However, this method by itself is highly variable. 
+Because we did not use the observation in the fitting process, the MSE is approximately unbiased for the test error. However, this method by itself is highly variable.
 
 ```{r}
 ## A very simple example
@@ -692,7 +692,8 @@ dat = data.frame(y = y, x = x)
 train_mse = vector(mode = "logical", length = nrow(dat))
 test_mse = vector(mode = "logical", length = nrow(dat))
 for(i in 1:nrow(dat)){
-  out = dat[1,]
+  out = dat[i,]
+  # print(out)
   loo = dat[-i,]
   fit = lm(y~x, data = loo)
   train_mse[i] = mean((fit$model$y - predict(fit)))
@@ -702,35 +703,34 @@ round(mean(train_mse),3)
 mean(test_mse)
 ```
 
-LOOCV has the potential to be expensive to implement because we have to fit our model $n$ times. With least squares linear or polynomial regression, it turns out that a shortcut makes the cost of LOOCV the same as a single model fit. 
+LOOCV has the potential to be expensive to implement because we have to fit our model $n$ times. With least squares linear or polynomial regression, it turns out that a shortcut makes the cost of LOOCV the same as a single model fit.
 
 $$
 CV_{(n)} = \frac{1}{n}\sum_{i=1}^n\left(\frac{y_i - \hat{y}_i}{1-h_i} \right)^2
-$$
-Here $\hat{y}_i$ is the $ith$ fitted value from the original least squares fit, and $h_i$ is the leverage defined by 
+$$ Here $\hat{y}_i$ is the $ith$ fitted value from the original least squares fit, and $h_i$ is the leverage defined by
 
 $$
 h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{i' = 1}^n (x_{i'} - \bar{x})^2}
-$$
-The shortcut equation is almost the same as the usual MSE except that the $ith$ residual is divided by $1-h_i$. Leverage ($h_i$) is between $\frac{1}{n}$ and 1. It reflects the amount that an observation influences its own fit. High leverage points' residuals are inflated in the formula for the equality to hold. 
+$$ The shortcut equation is almost the same as the usual MSE except that the $ith$ residual is divided by $1-h_i$. Leverage ($h_i$) is between $\frac{1}{n}$ and 1. It reflects the amount that an observation influences its own fit. High leverage points' residuals are inflated in the formula for the equality to hold.
 
-### k-Fold Cross Validation 
+### k-Fold Cross Validation
 
-Since LOOCV is expensive, an alternative is k-fold CV. The approach involves randomly dividing our set of observations into $k$ folds of approximately equal size. The first fold is the validation set and the learning method is fit on to the remaining $k-1$ folds. MSE is then computed on the observations in the hold out fold. We repeat this procedure k times for each different group and then calculate our estimate by taking the average of the values 
+Since LOOCV is expensive, an alternative is k-fold CV. The approach involves randomly dividing our set of observations into $k$ folds of approximately equal size. The first fold is the validation set and the learning method is fit on to the remaining $k-1$ folds. MSE is then computed on the observations in the hold out fold. We repeat this procedure k times for each different group and then calculate our estimate by taking the average of the values
 
 $$
 CV_{(k)} = \frac{1}{k}\sum_{i=1}^kMSE_i
-$$
-Perhaps unsurprisingly, LOOCV is a k-fold cross validation where k is the same as n. 
-#### Bias-Variance Trade-off for k-fold Cross Validation 
+$$ 
+Perhaps unsurprisingly, LOOCV is a k-fold cross validation where k is the same as n.
 
-k-fold CV often does better than LOOCV on test error because of the bias variance trade-off. While LOOCV gives approximately unbiased estimates of the test error, because we are fitting on a single unit each time the procedure will likely have high variance. Conversely, while k-fold cross validation contains an intermediate amount of bias (each training set contains $ \approx \frac{(k-1)n}{k}$ observations) whenever $k < n$ the LOOCV procedure will have higher variance than k-fold CV. 
+#### Bias-Variance Trade-off for k-fold Cross Validation
 
-Typically we set k-fold to 5 or 10 which as rules of thumbs tend to yield test error estimates that suffer from neither excessively high bias nor from high variance. 
+k-fold CV often does better than LOOCV on test error because of the bias variance trade-off. While LOOCV gives approximately unbiased estimates of the test error, because we are fitting on a single unit each time the procedure will likely have high variance. Conversely, while k-fold cross validation contains an intermediate amount of bias (each training set contains \$ \approx \frac{(k-1)n}{k}\$ observations) whenever $k < n$ the LOOCV procedure will have higher variance than k-fold CV.
 
-### Cross Validation for Classification 
+Typically we set k-fold to 5 or 10 which as rules of thumbs tend to yield test error estimates that suffer from neither excessively high bias nor from high variance.
 
-Same general ideas hold, except we use accuracy error. 
+### Cross Validation for Classification
+
+Same general ideas hold, except we use accuracy error.
 
 ## Chapter 6: Ridge Regression and Lasso
 
@@ -760,7 +760,7 @@ $$ The denominator is the estimated standard deviation of the $jth$ predictor so
 
 ##### Application
 
-TODO: Insert these in 
+TODO: Insert these in
 
 ```{r, cache = T}
 Hitters = na.omit(ISLR2::Hitters)
@@ -806,6 +806,7 @@ plot(cv.out)
 bestlam = cv.out$lambda.min
 bestlam
 ```
+
 Now do the same with the Lasso
 
 ```{r}
@@ -822,7 +823,6 @@ bestlam = cv.out$lambda.min
 lasso.pred = predict(lasso.mod, s = bestlam, newx = x[test,])
 mean((lasso.pred-y.test)^2)
 ```
-
 
 #### Why does Ridge Regression improve over OLS
 

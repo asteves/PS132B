@@ -56,7 +56,7 @@ dim(x)
 
 There are roughly 10 times the number of predictors than the number of observations. The model matrix will thus be rank deficient and the resulting equation has an infinite number of solutions. 
 
-Practically speaking, in an OLS regression, R will arbitrarily drop a lot of character string predictors in order to deal with this problem. In the logistic regression, R will hang for ages.
+Practically speaking, in an OLS regression, R will arbitrarily drop a lot of character string predictors in order to deal with this problem. In the logistic regression, R will hang for ages before doing something similar.
 
 ### 3 
 ```{r}
