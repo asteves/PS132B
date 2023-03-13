@@ -719,8 +719,7 @@ Since LOOCV is expensive, an alternative is k-fold CV. The approach involves ran
 
 $$
 CV_{(k)} = \frac{1}{k}\sum_{i=1}^kMSE_i
-$$ 
-Perhaps unsurprisingly, LOOCV is a k-fold cross validation where k is the same as n.
+$$ Perhaps unsurprisingly, LOOCV is a k-fold cross validation where k is the same as n.
 
 #### Bias-Variance Trade-off for k-fold Cross Validation
 
@@ -857,3 +856,104 @@ Cross validation can be used to determine which approach is better. Generally sp
 ### Selecting the tuning parameter
 
 Use cross validation on the penalty term. Create a grid of $\lambda$ values and compute the cross validation error for each as described in the @sec-cv section.
+
+## Chapter 8: Tree Based Methods
+
+### CART
+
+Building a regression tree proceeds loosely in two steps.
+
+1.  Divide the predictor space into J distinct and non-overlapping regions $R_1, …, R_j$.
+2.  For every observation that falls into the region $R_j$ make the same prediction which is simply the mean of the response values for the training observation in $R_j$.
+
+To construct regions we divide the predictor space into boxes, the goal of which is to find boxes that minimize the RSS $\sum_{j=1}^J\sum_{i \in R_j} (y_i - \hat{y}_{R_j})^2$
+
+It is computational infeasible to consider every possible partition of the feature space, so we use a top down greedy approach called recursive binary splitting. This begins at the top of the tree and at each step the best split is made at that particular step instead of looking ahead to a possible better split at a future node.
+
+For recursive binary splitting, we first select the predictor and the cutpoint such that splitting the predictor space leads to the greatest possible reduction in RSS. We repeat this process for all of our regions until a stopping criterion is reached.
+
+We prune trees via cost complexity pruning. Instead of considering every possible subtree, we consider the sequence of trees indexed by a non-negative tuning parameter $\alpha$. The general algorithm is laid out on page 333.
+
+Classification trees are made via a similar process except that we use it to predict a qualitative rather than quantitative response. In addition, we cannot use RSS as our criterion for binary splits, so we use the binary entropy or Gini indexing instead.
+
+### Bagging
+
+Decision trees can suffer from high variance. Bootstrap aggregation (bagging) is a general purpose procedure fro reducing the variance of a statistical learning methods.We generate B different bootstrapped training data sets, train our method on the $b^{th}$ bootstrapped training set in order to get $\hat{f}^{*b}(x)$ and then average over all predictions to obtain $\hat{f}_{bag}(x) = \frac{1}{B}\sum_{b=1}B\hat{f}^{*b}(x)$
+
+Bagging is particularly useful with decision trees. We construct B regression trees using B boostrapped training sets and average the resulting predictions. Each tree has high variance and low bias, and averaging over all trees reduces variances. For qualitative trees we take a majority vote for the average class prediction.
+
+#### Out of Bag Error Estimation 
+
+On average, each bagged tree makes use of about 2/3 of the observations. The remaining 1/3 of the observations not used to fit a given bagged tree are referred to as out of bag (OOB) observations. We can use this to calculate the overall OOB MSE or classification error, which is a valid estimate of the test error for the bagged model because the response for each observation is predicted using only the trees not fit using that observation.
+
+### Boosting
+
+In boosting, we grow trees sequentially using information from previously grown trees. We do not bootstrap sample; instead each tree is fit on a modified version of the original dataset.
+
+Unlike fitting a large decision tree, the boosting approach learns slowly. Given the current model, we fit a decision tree to the residuals from teh model. We then add this new decision tree into the fitted function in order to update the residuals. Each of these trees can be rather small, with just a few terminal nodes determined by the max node size parameter n the algorithm. By fitting small trees to the residuals, we slowly improve our model fit in areas where it does not perform well. 
+#### Algorithm 
+
+1. Set $\hat{f}(x) = 0, r_i = y_i$ for all $i$ in the training set. 
+
+2. For b = 1,2,..., B repeat: 
+
+  - Fit a tree with d splits (d + 1 terminal nodes) to the training data (X,r).
+  - Update model by adding in a shrunken version of the new tree $\hat{f}(x) = \hat{f}(x) + \lambda \hat{f}^b(x)$
+  - Update the residuals $r_i = r_i + \lambda \hat{f}^b(x)$ 
+  
+3. Output the boosted model. $\hat{f}(x) = \sum_{b=1}^B \lambda \hat{f}^b(x)$
+
+We have three parameters. The number of trees B. Unlike bagging and random forests, boosting can overfit if B is too large, although this overfitting tends to occur slowly if at all. We use cross-validation to select B. 
+
+The shrinkage parameter $\lambda$, a small positive number. This controls the rate at which boosting learns. Typical values are 0.01 and 0.001 and the right choice can depend on the problem. Very small $\lambda$ using a very large value of B in order to achieve good performance. 
+
+The interaction depth/number $d$ of splits in each tree, which controls the complexity of the boosted ensemble. Often $d = 1$ works well, in which case each tree is a stump, consisting of a single split. It controls the interaction order of the boosted model because d splits can involve at most d variables. 
+
+### Random Forests
+
+Random forests provide an improvement over bagged trees by decorrelating the trees. We build a number of decision trees on bootstrapped random samples. When building the tree, each time a split is considered we take a random sample of m predictors to be split candidates from the full set of p predictors. We typically choose $m \approx \sqrt{p}$. The main difference between Random Forests and bagging is the size of the predictor subset. When $m = p$ random forests are equivalent to bagging. 
+
+### BART 
+
+Bayesian Additive Regression Trees (BART) are another ensemble method. In BART we have $K$ number of regression trees and $B$ number of iterations for which the algorithm runs. $\hat{f}^B_k(x)$ represents the prediction at $x$ for the $k^{th}$ regression tree at the $b^{th}$ iteration. At the end of each iteration we sum all K trees. 
+
+We typically throw away the first few BART prediction models as they are part of the burn-in period. 
+
+#### Algorithm 
+
+1. Let $\hat{f}^1_1(x) = ... = \hat{f}^1_K(x) = \frac{1}{nK}\sum_{i=1}^ny_i$
+
+2. Compute $\hat{f}^1(x) = \sum_{k=1}^K \hat{f}^1_k(x) = \frac{1}{n}\sum_{i=1}^n y_i$
+
+3. For b = 2, ... B: 
+
+  - For k = 1,2,...,K:
+    - For i = 1,..., n, compute the current partial residual $r_i = y_i - \sum_{k' < k}\hat{f}^b_{k'}(x_i) - \sum_{k' > k}\hat{f}^{b-1}_{k'}(x_i)$ 
+    
+    - Fit a new tree to $r_i$ by randomly perturbing the $k^{th}$ tree from the previous iteration. Perturbations that improve the fit are favored. 
+  - Compute $\hat{f}^b(x) = \sum_{k=1}^k \hat{f}^b_k(x)$
+  
+4. Compute the mean after L burn-in samples. $\hat{f}(x) = \frac{1}{B-L}\sum_{b=L+1}^B\hat{f}%b(x)$
+
+## Chapter 12: Unsupervised Learning 
+
+### Principal Components Analysis 
+
+#### Proportion of Variance Explained
+
+#### Scaling Variables 
+
+#### Deciding how many Principal Components to Use
+
+### Clustering Methods  
+
+#### K-Means Clustering 
+
+#### Hierarchical Clustering 
+
+#### Choice of Dissimilarity Measure
+
+#### Practical Issues in Clustering 
+
+
+

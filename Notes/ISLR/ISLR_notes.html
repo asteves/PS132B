@@ -165,6 +165,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#comparing-lasso-and-ridge-regression" id="toc-comparing-lasso-and-ridge-regression" class="nav-link" data-scroll-target="#comparing-lasso-and-ridge-regression"><span class="toc-section-number">6.3</span>  Comparing lasso and ridge regression</a></li>
   <li><a href="#selecting-the-tuning-parameter" id="toc-selecting-the-tuning-parameter" class="nav-link" data-scroll-target="#selecting-the-tuning-parameter"><span class="toc-section-number">6.4</span>  Selecting the tuning parameter</a></li>
   </ul></li>
+  <li><a href="#chapter-8-tree-based-methods" id="toc-chapter-8-tree-based-methods" class="nav-link" data-scroll-target="#chapter-8-tree-based-methods"><span class="toc-section-number">7</span>  Chapter 8: Tree Based Methods</a>
+  <ul class="collapse">
+  <li><a href="#cart" id="toc-cart" class="nav-link" data-scroll-target="#cart"><span class="toc-section-number">7.1</span>  CART</a></li>
+  <li><a href="#bagging" id="toc-bagging" class="nav-link" data-scroll-target="#bagging"><span class="toc-section-number">7.2</span>  Bagging</a></li>
+  <li><a href="#boosting" id="toc-boosting" class="nav-link" data-scroll-target="#boosting"><span class="toc-section-number">7.3</span>  Boosting</a></li>
+  <li><a href="#random-forests" id="toc-random-forests" class="nav-link" data-scroll-target="#random-forests"><span class="toc-section-number">7.4</span>  Random Forests</a></li>
+  <li><a href="#bart" id="toc-bart" class="nav-link" data-scroll-target="#bart"><span class="toc-section-number">7.5</span>  BART</a></li>
+  </ul></li>
+  <li><a href="#chapter-12-unsupervised-learning" id="toc-chapter-12-unsupervised-learning" class="nav-link" data-scroll-target="#chapter-12-unsupervised-learning"><span class="toc-section-number">8</span>  Chapter 12: Unsupervised Learning</a>
+  <ul class="collapse">
+  <li><a href="#principal-components-analysis" id="toc-principal-components-analysis" class="nav-link" data-scroll-target="#principal-components-analysis"><span class="toc-section-number">8.1</span>  Principal Components Analysis</a></li>
+  <li><a href="#clustering-methods" id="toc-clustering-methods" class="nav-link" data-scroll-target="#clustering-methods"><span class="toc-section-number">8.2</span>  Clustering Methods</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -1169,6 +1182,109 @@ collapsing to unique 'x' values</code></pre>
 <section id="selecting-the-tuning-parameter" class="level3" data-number="6.4">
 <h3 data-number="6.4" class="anchored" data-anchor-id="selecting-the-tuning-parameter"><span class="header-section-number">6.4</span> Selecting the tuning parameter</h3>
 <p>Use cross validation on the penalty term. Create a grid of <span class="math inline">\lambda</span> values and compute the cross validation error for each as described in the <a href="#sec-cv">Section&nbsp;5.1</a> section.</p>
+</section>
+</section>
+<section id="chapter-8-tree-based-methods" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="chapter-8-tree-based-methods"><span class="header-section-number">7</span> Chapter 8: Tree Based Methods</h2>
+<section id="cart" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="cart"><span class="header-section-number">7.1</span> CART</h3>
+<p>Building a regression tree proceeds loosely in two steps.</p>
+<ol type="1">
+<li>Divide the predictor space into J distinct and non-overlapping regions <span class="math inline">R_1, …, R_j</span>.</li>
+<li>For every observation that falls into the region <span class="math inline">R_j</span> make the same prediction which is simply the mean of the response values for the training observation in <span class="math inline">R_j</span>.</li>
+</ol>
+<p>To construct regions we divide the predictor space into boxes, the goal of which is to find boxes that minimize the RSS <span class="math inline">\sum_{j=1}^J\sum_{i \in R_j} (y_i - \hat{y}_{R_j})^2</span></p>
+<p>It is computational infeasible to consider every possible partition of the feature space, so we use a top down greedy approach called recursive binary splitting. This begins at the top of the tree and at each step the best split is made at that particular step instead of looking ahead to a possible better split at a future node.</p>
+<p>For recursive binary splitting, we first select the predictor and the cutpoint such that splitting the predictor space leads to the greatest possible reduction in RSS. We repeat this process for all of our regions until a stopping criterion is reached.</p>
+<p>We prune trees via cost complexity pruning. Instead of considering every possible subtree, we consider the sequence of trees indexed by a non-negative tuning parameter <span class="math inline">\alpha</span>. The general algorithm is laid out on page 333.</p>
+<p>Classification trees are made via a similar process except that we use it to predict a qualitative rather than quantitative response. In addition, we cannot use RSS as our criterion for binary splits, so we use the binary entropy or Gini indexing instead.</p>
+</section>
+<section id="bagging" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="bagging"><span class="header-section-number">7.2</span> Bagging</h3>
+<p>Decision trees can suffer from high variance. Bootstrap aggregation (bagging) is a general purpose procedure fro reducing the variance of a statistical learning methods.We generate B different bootstrapped training data sets, train our method on the <span class="math inline">b^{th}</span> bootstrapped training set in order to get <span class="math inline">\hat{f}^{*b}(x)</span> and then average over all predictions to obtain <span class="math inline">\hat{f}_{bag}(x) = \frac{1}{B}\sum_{b=1}B\hat{f}^{*b}(x)</span></p>
+<p>Bagging is particularly useful with decision trees. We construct B regression trees using B boostrapped training sets and average the resulting predictions. Each tree has high variance and low bias, and averaging over all trees reduces variances. For qualitative trees we take a majority vote for the average class prediction.</p>
+<section id="out-of-bag-error-estimation" class="level4" data-number="7.2.1">
+<h4 data-number="7.2.1" class="anchored" data-anchor-id="out-of-bag-error-estimation"><span class="header-section-number">7.2.1</span> Out of Bag Error Estimation</h4>
+<p>On average, each bagged tree makes use of about 2/3 of the observations. The remaining 1/3 of the observations not used to fit a given bagged tree are referred to as out of bag (OOB) observations. We can use this to calculate the overall OOB MSE or classification error, which is a valid estimate of the test error for the bagged model because the response for each observation is predicted using only the trees not fit using that observation.</p>
+</section>
+</section>
+<section id="boosting" class="level3" data-number="7.3">
+<h3 data-number="7.3" class="anchored" data-anchor-id="boosting"><span class="header-section-number">7.3</span> Boosting</h3>
+<p>In boosting, we grow trees sequentially using information from previously grown trees. We do not bootstrap sample; instead each tree is fit on a modified version of the original dataset.</p>
+<p>Unlike fitting a large decision tree, the boosting approach learns slowly. Given the current model, we fit a decision tree to the residuals from teh model. We then add this new decision tree into the fitted function in order to update the residuals. Each of these trees can be rather small, with just a few terminal nodes determined by the max node size parameter n the algorithm. By fitting small trees to the residuals, we slowly improve our model fit in areas where it does not perform well. #### Algorithm</p>
+<ol type="1">
+<li><p>Set <span class="math inline">\hat{f}(x) = 0, r_i = y_i</span> for all <span class="math inline">i</span> in the training set.</p></li>
+<li><p>For b = 1,2,…, B repeat:</p></li>
+</ol>
+<ul>
+<li>Fit a tree with d splits (d + 1 terminal nodes) to the training data (X,r).</li>
+<li>Update model by adding in a shrunken version of the new tree <span class="math inline">\hat{f}(x) = \hat{f}(x) + \lambda \hat{f}^b(x)</span></li>
+<li>Update the residuals <span class="math inline">r_i = r_i + \lambda \hat{f}^b(x)</span></li>
+</ul>
+<ol start="3" type="1">
+<li>Output the boosted model. <span class="math inline">\hat{f}(x) = \sum_{b=1}^B \lambda \hat{f}^b(x)</span></li>
+</ol>
+<p>We have three parameters. The number of trees B. Unlike bagging and random forests, boosting can overfit if B is too large, although this overfitting tends to occur slowly if at all. We use cross-validation to select B.</p>
+<p>The shrinkage parameter <span class="math inline">\lambda</span>, a small positive number. This controls the rate at which boosting learns. Typical values are 0.01 and 0.001 and the right choice can depend on the problem. Very small <span class="math inline">\lambda</span> using a very large value of B in order to achieve good performance.</p>
+<p>The interaction depth/number <span class="math inline">d</span> of splits in each tree, which controls the complexity of the boosted ensemble. Often <span class="math inline">d = 1</span> works well, in which case each tree is a stump, consisting of a single split. It controls the interaction order of the boosted model because d splits can involve at most d variables.</p>
+</section>
+<section id="random-forests" class="level3" data-number="7.4">
+<h3 data-number="7.4" class="anchored" data-anchor-id="random-forests"><span class="header-section-number">7.4</span> Random Forests</h3>
+<p>Random forests provide an improvement over bagged trees by decorrelating the trees. We build a number of decision trees on bootstrapped random samples. When building the tree, each time a split is considered we take a random sample of m predictors to be split candidates from the full set of p predictors. We typically choose <span class="math inline">m \approx \sqrt{p}</span>. The main difference between Random Forests and bagging is the size of the predictor subset. When <span class="math inline">m = p</span> random forests are equivalent to bagging.</p>
+</section>
+<section id="bart" class="level3" data-number="7.5">
+<h3 data-number="7.5" class="anchored" data-anchor-id="bart"><span class="header-section-number">7.5</span> BART</h3>
+<p>Bayesian Additive Regression Trees (BART) are another ensemble method. In BART we have <span class="math inline">K</span> number of regression trees and <span class="math inline">B</span> number of iterations for which the algorithm runs. <span class="math inline">\hat{f}^B_k(x)</span> represents the prediction at <span class="math inline">x</span> for the <span class="math inline">k^{th}</span> regression tree at the <span class="math inline">b^{th}</span> iteration. At the end of each iteration we sum all K trees.</p>
+<p>We typically throw away the first few BART prediction models as they are part of the burn-in period.</p>
+<section id="algorithm" class="level4" data-number="7.5.1">
+<h4 data-number="7.5.1" class="anchored" data-anchor-id="algorithm"><span class="header-section-number">7.5.1</span> Algorithm</h4>
+<ol type="1">
+<li><p>Let <span class="math inline">\hat{f}^1_1(x) = ... = \hat{f}^1_K(x) = \frac{1}{nK}\sum_{i=1}^ny_i</span></p></li>
+<li><p>Compute <span class="math inline">\hat{f}^1(x) = \sum_{k=1}^K \hat{f}^1_k(x) = \frac{1}{n}\sum_{i=1}^n y_i</span></p></li>
+<li><p>For b = 2, … B:</p></li>
+</ol>
+<ul>
+<li>For k = 1,2,…,K:
+<ul>
+<li><p>For i = 1,…, n, compute the current partial residual <span class="math inline">r_i = y_i - \sum_{k' &lt; k}\hat{f}^b_{k'}(x_i) - \sum_{k' &gt; k}\hat{f}^{b-1}_{k'}(x_i)</span></p></li>
+<li><p>Fit a new tree to <span class="math inline">r_i</span> by randomly perturbing the <span class="math inline">k^{th}</span> tree from the previous iteration. Perturbations that improve the fit are favored.</p></li>
+</ul></li>
+<li>Compute <span class="math inline">\hat{f}^b(x) = \sum_{k=1}^k \hat{f}^b_k(x)</span></li>
+</ul>
+<ol start="4" type="1">
+<li>Compute the mean after L burn-in samples. <span class="math inline">\hat{f}(x) = \frac{1}{B-L}\sum_{b=L+1}^B\hat{f}%b(x)</span></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="chapter-12-unsupervised-learning" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="chapter-12-unsupervised-learning"><span class="header-section-number">8</span> Chapter 12: Unsupervised Learning</h2>
+<section id="principal-components-analysis" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="principal-components-analysis"><span class="header-section-number">8.1</span> Principal Components Analysis</h3>
+<section id="proportion-of-variance-explained" class="level4" data-number="8.1.1">
+<h4 data-number="8.1.1" class="anchored" data-anchor-id="proportion-of-variance-explained"><span class="header-section-number">8.1.1</span> Proportion of Variance Explained</h4>
+</section>
+<section id="scaling-variables" class="level4" data-number="8.1.2">
+<h4 data-number="8.1.2" class="anchored" data-anchor-id="scaling-variables"><span class="header-section-number">8.1.2</span> Scaling Variables</h4>
+</section>
+<section id="deciding-how-many-principal-components-to-use" class="level4" data-number="8.1.3">
+<h4 data-number="8.1.3" class="anchored" data-anchor-id="deciding-how-many-principal-components-to-use"><span class="header-section-number">8.1.3</span> Deciding how many Principal Components to Use</h4>
+</section>
+</section>
+<section id="clustering-methods" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="clustering-methods"><span class="header-section-number">8.2</span> Clustering Methods</h3>
+<section id="k-means-clustering" class="level4" data-number="8.2.1">
+<h4 data-number="8.2.1" class="anchored" data-anchor-id="k-means-clustering"><span class="header-section-number">8.2.1</span> K-Means Clustering</h4>
+</section>
+<section id="hierarchical-clustering" class="level4" data-number="8.2.2">
+<h4 data-number="8.2.2" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">8.2.2</span> Hierarchical Clustering</h4>
+</section>
+<section id="choice-of-dissimilarity-measure" class="level4" data-number="8.2.3">
+<h4 data-number="8.2.3" class="anchored" data-anchor-id="choice-of-dissimilarity-measure"><span class="header-section-number">8.2.3</span> Choice of Dissimilarity Measure</h4>
+</section>
+<section id="practical-issues-in-clustering" class="level4" data-number="8.2.4">
+<h4 data-number="8.2.4" class="anchored" data-anchor-id="practical-issues-in-clustering"><span class="header-section-number">8.2.4</span> Practical Issues in Clustering</h4>
+</section>
 </section>
 </section>
 
