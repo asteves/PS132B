@@ -882,7 +882,7 @@ Decision trees can suffer from high variance. Bootstrap aggregation (bagging) is
 
 Bagging is particularly useful with decision trees. We construct B regression trees using B boostrapped training sets and average the resulting predictions. Each tree has high variance and low bias, and averaging over all trees reduces variances. For qualitative trees we take a majority vote for the average class prediction.
 
-#### Out of Bag Error Estimation 
+#### Out of Bag Error Estimation
 
 On average, each bagged tree makes use of about 2/3 of the observations. The remaining 1/3 of the observations not used to fit a given bagged tree are referred to as out of bag (OOB) observations. We can use this to calculate the overall OOB MSE or classification error, which is a valid estimate of the test error for the bagged model because the response for each observation is predicted using only the trees not fit using that observation.
 
@@ -890,70 +890,198 @@ On average, each bagged tree makes use of about 2/3 of the observations. The rem
 
 In boosting, we grow trees sequentially using information from previously grown trees. We do not bootstrap sample; instead each tree is fit on a modified version of the original dataset.
 
-Unlike fitting a large decision tree, the boosting approach learns slowly. Given the current model, we fit a decision tree to the residuals from teh model. We then add this new decision tree into the fitted function in order to update the residuals. Each of these trees can be rather small, with just a few terminal nodes determined by the max node size parameter n the algorithm. By fitting small trees to the residuals, we slowly improve our model fit in areas where it does not perform well. 
-#### Algorithm 
+Unlike fitting a large decision tree, the boosting approach learns slowly. Given the current model, we fit a decision tree to the residuals from the model. We then add this new decision tree into the fitted function in order to update the residuals. Each of these trees can be rather small, with just a few terminal nodes determined by the max node size parameter n the algorithm. By fitting small trees to the residuals, we slowly improve our model fit in areas where it does not perform well.
 
-1. Set $\hat{f}(x) = 0, r_i = y_i$ for all $i$ in the training set. 
+At each iteration of boosting, the data are reweighted or modified based on how well the current models are predicting each point. Each new iteration prioritizes data points not yet accurately predicted/classified. Models are added together, and sometimes weighted based on individual accuracy.
 
-2. For b = 1,2,..., B repeat: 
+#### Algorithm
 
-  - Fit a tree with d splits (d + 1 terminal nodes) to the training data (X,r).
-  - Update model by adding in a shrunken version of the new tree $\hat{f}(x) = \hat{f}(x) + \lambda \hat{f}^b(x)$
-  - Update the residuals $r_i = r_i + \lambda \hat{f}^b(x)$ 
-  
-3. Output the boosted model. $\hat{f}(x) = \sum_{b=1}^B \lambda \hat{f}^b(x)$
+1.  Set $\hat{f}(x) = 0, r_i = y_i$ for all $i$ in the training set.
 
-We have three parameters. The number of trees B. Unlike bagging and random forests, boosting can overfit if B is too large, although this overfitting tends to occur slowly if at all. We use cross-validation to select B. 
+2.  For b = 1,2,..., B repeat:
 
-The shrinkage parameter $\lambda$, a small positive number. This controls the rate at which boosting learns. Typical values are 0.01 and 0.001 and the right choice can depend on the problem. Very small $\lambda$ using a very large value of B in order to achieve good performance. 
+-   Fit a tree with d splits (d + 1 terminal nodes) to the training data (X,r).
+-   Update model by adding in a shrunken version of the new tree $\hat{f}(x) = \hat{f}(x) + \lambda \hat{f}^b(x)$
+-   Update the residuals $r_i = r_i + \lambda \hat{f}^b(x)$
 
-The interaction depth/number $d$ of splits in each tree, which controls the complexity of the boosted ensemble. Often $d = 1$ works well, in which case each tree is a stump, consisting of a single split. It controls the interaction order of the boosted model because d splits can involve at most d variables. 
+3.  Output the boosted model. $\hat{f}(x) = \sum_{b=1}^B \lambda \hat{f}^b(x)$
+
+We have three parameters.
+
+1.  The number of trees B. Unlike bagging and random forests, boosting can overfit if B is too large, although this overfitting tends to occur slowly if at all. We use cross-validation to select B.
+
+2.  The shrinkage parameter $\lambda$, a small positive number. This controls the rate at which boosting learns. Typical values are 0.01 and 0.001 and the right choice can depend on the problem. Very small $\lambda$ using a very large value of B in order to achieve good performance.
+
+3.  The interaction depth/number $d$ of splits in each tree, which controls the complexity of the boosted ensemble. Often $d = 1$ works well, in which case each tree is a stump, consisting of a single split. It controls the interaction order of the boosted model because d splits can involve at most d variables.
+
+In general, the rough recommendation for interaction depth is between 3 and 7. The model should be trained with too many iterations initially, and cross validation should be used to find the final number of boosting iterations. The learning rate has an important impact on optimal B. Since it is possible for gradient boosted trees to overfit, use some preliminary exploration to determine suitable values for interaction depth, data sub-sampling, and the learning rate. Leave B as the primary tuning parameter.
 
 ### Random Forests
 
-Random forests provide an improvement over bagged trees by decorrelating the trees. We build a number of decision trees on bootstrapped random samples. When building the tree, each time a split is considered we take a random sample of m predictors to be split candidates from the full set of p predictors. We typically choose $m \approx \sqrt{p}$. The main difference between Random Forests and bagging is the size of the predictor subset. When $m = p$ random forests are equivalent to bagging. 
+Random forests provide an improvement over bagged trees by decorrelating the trees. We build a number of decision trees on bootstrapped random samples. When building the tree, each time a split is considered we take a random sample of m predictors to be split candidates from the full set of p predictors. We typically choose $m \approx \sqrt{p}$. The main difference between Random Forests and bagging is the size of the predictor subset. When $m = p$ random forests are equivalent to bagging.
 
-### BART 
+There are multiple sources of randomness in a Random Forest. The first is that since random forests are an application of bagging, for every tree data are randomly re-sampled. This is one of the ways that the trees are decorrelated from each other. The second is that the subset of predictors used is randomly sampled for consideration at each split.
 
-Bayesian Additive Regression Trees (BART) are another ensemble method. In BART we have $K$ number of regression trees and $B$ number of iterations for which the algorithm runs. $\hat{f}^B_k(x)$ represents the prediction at $x$ for the $k^{th}$ regression tree at the $b^{th}$ iteration. At the end of each iteration we sum all K trees. 
+#### Algorithm
 
-We typically throw away the first few BART prediction models as they are part of the burn-in period. 
+Let the training data consist of $p$ inputs and an outcome, for each of N observations $(\textbf{x}_i, y_i)$ for $i = 1,2,...N$.
 
-#### Algorithm 
+1.  For b = 1 to B:
 
-1. Let $\hat{f}^1_1(x) = ... = \hat{f}^1_K(x) = \frac{1}{nK}\sum_{i=1}^ny_i$
+-   Draw bootstrap resample of size N from the training data.
+-   Fit a tree $T_b$ to the bootstrapped data by recursively repeating the following steps for each node until the minimum node size is reached.
+    -   Select m variables at random from the p predictors.
+    -   Pick the best variable/split point among m.
+    -   Split the node into two new nodes.
 
-2. Compute $\hat{f}^1(x) = \sum_{k=1}^K \hat{f}^1_k(x) = \frac{1}{n}\sum_{i=1}^n y_i$
+2.  Output the ensemble/committee of trees $\{T_b\}^B_1$.
+3.  Make a prediction at a new point $\textbf{x}_0$
 
-3. For b = 2, ... B: 
+Random Forests tend to perform poorly in situations where m is set to be small and where the number of possible variables is large, but the fraction of relevant variables is small.
 
-  - For k = 1,2,...,K:
-    - For i = 1,..., n, compute the current partial residual $r_i = y_i - \sum_{k' < k}\hat{f}^b_{k'}(x_i) - \sum_{k' > k}\hat{f}^{b-1}_{k'}(x_i)$ 
-    
-    - Fit a new tree to $r_i$ by randomly perturbing the $k^{th}$ tree from the previous iteration. Perturbations that improve the fit are favored. 
-  - Compute $\hat{f}^b(x) = \sum_{k=1}^k \hat{f}^b_k(x)$
-  
-4. Compute the mean after L burn-in samples. $\hat{f}(x) = \frac{1}{B-L}\sum_{b=L+1}^B\hat{f}%b(x)$
+### BART
 
-## Chapter 12: Unsupervised Learning 
+Bayesian Additive Regression Trees (BART) are another ensemble method. In BART we have $K$ number of regression trees and $B$ number of iterations for which the algorithm runs. $\hat{f}^B_k(x)$ represents the prediction at $x$ for the $k^{th}$ regression tree at the $b^{th}$ iteration. At the end of each iteration we sum all K trees.
 
-### Principal Components Analysis 
+We typically throw away the first few BART prediction models as they are part of the burn-in period.
+
+#### Algorithm
+
+1.  Let $\hat{f}^1_1(x) = ... = \hat{f}^1_K(x) = \frac{1}{nK}\sum_{i=1}^ny_i$
+
+2.  Compute $\hat{f}^1(x) = \sum_{k=1}^K \hat{f}^1_k(x) = \frac{1}{n}\sum_{i=1}^n y_i$
+
+3.  For b = 2, ... B:
+
+-   For k = 1,2,...,K:
+    -   For i = 1,..., n, compute the current partial residual $r_i = y_i - \sum_{k' < k}\hat{f}^b_{k'}(x_i) - \sum_{k' > k}\hat{f}^{b-1}_{k'}(x_i)$
+
+    -   Fit a new tree to $r_i$ by randomly perturbing the $k^{th}$ tree from the previous iteration. Perturbations that improve the fit are favored.
+-   Compute $\hat{f}^b(x) = \sum_{k=1}^k \hat{f}^b_k(x)$
+
+4.  Compute the mean after L burn-in samples. $\hat{f}(x) = \frac{1}{B-L}\sum_{b=L+1}^B\hat{f}%b(x)$
+
+## Chapter 12: Unsupervised Learning
+
+Most of the book concerns supervised learning methods. In these methods there is a set of $p$ features measured on $n$ on observations and a known response $Y$ also measured on those observations. In unsupervised learning, we only have a set of features without a ground truth response value.
+
+Unsupervised learning is more subjective and there is no simple goal for the analysis. UL is often performed as part of initial exploratory data analysis.
+
+### Principal Components Analysis
+
+When faced with a large set of correlated variables, principal components allows us to summarize the data with a smaller number of representative variables in the original set. PCA refers to the process by which principal components are computed and the subsequent use of these components in understanding the data.
+
+Suppose we wish to visualize $n$ observations with measurements on a set of $p$ features. There are ${p \choose 2} = p(p-1)/2$ ways to do this. We would like to find a low-dimensional representation of the data that captures as much of the information as possible. Each of the dimensions found by. PCA is a linear combination of the $p$ features.
+
+The first principal components of the set of features is the normalized linear combination of the features $$Z_1 = \phi_{11}X_1 + …+ \phi_{p1}X_p$$
+
+that has the largest variance. The $\phi$ terms are the loading of the first principal component. We constrain them so that the sum of squares equals 1. If we do not do this, setting these elements to a large value could lead to a large variance.
+
+We assume that each variable has been centered to have mean 0 and look for features of the same that has the largest sample variance subject to the normalizing constraint. This is solved via an eigen decomposition.[^8]
+
+[^8]: The actual details is outside the scope of this question.
+
+After the first principal component has been determined, we can find the second principal component which is the linear combination that has maximal variance out of all linear combinations that are uncorrelated with the first principal component.
+
+An alternative interpretation of principal components is that they provide low dimensional linear surfaces that are closest to the observations. The first principal component loading vector is the line in p-dimensional space that is closest to the n observations. The appeal of this interpretation is that the dimension of data that it answers the question of what single dimension of data lies as close as possible to all data points. The first two dimensions span the plane that is closest to the n observations in terms of average squared euclidean distance. We can write this description for M principal components to get the best M-dimensional approximation in terms of Euclidean distance to the $i^{th}$ observation $x_{ij}$. The representation can be written as $x_{ij} \approx \sum_{m=1}^M z_{im}\phi_{jm}$
 
 #### Proportion of Variance Explained
 
-#### Scaling Variables 
+We can ask a general question. How much information in a given data set is lost by projecting the observations onto the first few principal components? In other words, how much variance in the data is not contained in the first few principal components. The total variance present in a dataset (with mean zero centered variables) is $\sum_{j=1}^p V(X_j) = \sum_{j=1}^p\frac{1}{n}\sum_{i=1}^n x^2_{ij}$ 
+
+The variance explained by the $m^th$ principal component is: $\frac{1}{n}\sum_{i=1}^n z^2_{im} = \frac{1}{n}\sum_{i=1}^n \left( \sum_{j=1}^p \phi_{jm} x_{ij} \right)^2$
+
+The Proportion of Variance Explained (PVE) of the $m^th$ principal component is given by
+
+$$\begin{aligned}
+
+\frac{\sum_{i=1}^nz^2_{im}}{\sum_{j=1}^p\sum_{i=1}^n x^2_{ij}} = \frac{\sum_{i=1}^n\left(\sum_{j=1}^p \phi_{jm}x_{ij} \right)^2}{\sum_{j=1}^p\sum_{i=1}^nx^2_{ij}}
+\end{aligned}$$
+
+The PVE of each principal component is non-negative. In total there are $min(n-1, p)$ principal components and their PVEs sum to 1. 
+
+We can decompose the variance of data into the variance of the first M principal components plus the MSE of the M-dimensional approximation. 
+
+$$\begin{aligned}
+\sum_{j=1}^p \frac{1}{n}\sum_{i=1}^nx^2_{ij} = \sum_{m=1}^M\frac{1}{n}\sum_{i=1}^nz^2_{im} + \frac{1}{n}\sum_{j=1}^p\sum_{i=1}^n\left(x_{ij} - \sum_{m=1}^Mz_{im}\phi_{jm} \right)^2
+\end{aligned}$$
+
+The first term is the variance of data. The second term is the variance of the first M PCs and the third term is the MSE of M-dimensional approximation. The first term is fixed, so by maximizing the variance of the first M principal components, we mechanically minimize the MSE of the M dimensional approximation and vice versa. 
+
+It is also the case the PVE defined above is equivalent to $1 - \frac{RSS}{TSS}$ where TSS represents the total sum of squared elements of $\textbf{X}$ and RSS represents the residual sum of squares of the M-dimensional approximation given by principal components. This means we can interpret the PVE as the $R^2$ of the approximation for $\textbf{X}$ given by the first M principal components. 
+
+#### Scaling Variables
+
+Whenever we perform PCA, we should center the variables to have mean 0. The results obtained when we perform PCA will also depend on whether the variables have been individually scaled. This is in contrast to some other supervised and unsupervised algorithms in which scaling has no effect. Because this is undesirable behavior, we typically scale each variable to have standard deviation one before we perform PCA, unless every variable is measured already in the same units. 
 
 #### Deciding how many Principal Components to Use
 
-### Clustering Methods  
+There is no single answer to how many principal components to use in a problem. We typically decide on the number of principal components by examining a *scree plot*. We choose the smallest number of principal components that are required in order to explain a sizable amount of the variation of the data. The drop in the scree plot is often referred to as the "elbow." 
+### Clustering Methods
 
-#### K-Means Clustering 
+Clustering refers to a broad set of techniques for finding subgroups, called clusters, in a data set. When we cluster observations of a data set, we partition them into distinct groups so that the observations within each group are quite similar to each other, while observations in different groups are quite different from each other. 
 
-#### Hierarchical Clustering 
+Clustering looks to find homogeneous subgroups among the observations. This differs from PCA whose mechanism is to find a low-dimensional representation of the observations that explain a good fraction of the variance. 
+
+#### K-Means Clustering
+
+In K-means the idea is that a good clustering is one for which the within-cluster variation is as small as possible. The within cluster variation for cluster $C_k$ is a measure $W(C_k)$ of the amount by which the observations within a cluster differ from each other. We seek to minimize this problem by partitioning the observations into K clusters such that the total within-cluster variation, summed over all K clusters, is as small as possible. 
+
+We define within cluster variation as the squared Euclidean distance between observations. $W(C_k) = \frac{1}{|C_k|}\sum_{i, i' \in C_k}\sum_{j=1}^p(x_{ij} - x_{i'j})^2$ where $|C_k|$ denotes the number of observations in the $k^th$ cluster. 
+
+The overall optimization problem of K-means is thus 
+
+$$\begin{aligned}
+\arg\min_{C_1, .., C_k} \left\{\sum_{k=1}^K \frac{1}{|C_k|}\sum_{i,i' \in C_k}\sum_{j=1}^p(x_{ij} - x_{i'j})^2 \right\}
+\end{aligned}$$
+
+The algorithm to solve this optimization problem is: 
+
+##### Algorithm 
+
+1. Randomly assign a number from 1 to K, to each observation. These are initial cluster assignments for the observations. 
+
+2. Iterate until the cluster assignments stop changing:
+  - For each of the K clusters, compute the cluster centroid. The $k^th$ cluster centroid is the vector of p feature means for the observation in the $k^th$ cluster. 
+  - Assign each observation to the cluster whose centroid is closest (where closest is defined by Euclidean distance)
+  
+The K-means algorithm finds a local rather than a global optimum. The results thus depend on the initial random cluster assignments of each observations. As a result, we want to run the algorithm multiple times from different random initial configurations. Then we select the solution for which the objective function is smallest. 
+
+#### Hierarchical Clustering
+
+Hierarchical clustering is an alternative approach that does not require we commit to a specific choice of K. The most common type of hierarchical clustering is agglomerative (bottom-up) clustering.
+
+##### Algorithm 
+
+Define some sort of dissimilarity measure between each pair of observations (usually Euclidean distance). 
+
+1. Starting at the bottom of the dendrogram, each of the n observations is treated as its own cluster. The two clusters that are most similar to each other are fused so that there are now n-1 clusters. 
+2. Repeat until all observations are fused into a single cluster. 
+
+Dissimilarity is defined by one of four (usually) linkage measures--complete, average, single, and centroid. Centroid is usually not used by statisticians. 
+
+Complete: Maximial intercluster dissimilarity. Compute all pairwise similiarities between the observations in cluster A and the observation in cluster B. Record the largest of these similiarity. 
+
+Single: Minimal intercluster dissimiliarity. Compute all pairwise similiarities between the observations in cluster A and the observations in cluster B, record the smallest of these dissimiliarities. Single linkage can result in extended, trailing clusters in which single observations are fused one at a time. 
+
+Average: Mean intercluster dissimiliarity. Compute all pairwise dissimiliarities between the observations in cluster A and the observations in cluster B. Record the average of these dissimiliarities. 
+
+Centroid: Dissimiliarity between the centroid for cluster A (a mean vector of length p) and the centroid for cluster B. Can result in undesirable inversions whereby two clusters are fused as a height below either of the individual clusters in the dendrogram. 
 
 #### Choice of Dissimilarity Measure
 
-#### Practical Issues in Clustering 
+Normally, we use Euclidean distance, but we could use other dissimilarity measures. Correlation based distance considers two observations to be similar if their features are highly correlated even though the observed values may be far apart in terms of Euclidean distance. 
 
+The choice of dissimilarity matters because it has a strong effect on the resulting dendrogram. 
 
+#### Practical Issues in Clustering
 
+In order to perform clustering, the analyst must make some decisions. 
+
+- Should the observations or features be standardized in some way? 
+
+- In hierarchical clustering, what dissimilarity measure should be used? What type of linkage should be used? Where should we cut the dendrogram to obtain clusters? 
+
+- In K-means clustering, how many clusters should we look for in the data? 
+
+Each of these decisions has a strong impact on the results obtained. In practice, try several different choices and look for the one with the most useful or interpretable solutions. 

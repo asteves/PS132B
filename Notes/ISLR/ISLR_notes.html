@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -176,7 +176,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#chapter-12-unsupervised-learning" id="toc-chapter-12-unsupervised-learning" class="nav-link" data-scroll-target="#chapter-12-unsupervised-learning"><span class="toc-section-number">8</span>  Chapter 12: Unsupervised Learning</a>
   <ul class="collapse">
   <li><a href="#principal-components-analysis" id="toc-principal-components-analysis" class="nav-link" data-scroll-target="#principal-components-analysis"><span class="toc-section-number">8.1</span>  Principal Components Analysis</a></li>
-  <li><a href="#clustering-methods" id="toc-clustering-methods" class="nav-link" data-scroll-target="#clustering-methods"><span class="toc-section-number">8.2</span>  Clustering Methods</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1211,7 +1210,10 @@ collapsing to unique 'x' values</code></pre>
 <section id="boosting" class="level3" data-number="7.3">
 <h3 data-number="7.3" class="anchored" data-anchor-id="boosting"><span class="header-section-number">7.3</span> Boosting</h3>
 <p>In boosting, we grow trees sequentially using information from previously grown trees. We do not bootstrap sample; instead each tree is fit on a modified version of the original dataset.</p>
-<p>Unlike fitting a large decision tree, the boosting approach learns slowly. Given the current model, we fit a decision tree to the residuals from teh model. We then add this new decision tree into the fitted function in order to update the residuals. Each of these trees can be rather small, with just a few terminal nodes determined by the max node size parameter n the algorithm. By fitting small trees to the residuals, we slowly improve our model fit in areas where it does not perform well. #### Algorithm</p>
+<p>Unlike fitting a large decision tree, the boosting approach learns slowly. Given the current model, we fit a decision tree to the residuals from the model. We then add this new decision tree into the fitted function in order to update the residuals. Each of these trees can be rather small, with just a few terminal nodes determined by the max node size parameter n the algorithm. By fitting small trees to the residuals, we slowly improve our model fit in areas where it does not perform well.</p>
+<p>At each iteration of boosting, the data are reweighted or modified based on how well the current models are predicting each point. Each new iteration prioritizes data points not yet accurately predicted/classified. Models are added together, and sometimes weighted based on individual accuracy.</p>
+<section id="algorithm" class="level4" data-number="7.3.1">
+<h4 data-number="7.3.1" class="anchored" data-anchor-id="algorithm"><span class="header-section-number">7.3.1</span> Algorithm</h4>
 <ol type="1">
 <li><p>Set <span class="math inline">\hat{f}(x) = 0, r_i = y_i</span> for all <span class="math inline">i</span> in the training set.</p></li>
 <li><p>For b = 1,2,…, B repeat:</p></li>
@@ -1224,20 +1226,47 @@ collapsing to unique 'x' values</code></pre>
 <ol start="3" type="1">
 <li>Output the boosted model. <span class="math inline">\hat{f}(x) = \sum_{b=1}^B \lambda \hat{f}^b(x)</span></li>
 </ol>
-<p>We have three parameters. The number of trees B. Unlike bagging and random forests, boosting can overfit if B is too large, although this overfitting tends to occur slowly if at all. We use cross-validation to select B.</p>
-<p>The shrinkage parameter <span class="math inline">\lambda</span>, a small positive number. This controls the rate at which boosting learns. Typical values are 0.01 and 0.001 and the right choice can depend on the problem. Very small <span class="math inline">\lambda</span> using a very large value of B in order to achieve good performance.</p>
-<p>The interaction depth/number <span class="math inline">d</span> of splits in each tree, which controls the complexity of the boosted ensemble. Often <span class="math inline">d = 1</span> works well, in which case each tree is a stump, consisting of a single split. It controls the interaction order of the boosted model because d splits can involve at most d variables.</p>
+<p>We have three parameters.</p>
+<ol type="1">
+<li><p>The number of trees B. Unlike bagging and random forests, boosting can overfit if B is too large, although this overfitting tends to occur slowly if at all. We use cross-validation to select B.</p></li>
+<li><p>The shrinkage parameter <span class="math inline">\lambda</span>, a small positive number. This controls the rate at which boosting learns. Typical values are 0.01 and 0.001 and the right choice can depend on the problem. Very small <span class="math inline">\lambda</span> using a very large value of B in order to achieve good performance.</p></li>
+<li><p>The interaction depth/number <span class="math inline">d</span> of splits in each tree, which controls the complexity of the boosted ensemble. Often <span class="math inline">d = 1</span> works well, in which case each tree is a stump, consisting of a single split. It controls the interaction order of the boosted model because d splits can involve at most d variables.</p></li>
+</ol>
+<p>In general, the rough recommendation for interaction depth is between 3 and 7. The model should be trained with too many iterations initially, and cross validation should be used to find the final number of boosting iterations. The learning rate has an important impact on optimal B. Since it is possible for gradient boosted trees to overfit, use some preliminary exploration to determine suitable values for interaction depth, data sub-sampling, and the learning rate. Leave B as the primary tuning parameter.</p>
+</section>
 </section>
 <section id="random-forests" class="level3" data-number="7.4">
 <h3 data-number="7.4" class="anchored" data-anchor-id="random-forests"><span class="header-section-number">7.4</span> Random Forests</h3>
 <p>Random forests provide an improvement over bagged trees by decorrelating the trees. We build a number of decision trees on bootstrapped random samples. When building the tree, each time a split is considered we take a random sample of m predictors to be split candidates from the full set of p predictors. We typically choose <span class="math inline">m \approx \sqrt{p}</span>. The main difference between Random Forests and bagging is the size of the predictor subset. When <span class="math inline">m = p</span> random forests are equivalent to bagging.</p>
+<p>There are multiple sources of randomness in a Random Forest. The first is that since random forests are an application of bagging, for every tree data are randomly re-sampled. This is one of the ways that the trees are decorrelated from each other. The second is that the subset of predictors used is randomly sampled for consideration at each split.</p>
+<section id="algorithm-1" class="level4" data-number="7.4.1">
+<h4 data-number="7.4.1" class="anchored" data-anchor-id="algorithm-1"><span class="header-section-number">7.4.1</span> Algorithm</h4>
+<p>Let the training data consist of <span class="math inline">p</span> inputs and an outcome, for each of N observations <span class="math inline">(\textbf{x}_i, y_i)</span> for <span class="math inline">i = 1,2,...N</span>.</p>
+<ol type="1">
+<li>For b = 1 to B:</li>
+</ol>
+<ul>
+<li>Draw bootstrap resample of size N from the training data.</li>
+<li>Fit a tree <span class="math inline">T_b</span> to the bootstrapped data by recursively repeating the following steps for each node until the minimum node size is reached.
+<ul>
+<li>Select m variables at random from the p predictors.</li>
+<li>Pick the best variable/split point among m.</li>
+<li>Split the node into two new nodes.</li>
+</ul></li>
+</ul>
+<ol start="2" type="1">
+<li>Output the ensemble/committee of trees <span class="math inline">\{T_b\}^B_1</span>.</li>
+<li>Make a prediction at a new point <span class="math inline">\textbf{x}_0</span></li>
+</ol>
+<p>Random Forests tend to perform poorly in situations where m is set to be small and where the number of possible variables is large, but the fraction of relevant variables is small.</p>
+</section>
 </section>
 <section id="bart" class="level3" data-number="7.5">
 <h3 data-number="7.5" class="anchored" data-anchor-id="bart"><span class="header-section-number">7.5</span> BART</h3>
 <p>Bayesian Additive Regression Trees (BART) are another ensemble method. In BART we have <span class="math inline">K</span> number of regression trees and <span class="math inline">B</span> number of iterations for which the algorithm runs. <span class="math inline">\hat{f}^B_k(x)</span> represents the prediction at <span class="math inline">x</span> for the <span class="math inline">k^{th}</span> regression tree at the <span class="math inline">b^{th}</span> iteration. At the end of each iteration we sum all K trees.</p>
 <p>We typically throw away the first few BART prediction models as they are part of the burn-in period.</p>
-<section id="algorithm" class="level4" data-number="7.5.1">
-<h4 data-number="7.5.1" class="anchored" data-anchor-id="algorithm"><span class="header-section-number">7.5.1</span> Algorithm</h4>
+<section id="algorithm-2" class="level4" data-number="7.5.1">
+<h4 data-number="7.5.1" class="anchored" data-anchor-id="algorithm-2"><span class="header-section-number">7.5.1</span> Algorithm</h4>
 <ol type="1">
 <li><p>Let <span class="math inline">\hat{f}^1_1(x) = ... = \hat{f}^1_K(x) = \frac{1}{nK}\sum_{i=1}^ny_i</span></p></li>
 <li><p>Compute <span class="math inline">\hat{f}^1(x) = \sum_{k=1}^K \hat{f}^1_k(x) = \frac{1}{n}\sum_{i=1}^n y_i</span></p></li>
@@ -1259,31 +1288,99 @@ collapsing to unique 'x' values</code></pre>
 </section>
 <section id="chapter-12-unsupervised-learning" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="chapter-12-unsupervised-learning"><span class="header-section-number">8</span> Chapter 12: Unsupervised Learning</h2>
+<p>Most of the book concerns supervised learning methods. In these methods there is a set of <span class="math inline">p</span> features measured on <span class="math inline">n</span> on observations and a known response <span class="math inline">Y</span> also measured on those observations. In unsupervised learning, we only have a set of features without a ground truth response value.</p>
+<p>Unsupervised learning is more subjective and there is no simple goal for the analysis. UL is often performed as part of initial exploratory data analysis.</p>
 <section id="principal-components-analysis" class="level3" data-number="8.1">
 <h3 data-number="8.1" class="anchored" data-anchor-id="principal-components-analysis"><span class="header-section-number">8.1</span> Principal Components Analysis</h3>
+<p>When faced with a large set of correlated variables, principal components allows us to summarize the data with a smaller number of representative variables in the original set. PCA refers to the process by which principal components are computed and the subsequent use of these components in understanding the data.</p>
+<p>Suppose we wish to visualize <span class="math inline">n</span> observations with measurements on a set of <span class="math inline">p</span> features. There are <span class="math inline">{p \choose 2} = p(p-1)/2</span> ways to do this. We would like to find a low-dimensional representation of the data that captures as much of the information as possible. Each of the dimensions found by. PCA is a linear combination of the <span class="math inline">p</span> features.</p>
+<p>The first principal components of the set of features is the normalized linear combination of the features <span class="math display">Z_1 = \phi_{11}X_1 + …+ \phi_{p1}X_p</span></p>
+<p>that has the largest variance. The <span class="math inline">\phi</span> terms are the loading of the first principal component. We constrain them so that the sum of squares equals 1. If we do not do this, setting these elements to a large value could lead to a large variance.</p>
+<p>We assume that each variable has been centered to have mean 0 and look for features of the same that has the largest sample variance subject to the normalizing constraint. This is solved via an eigen decomposition.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>After the first principal component has been determined, we can find the second principal component which is the linear combination that has maximal variance out of all linear combinations that are uncorrelated with the first principal component.</p>
+<p>An alternative interpretation of principal components is that they provide low dimensional linear surfaces that are closest to the observations. The first principal component loading vector is the line in p-dimensional space that is closest to the n observations. The appeal of this interpretation is that the dimension of data that it answers the question of what single dimension of data lies as close as possible to all data points. The first two dimensions span the plane that is closest to the n observations in terms of average squared euclidean distance. We can write this description for M principal components to get the best M-dimensional approximation in terms of Euclidean distance to the <span class="math inline">i^{th}</span> observation <span class="math inline">x_{ij}</span>. The representation can be written as <span class="math inline">x_{ij} \approx \sum_{m=1}^M z_{im}\phi_{jm}</span></p>
 <section id="proportion-of-variance-explained" class="level4" data-number="8.1.1">
 <h4 data-number="8.1.1" class="anchored" data-anchor-id="proportion-of-variance-explained"><span class="header-section-number">8.1.1</span> Proportion of Variance Explained</h4>
+<p>We can ask a general question. How much information in a given data set is lost by projecting the observations onto the first few principal components? In other words, how much variance in the data is not contained in the first few principal components. The total variance present in a dataset (with mean zero centered variables) is <span class="math inline">\sum_{j=1}^p V(X_j) = \sum_{j=1}^p\frac{1}{n}\sum_{i=1}^n x^2_{ij}</span></p>
+<p>The variance explained by the <span class="math inline">m^th</span> principal component is: <span class="math inline">\frac{1}{n}\sum_{i=1}^n z^2_{im} = \frac{1}{n}\sum_{i=1}^n \left( \sum_{j=1}^p \phi_{jm} x_{ij} \right)^2</span></p>
+<p>The Proportion of Variance Explained (PVE) of the <span class="math inline">m^th</span> principal component is given by</p>
+$$
+<span class="math display">\begin{aligned}
+
+\frac{\sum_{i=1}^nz^2_{im}}{\sum_{j=1}^p\sum_{i=1}^n x^2_{ij}} = \frac{\sum_{i=1}^n\left(\sum_{j=1}^p \phi_{jm}x_{ij} \right)^2}{\sum_{j=1}^p\sum_{i=1}^nx^2_{ij}}
+\end{aligned}</span>
+<p>$$</p>
+<p>The PVE of each principal component is non-negative. In total there are <span class="math inline">min(n-1, p)</span> principal components and their PVEs sum to 1.</p>
+<p>We can decompose the variance of data into the variance of the first M principal components plus the MSE of the M-dimensional approximation.</p>
+<p><span class="math display">\begin{aligned}
+\sum_{j=1}^p \frac{1}{n}\sum_{i=1}^nx^2_{ij} = \sum_{m=1}^M\frac{1}{n}\sum_{i=1}^nz^2_{im} + \frac{1}{n}\sum_{j=1}^p\sum_{i=1}^n\left(x_{ij} - \sum_{m=1}^Mz_{im}\phi_{jm} \right)^2
+\end{aligned}</span></p>
+<p>The first term is the variance of data. The second term is the variance of the first M PCs and the third term is the MSE of M-dimensional approximation. The first term is fixed, so by maximizing the variance of the first M principal components, we mechanically minimize the MSE of the M dimensional approximation and vice versa.</p>
+<p>It is also the case the PVE defined above is equivalent to <span class="math inline">1 - \frac{RSS}{TSS}</span> where TSS represents the total sum of squared elements of <span class="math inline">\textbf{X}</span> and RSS represents the residual sum of squares of the M-dimensional approximation given by principal components. This means we can interpret the PVE as the <span class="math inline">R^2</span> of the approximation for <span class="math inline">\textbf{X}</span> given by the first M principal components.</p>
 </section>
 <section id="scaling-variables" class="level4" data-number="8.1.2">
 <h4 data-number="8.1.2" class="anchored" data-anchor-id="scaling-variables"><span class="header-section-number">8.1.2</span> Scaling Variables</h4>
+<p>Whenever we perform PCA, we should center the variables to have mean 0. The results obtained when we perform PCA will also depend on whether the variables have been individually scaled. This is in contrast to some other supervised and unsupervised algorithms in which scaling has no effect. Because this is undesirable behavior, we typically scale each variable to have standard deviation one before we perform PCA, unless every variable is measured already in the same units.</p>
 </section>
 <section id="deciding-how-many-principal-components-to-use" class="level4" data-number="8.1.3">
 <h4 data-number="8.1.3" class="anchored" data-anchor-id="deciding-how-many-principal-components-to-use"><span class="header-section-number">8.1.3</span> Deciding how many Principal Components to Use</h4>
+<p>There is no single answer to how many principal components to use in a problem. We typically decide on the number of principal components by examining a <em>scree plot</em>. We choose the smallest number of principal components that are required in order to explain a sizable amount of the variation of the data. The drop in the scree plot is often referred to as the “elbow.” ### Clustering Methods</p>
+<p>Clustering refers to a broad set of techniques for finding subgroups, called clusters, in a data set. When we cluster observations of a data set, we partition them into distinct groups so that the observations within each group are quite similar to each other, while observations in different groups are quite different from each other.</p>
+<p>Clustering looks to find homogeneous subgroups among the observations. This differs from PCA whose mechanism is to find a low-dimensional representation of the observations that explain a good fraction of the variance.</p>
+</section>
+<section id="k-means-clustering" class="level4" data-number="8.1.4">
+<h4 data-number="8.1.4" class="anchored" data-anchor-id="k-means-clustering"><span class="header-section-number">8.1.4</span> K-Means Clustering</h4>
+<p>In K-means the idea is that a good clustering is one for which the within-cluster variation is as small as possible. The within cluster variation for cluster <span class="math inline">C_k</span> is a measure <span class="math inline">W(C_k)</span> of the amount by which the observations within a cluster differ from each other. We seek to minimize this problem by partitioning the observations into K clusters such that the total within-cluster variation, summed over all K clusters, is as small as possible.</p>
+<p>We define within cluster variation as the squared Euclidean distance between observations. <span class="math inline">W(C_k) = \frac{1}{|C_k|}\sum_{i, i' \in C_k}\sum_{j=1}^p(x_{ij} - x_{i'j})^2</span> where <span class="math inline">|C_k|</span> denotes the number of observations in the <span class="math inline">k^th</span> cluster.</p>
+<p>The overall optimization problem of K-means is thus</p>
+<p><span class="math display">\begin{aligned}
+\arg\min_{C_1, .., C_k} \left\{\sum_{k=1}^K \frac{1}{|C_k|}\sum_{i,i' \in C_k}\sum_{j=1}^p(x_{ij} - x_{i'j})^2 \right\}
+\end{aligned}</span></p>
+<p>The algorithm to solve this optimization problem is:</p>
+<section id="algorithm-3" class="level5" data-number="8.1.4.1">
+<h5 data-number="8.1.4.1" class="anchored" data-anchor-id="algorithm-3"><span class="header-section-number">8.1.4.1</span> Algorithm</h5>
+<ol type="1">
+<li><p>Randomly assign a number from 1 to K, to each observation. These are initial cluster assignments for the observations.</p></li>
+<li><p>Iterate until the cluster assignments stop changing:</p></li>
+</ol>
+<ul>
+<li>For each of the K clusters, compute the cluster centroid. The <span class="math inline">k^th</span> cluster centroid is the vector of p feature means for the observation in the <span class="math inline">k^th</span> cluster.</li>
+<li>Assign each observation to the cluster whose centroid is closest (where closest is defined by Euclidean distance)</li>
+</ul>
+<p>The K-means algorithm finds a local rather than a global optimum. The results thus depend on the initial random cluster assignments of each observations. As a result, we want to run the algorithm multiple times from different random initial configurations. Then we select the solution for which the objective function is smallest.</p>
 </section>
 </section>
-<section id="clustering-methods" class="level3" data-number="8.2">
-<h3 data-number="8.2" class="anchored" data-anchor-id="clustering-methods"><span class="header-section-number">8.2</span> Clustering Methods</h3>
-<section id="k-means-clustering" class="level4" data-number="8.2.1">
-<h4 data-number="8.2.1" class="anchored" data-anchor-id="k-means-clustering"><span class="header-section-number">8.2.1</span> K-Means Clustering</h4>
+<section id="hierarchical-clustering" class="level4" data-number="8.1.5">
+<h4 data-number="8.1.5" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">8.1.5</span> Hierarchical Clustering</h4>
+<p>Hierarchical clustering is an alternative approach that does not require we commit to a specific choice of K. The most common type of hierarchical clustering is agglomerative (bottom-up) clustering.</p>
+<section id="algorithm-4" class="level5" data-number="8.1.5.1">
+<h5 data-number="8.1.5.1" class="anchored" data-anchor-id="algorithm-4"><span class="header-section-number">8.1.5.1</span> Algorithm</h5>
+<p>Define some sort of dissimilarity measure between each pair of observations (usually Euclidean distance).</p>
+<ol type="1">
+<li>Starting at the bottom of the dendrogram, each of the n observations is treated as its own cluster. The two clusters that are most similar to each other are fused so that there are now n-1 clusters.</li>
+<li>Repeat until all observations are fused into a single cluster.</li>
+</ol>
+<p>Dissimilarity is defined by one of four (usually) linkage measures–complete, average, single, and centroid. Centroid is usually not used by statisticians.</p>
+<p>Complete: Maximial intercluster dissimilarity. Compute all pairwise similiarities between the observations in cluster A and the observation in cluster B. Record the largest of these similiarity.</p>
+<p>Single: Minimal intercluster dissimiliarity. Compute all pairwise similiarities between the observations in cluster A and the observations in cluster B, record the smallest of these dissimiliarities. Single linkage can result in extended, trailing clusters in which single observations are fused one at a time.</p>
+<p>Average: Mean intercluster dissimiliarity. Compute all pairwise dissimiliarities between the observations in cluster A and the observations in cluster B. Record the average of these dissimiliarities.</p>
+<p>Centroid: Dissimiliarity between the centroid for cluster A (a mean vector of length p) and the centroid for cluster B. Can result in undesirable inversions whereby two clusters are fused as a height below either of the individual clusters in the dendrogram.</p>
 </section>
-<section id="hierarchical-clustering" class="level4" data-number="8.2.2">
-<h4 data-number="8.2.2" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">8.2.2</span> Hierarchical Clustering</h4>
 </section>
-<section id="choice-of-dissimilarity-measure" class="level4" data-number="8.2.3">
-<h4 data-number="8.2.3" class="anchored" data-anchor-id="choice-of-dissimilarity-measure"><span class="header-section-number">8.2.3</span> Choice of Dissimilarity Measure</h4>
+<section id="choice-of-dissimilarity-measure" class="level4" data-number="8.1.6">
+<h4 data-number="8.1.6" class="anchored" data-anchor-id="choice-of-dissimilarity-measure"><span class="header-section-number">8.1.6</span> Choice of Dissimilarity Measure</h4>
+<p>Normally, we use Euclidean distance, but we could use other dissimilarity measures. Correlation based distance considers two observations to be similar if their features are highly correlated even though the observed values may be far apart in terms of Euclidean distance.</p>
+<p>The choice of dissimilarity matters because it has a strong effect on the resulting dendrogram.</p>
 </section>
-<section id="practical-issues-in-clustering" class="level4" data-number="8.2.4">
-<h4 data-number="8.2.4" class="anchored" data-anchor-id="practical-issues-in-clustering"><span class="header-section-number">8.2.4</span> Practical Issues in Clustering</h4>
+<section id="practical-issues-in-clustering" class="level4" data-number="8.1.7">
+<h4 data-number="8.1.7" class="anchored" data-anchor-id="practical-issues-in-clustering"><span class="header-section-number">8.1.7</span> Practical Issues in Clustering</h4>
+<p>In order to perform clustering, the analyst must make some decisions.</p>
+<ul>
+<li><p>Should the observations or features be standardized in some way?</p></li>
+<li><p>In hierarchical clustering, what dissimilarity measure should be used? What type of linkage should be used? Where should we cut the dendrogram to obtain clusters?</p></li>
+<li><p>In K-means clustering, how many clusters should we look for in the data?</p></li>
+</ul>
+<p>Each of these decisions has a strong impact on the results obtained. In practice, try several different choices and look for the one with the most useful or interpretable solutions.</p>
 </section>
 </section>
 </section>
@@ -1307,6 +1404,7 @@ E[Y-\hat{Y}]^2 &amp;= V[\hat{f}] + B[\hat{f}]^2 + V[\epsilon]
 <li id="fn5"><p>In causal inference, we tend to care a lot more about the bias of our estimator than the variance.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>The book often refers to this as “synergy”<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>Note that this sounds an awful lot like finding an average and that is intentional.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>The actual details is outside the scope of this question.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->

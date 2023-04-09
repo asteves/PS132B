@@ -1,0 +1,92 @@
+---
+title: "Section 3/17"
+format: revealjs
+editor: visual
+---
+
+## Section in 30ish Seconds 
+
+-   Challenge 1 Due on 3/21. Midterm is next Thursday (3/23)
+
+-   A brief discussion about challenge grading
+
+-   Whirlwind tour of concepts that are fair game for the midterm
+
+## Challenge Notes (1/2)
+
+-   Three different methods
+
+    -   Three different logistic regressions fails the assignment
+
+-   Use all the data
+
+    -   Three different logistic regressions with different combinations of data fails the assignment
+
+-   If you know how to use it GitHub is great for collaboration.
+
+    -   If you don't sending emails around is fine. Getting together as a group is also a good idea.
+
+## Challenge Notes (2/2)
+
+#### Here's a Good Comment
+
+We build a random forest model because we think it will have properties (X,Y,Z) that work well on this problem because (a,b,c)
+
+```{r, echo = T, eval = F}
+## fitting a random forest with default tree size
+## on training dataset. 
+rfm = randomForest::randomForest(
+  formula = formula, 
+  data = data
+)
+```
+
+#### Here is a bad comment 
+```{r, echo = T, eval = F}
+## Random Forest 
+rfm = randomForest(formula = formula, data = data)
+```
+
+## Concepts 
+
+- Regression/Classification
+
+-   Bias-Variance Trade off
+
+-   Mean Squared Error/Mean Absolute Error
+
+-   Train/Validation/Test Sets
+
+-   Cross Validation
+
+    -   Out of Bag error estimation
+
+-   Bootstrapping
+
+- Accuracy/Precision/Recall
+
+## Algorithms 
+
+-   Linear Regression
+
+-   Logistic Regression
+
+-   Ridge Regression/LASSO
+
+-   Tree Based Methods
+
+    -   CART, Bagging, Random Forests, Gradient Boosted Trees
+
+## Methods
+
+-   The function calls to fit algorithms in R
+
+    -   Parameters, function arguments
+
+-   How to visualize basic graphs
+
+    -   Scatterplots, histograms, line charts
+
+-   Loops and conditionals
+
+    -   Syntax and purpose

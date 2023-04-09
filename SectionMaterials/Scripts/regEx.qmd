@@ -1,0 +1,250 @@
+---
+title: "Regular Expression in R with stringr"
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show Answer"
+    code-tools: true
+    eval: false
+    fontsize: "100%"
+
+editor: visual
+---
+
+## Libraries
+
+```{r}
+#| code-fold: false
+library(stringr)
+```
+
+## Pattern Basics
+
+We will use the `fruit`, and `sentences` objects, which are vectors that come loaded with the `stringr` packages.
+
+### Task 1
+
+Find the third item in fruit, and the first four items in sentences.
+
+```{r}
+fruit[3]
+sentences[1:4]
+```
+
+The key functions in `stringr` are functions that *detect* matches, functions that *count* matches, functions that *replace* matches, and functions that *extract* values.
+
+#### Detecting Matches
+
+`str_detect()` returns a logical vector that is TRUE if the pattern matches an element of the character vector and FALSE otherwise
+
+```{r}
+#| code-fold: false
+  
+str_detect(string = fruit, pattern = "apple")
+
+## If we want to return the appropriate elements we 
+## use the results of str_detect() to subset a vector 
+fruit[str_detect(fruit, "apple")]
+
+## An alternative 
+fruit[str_which(string = fruit, pattern = "apple")]
+```
+
+#### Counting Matches
+
+`str_count()` will tell you the number of matches in each string.
+
+```{r}
+#| code-fold: false
+str_count(fruit, "apple")
+```
+
+#### Replacing Values
+
+We can modify with either `str_replace()` or `str_replace_all()`. The first replaces the first match, while the second replaces all matches.
+
+```{r}
+#| code-fold: false
+short_fruit = fruit[1:4]
+str_replace(short_fruit, pattern = "a", replacement = "Z")
+str_replace_all(short_fruit, pattern = "a", replacement = "Z")
+```
+
+The simplest regular expression consist of **literal** characters, the counting numbers and letters. They match exactly. Most punctuation characters have special meanings and are called meta-characters.
+
+### Task 2
+
+Find all fruits that contain "berry".
+
+```{r}
+## stringr solution 
+fruit[str_detect(fruit, pattern = "berry")]
+```
+
+Find all berries that begin with the letter b
+
+```{r}
+berries = fruit[str_detect(fruit, "berry")]
+berries[str_detect(berries, "^b")]
+
+## Alternatively 
+fruit[str_detect(fruit,"^b.+berry")]
+```
+
+In a new object called caps, collect just the fruit that have berry in their name and replace all mentions of the string "berry" with "BERRY".
+
+```{r}
+caps = fruit[str_detect(fruit, "berry")] |>
+  str_replace_all(pattern = "berry", replacement = "BERRY")
+caps
+```
+
+Quantifiers control how many times a pattern can match.
+
+-   `?` makes a pattern optional
+
+-   `+` lets a pattern repeat ("at least one match")
+
+-   `*` lets a pattern be optional or repeat
+
+#### Anchors
+
+By default, regex match any part of a string, but sometimes we want to match at the start of the end. In this case, we need to *anchor* the regular expression using `^` to match the start or `$` to match the end.
+
+```{r}
+#| code-fold: false
+fruit[str_detect(fruit, "^a")]
+fruit[str_detect(fruit, "a$")]
+```
+
+To force a regex to match just the full string pattern, anchor it with both operators.
+
+```{r}
+#| code-fold: false
+fruit[str_detect(fruit, "^apple$")]
+```
+
+We can also match the boundary between words with `\b`. This is often particularly useful if we are looking for a specific set of characters that might occur with spacing.
+
+### Task 3
+
+Find all fruits that include one or more instances of "bl".
+
+```{r}
+str_detect(c("banana", "blueberry", "bluelberry"), "bl+")
+```
+
+Character classes are defined by `[]` and lets us match a set of characters. For example `[abc]` will match "a", "b", or "c". If we want to *invert* the match, we add a `^` at the beginning. For example `[^abc]` will match everything except "a", "b", or "c".
+
+### Task 4
+
+Find all fruit that contain an "r" surrounded by vowels. Next, find all fruit that have an e surrounded by consonants.
+
+```{r}
+fruit[str_detect(fruit, "[aeiou]r[aeiou]")]
+fruit[str_detect(fruit, "[^aeiou]e[^aeiou]")]
+```
+
+We can also use *alternation* (think OR) to pick between one or more alternatives.
+
+### Task 5
+
+Find all fruits that contain apple or melon
+
+```{r}
+fruit[str_detect(fruit, "apple|melon")]
+```
+
+#### Character Classes Redux
+
+Some character classes are so commonly used that they have their own shortcuts.
+
+-   `\\d` match any digit. `\\D` match anything that isn't a digit
+
+-   `\\s` match any whitespace. `\\S` match anything that isn't whitespace.
+
+-   `\\w` matches any "word". `\\W` matches any "non-word" character.
+
+### Task 6
+
+Replace all spaces in the first item in `sentences` with the number 0.
+
+```{r}
+sentences[1]
+str_replace_all(sentences[1], pattern = "\\s", replacement = " ")
+```
+
+### Task 7
+
+In each of the first four items of `sentences`, find all instances of any word followed by the word "to" followed by a word OR all instances of any word followed by the word "a" followed by a word. Make sure to not include extraneous space.
+
+```{r}
+pattern = "(\\w+\\sto\\s\\w+)|(\\w+\\sa\\s\\w+)"
+vec = list()
+for(i in 1:4){
+    vec[[i]] = str_extract_all(sentences[i], 
+                             pattern = pattern)
+}
+vec
+```
+
+### 
+
+### Pattern Details
+
+#### Escaping
+
+We'll start with escaping. Escaping lets us match meta-characters that would otherwise be considered special.
+
+Sometimes we specifically want to find characters located inside `()`. For example, we might want to pull the partisanship of representatives, which commonly look like "Barbara Lee (Dem)". To escape a meta-character, use `\\` in your pattern.
+
+```{r}
+#| code-fold: false
+rep = "Barbara Lee (Dem)"
+str_extract(rep, pattern = "(Dem)")
+str_extract(rep, pattern = "\\(Dem\\)")
+```
+
+### Task 8
+
+Find the number of fruits that have berry as a separate word. E.g. "blueberry" is incorrect, but "apple berry" is a correct match.
+
+```{r}
+fruit[str_detect(fruit, "\\bberry$|^berry\\b")]
+
+sum(str_detect(fruit, "\\bberry$|^berry\\b"))
+```
+
+### Quantifiers
+
+Quantifiers control how many times a pattern matches. We can specify them as above or specify the number of matches precisely with `{}`.
+
+-   `{n}` matches exactly *n* times
+
+-   `{n,}` matches at least *n* times
+
+-   `{n,m}` matches between *n* and *m* times
+
+Regular expressions have precedence which we can override with parentheses. As well as overriding precedence, parentheses also create **capturing groups** that allow us to use sub-components of matches.
+
+The following is an example of "back reference." `\\1` is the match contained in the first parenthesis, `\\2` is the second, etc. For example, the following uses back reference to match the 1st capture group twice.
+
+```{r}
+repeats = c("banana", "coconut", "cucumber", "papaya", "satsumas",
+            "quince")
+repeats[str_detect(repeats, "(..)\\1")]
+```
+
+### Task 9
+
+Find all words in repeats that start and end with the same letter
+
+```{r}
+## This works because we anchor the first group to the 
+## beginning of the string, ask for an optional second letter
+## at the end of the string that matches the back-reference
+repeats[str_detect(repeats, "^(.).*\\1$")]
+
+## Alternatively 
+repeats[str_detect(repeats, "^(\\w).*\\1$")]
+```
